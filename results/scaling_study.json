@@ -1,0 +1,314 @@
+{
+  "study": "Quiver scaling capacity \u2014 incremental complexity",
+  "stop_rule": "found < max(2, target//3) OR elapsed > 1.5*budget",
+  "stages": [
+    {
+      "name": "6q_cycle_maxcut",
+      "problem": {
+        "kind": "cycle_maxcut",
+        "n": 6,
+        "threshold": 0.7,
+        "alt_indices": [
+          42,
+          21
+        ]
+      },
+      "num_qubits": 6,
+      "num_solutions_target": 6,
+      "num_solutions_found": 6,
+      "elapsed_s": 6.891866207122803,
+      "diversity_min": 0.16710526315789465,
+      "diversity_max": 1.0,
+      "families_used": [
+        "hardware_efficient",
+        "qaoa"
+      ],
+      "capacity_hit": false,
+      "detail": [
+        {
+          "family": "qaoa",
+          "verifier_score": 0.9999956810766452,
+          "gate_count": 42,
+          "depth": 22,
+          "two_qubit_count": 18,
+          "num_params": 6,
+          "diversity": 1.0
+        },
+        {
+          "family": "hardware_efficient",
+          "verifier_score": 0.9999999859479726,
+          "gate_count": 17,
+          "depth": 7,
+          "two_qubit_count": 5,
+          "num_params": 12,
+          "diversity": 0.6863636363636363
+        },
+        {
+          "family": "hardware_efficient",
+          "verifier_score": 0.9998610689949164,
+          "gate_count": 34,
+          "depth": 11,
+          "two_qubit_count": 10,
+          "num_params": 24,
+          "diversity": 0.32272727272727264
+        },
+        {
+          "family": "hardware_efficient",
+          "verifier_score": 0.9950914170871381,
+          "gate_count": 51,
+          "depth": 15,
+          "two_qubit_count": 15,
+          "num_params": 36,
+          "diversity": 0.21999999999999997
+        },
+        {
+          "family": "hardware_efficient",
+          "verifier_score": 0.9174180824897733,
+          "gate_count": 68,
+          "depth": 19,
+          "two_qubit_count": 20,
+          "num_params": 48,
+          "diversity": 0.16710526315789465
+        },
+        {
+          "family": "hardware_efficient",
+          "verifier_score": 0.9977546128449956,
+          "gate_count": 34,
+          "depth": 11,
+          "two_qubit_count": 10,
+          "num_params": 24,
+          "diversity": 0.3382352941176471
+        }
+      ]
+    },
+    {
+      "name": "8q_cycle_maxcut",
+      "problem": {
+        "kind": "cycle_maxcut",
+        "n": 8,
+        "threshold": 0.7,
+        "alt_indices": [
+          170,
+          85
+        ]
+      },
+      "num_qubits": 8,
+      "num_solutions_target": 6,
+      "num_solutions_found": 6,
+      "elapsed_s": 12.348555088043213,
+      "diversity_min": 0.21372549019607845,
+      "diversity_max": 1.0,
+      "families_used": [
+        "hardware_efficient",
+        "linear_entangler"
+      ],
+      "capacity_hit": false,
+      "detail": [
+        {
+          "family": "hardware_efficient",
+          "verifier_score": 0.9999981349810654,
+          "gate_count": 23,
+          "depth": 9,
+          "two_qubit_count": 7,
+          "num_params": 16,
+          "diversity": 1.0
+        },
+        {
+          "family": "hardware_efficient",
+          "verifier_score": 0.9984649953173599,
+          "gate_count": 46,
+          "depth": 13,
+          "two_qubit_count": 14,
+          "num_params": 32,
+          "diversity": 0.31153846153846154
+        },
+        {
+          "family": "hardware_efficient",
+          "verifier_score": 0.924446789903818,
+          "gate_count": 69,
+          "depth": 17,
+          "two_qubit_count": 21,
+          "num_params": 48,
+          "diversity": 0.21372549019607845
+        },
+        {
+          "family": "hardware_efficient",
+          "verifier_score": 0.986606253158059,
+          "gate_count": 46,
+          "depth": 13,
+          "two_qubit_count": 14,
+          "num_params": 32,
+          "diversity": 0.3369565217391304
+        },
+        {
+          "family": "hardware_efficient",
+          "verifier_score": 0.8958819926117436,
+          "gate_count": 69,
+          "depth": 17,
+          "two_qubit_count": 21,
+          "num_params": 48,
+          "diversity": 0.21372549019607845
+        },
+        {
+          "family": "linear_entangler",
+          "verifier_score": 0.9999917776058813,
+          "gate_count": 23,
+          "depth": 9,
+          "two_qubit_count": 7,
+          "num_params": 16,
+          "diversity": 0.31153846153846154
+        }
+      ]
+    },
+    {
+      "name": "8q_ghz",
+      "problem": {
+        "kind": "ghz",
+        "n": 8,
+        "threshold": 0.95
+      },
+      "num_qubits": 8,
+      "num_solutions_target": 6,
+      "num_solutions_found": 6,
+      "elapsed_s": 45.277827739715576,
+      "diversity_min": 0.18150943396226416,
+      "diversity_max": 1.0,
+      "families_used": [
+        "hardware_efficient",
+        "linear_entangler"
+      ],
+      "capacity_hit": false,
+      "detail": [
+        {
+          "family": "hardware_efficient",
+          "verifier_score": 0.9999995731621272,
+          "gate_count": 23,
+          "depth": 9,
+          "two_qubit_count": 7,
+          "num_params": 16,
+          "diversity": 1.0
+        },
+        {
+          "family": "hardware_efficient",
+          "verifier_score": 0.9971876992100095,
+          "gate_count": 46,
+          "depth": 13,
+          "two_qubit_count": 14,
+          "num_params": 32,
+          "diversity": 0.31153846153846154
+        },
+        {
+          "family": "hardware_efficient",
+          "verifier_score": 0.9540674323117381,
+          "gate_count": 46,
+          "depth": 13,
+          "two_qubit_count": 14,
+          "num_params": 32,
+          "diversity": 0.3369565217391304
+        },
+        {
+          "family": "linear_entangler",
+          "verifier_score": 0.9999923026667191,
+          "gate_count": 23,
+          "depth": 9,
+          "two_qubit_count": 7,
+          "num_params": 16,
+          "diversity": 0.31153846153846154
+        },
+        {
+          "family": "linear_entangler",
+          "verifier_score": 0.9971847657436583,
+          "gate_count": 38,
+          "depth": 12,
+          "two_qubit_count": 14,
+          "num_params": 24,
+          "diversity": 0.24736842105263157
+        },
+        {
+          "family": "linear_entangler",
+          "verifier_score": 0.9619881916183953,
+          "gate_count": 53,
+          "depth": 15,
+          "two_qubit_count": 21,
+          "num_params": 32,
+          "diversity": 0.18150943396226416
+        }
+      ]
+    },
+    {
+      "name": "10q_ghz",
+      "problem": {
+        "kind": "ghz",
+        "n": 10,
+        "threshold": 0.95
+      },
+      "num_qubits": 10,
+      "num_solutions_target": 6,
+      "num_solutions_found": 4,
+      "elapsed_s": 62.216383934020996,
+      "diversity_min": 0.24077380952380956,
+      "diversity_max": 1.0,
+      "families_used": [
+        "hardware_efficient",
+        "linear_entangler"
+      ],
+      "capacity_hit": false,
+      "detail": [
+        {
+          "family": "hardware_efficient",
+          "verifier_score": 0.9999995985158873,
+          "gate_count": 29,
+          "depth": 11,
+          "two_qubit_count": 9,
+          "num_params": 20,
+          "diversity": 1.0
+        },
+        {
+          "family": "hardware_efficient",
+          "verifier_score": 0.9862896533748596,
+          "gate_count": 58,
+          "depth": 15,
+          "two_qubit_count": 18,
+          "num_params": 40,
+          "diversity": 0.30333333333333323
+        },
+        {
+          "family": "linear_entangler",
+          "verifier_score": 0.9994296931674044,
+          "gate_count": 29,
+          "depth": 11,
+          "two_qubit_count": 9,
+          "num_params": 20,
+          "diversity": 0.30333333333333323
+        },
+        {
+          "family": "linear_entangler",
+          "verifier_score": 0.9634831173092732,
+          "gate_count": 48,
+          "depth": 14,
+          "two_qubit_count": 18,
+          "num_params": 30,
+          "diversity": 0.24077380952380956
+        }
+      ]
+    },
+    {
+      "name": "10q_haar_random",
+      "problem": {
+        "kind": "haar_random",
+        "n": 10,
+        "seed": 13,
+        "threshold": 0.85
+      },
+      "num_qubits": 10,
+      "num_solutions_target": 6,
+      "num_solutions_found": 0,
+      "elapsed_s": 61.3567328453064,
+      "diversity_min": 0.0,
+      "diversity_max": 0.0,
+      "families_used": [],
+      "capacity_hit": true,
+      "detail": []
+    }
+  ]
+}
