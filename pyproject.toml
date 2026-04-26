@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "quiver"
+version = "0.1.0"
+description = "Quantum circuit exploration framework that finds multiple structurally diverse solutions"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Quiver Contributors" }]
+dependencies = [
+    "numpy>=1.24",
+    "scipy>=1.11",
+    "tomli>=2.0; python_version<'3.11'",
+]
+
+[project.optional-dependencies]
+pennylane = ["pennylane>=0.34"]
+qiskit = ["qiskit>=1.0"]
+dwave = ["dimod>=0.12", "dwave-system>=1.21"]
+test = ["pytest>=8.0", "pytest-cov>=5.0"]
+all = ["pennylane>=0.34", "qiskit>=1.0", "dimod>=0.12"]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["quiver*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-v"

@@ -1,0 +1,25 @@
+[exploration]
+num_solutions = 10
+time_budget_seconds = 300
+seed = 42
+
+[optimizer]
+method = "COBYLA"
+max_iter = 200
+basin_hops = 12
+step_size = 1.0
+tolerance = 1e-4
+
+[diversity]
+threshold = 0.25
+edit_weight = 0.5
+connectivity_weight = 0.3
+depth_weight = 0.2
+
+[budget]
+max_gates = 80
+max_depth = 30
+
+[ansatz]
+families = ["hardware_efficient", "qaoa", "linear_entangler"]
+num_layers = [1, 2, 3]
