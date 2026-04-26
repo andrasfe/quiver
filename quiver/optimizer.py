@@ -24,29 +24,47 @@ class OptimizeResult:
     converged: bool
 
 
+def _init_strategies(num_params: int, rng: np.random.Generator) -> list[np.ndarray]:
+    """Diverse seeds: zero (good for variational identity), small Gaussian
+    (perturbed identity), and full uniform random."""
+    return [
+        np.zeros(num_params),
+        rng.normal(0.0, 0.1, size=num_params),
+        rng.uniform(-np.pi, np.pi, size=num_params),
+    ]
+
+
 def optimize(
     objective: Callable[[np.ndarray], float],
     num_params: int,
     config: OptimizerConfig,
     rng: np.random.Generator,
 ) -> OptimizeResult:
-    best_params = rng.uniform(-np.pi, np.pi, size=num_params)
+    seeds = _init_strategies(num_params, rng)
+    best_params = seeds[0]
     best_val = float(objective(best_params))
     total_nfev = 1
 
+    # COBYLA needs at least num_params + 2 function evals to be well-defined;
+    # raise the cap automatically so high-dim ansätze are not silently starved.
+    effective_max_iter = max(config.max_iter, num_params + 50)
+
     for hop in range(max(1, config.basin_hops)):
-        if hop == 0:
-            x0 = best_params.copy()
+        if hop < len(seeds):
+            x0 = seeds[hop]
         else:
-            perturb = rng.normal(0.0, config.step_size, size=num_params)
-            x0 = best_params + perturb
+            # Annealed perturbation around best-so-far: large early,
+            # narrowing as basin-hopping proceeds.
+            anneal = max(0.25, 1.0 - 0.05 * (hop - len(seeds)))
+            scale = config.step_size * anneal
+            x0 = best_params + rng.normal(0.0, scale, size=num_params)
 
         result = minimize(
             objective,
             x0,
             method=config.method,
             options={
-                "maxiter": config.max_iter,
+                "maxiter": effective_max_iter,
                 "rhobeg": 0.5,
                 "catol": config.tolerance,
             },

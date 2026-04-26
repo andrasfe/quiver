@@ -1,0 +1,29 @@
+{
+  "study": "Quiver scaling v2 \u2014 deepened library + multi-start optimizer",
+  "deepening": [
+    "BrickWall (Euler rotations + brick-wall CNOTs)",
+    "AllToAll (pairwise CNOT all-to-all)",
+    "StronglyEntangling (varying-stride CNOT ring)",
+    "optimizer multi-start: zero / small-Gaussian / uniform / annealed"
+  ],
+  "stages": [
+    {
+      "name": "10q_haar_random_RETRY",
+      "problem": {
+        "kind": "haar_random",
+        "n": 10,
+        "seed": 13,
+        "threshold": 0.85
+      },
+      "num_qubits": 10,
+      "num_solutions_target": 6,
+      "num_solutions_found": 0,
+      "elapsed_s": 181.3551890850067,
+      "diversity_min": 0.0,
+      "diversity_max": 0.0,
+      "families_used": [],
+      "capacity_hit": true,
+      "detail": []
+    }
+  ]
+}
