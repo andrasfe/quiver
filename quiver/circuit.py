@@ -15,7 +15,9 @@ from typing import Iterable
 
 SINGLE_QUBIT_PARAMETRIC = frozenset({"rx", "ry", "rz", "u3", "p"})
 SINGLE_QUBIT_FIXED = frozenset({"h", "x", "y", "z", "s", "t", "sdg", "tdg"})
-TWO_QUBIT = frozenset({"cnot", "cx", "cz", "cy", "swap", "rzz", "rxx", "ryy"})
+TWO_QUBIT_FIXED = frozenset({"cnot", "cx", "cz", "swap", "iswap", "sqrt_iswap"})
+TWO_QUBIT_PARAMETRIC = frozenset({"rzz", "rxx", "ryy"})
+TWO_QUBIT = TWO_QUBIT_FIXED | TWO_QUBIT_PARAMETRIC
 
 
 @dataclass(frozen=True)

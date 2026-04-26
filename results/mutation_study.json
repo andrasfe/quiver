@@ -1,0 +1,227 @@
+{
+  "study": "Mutation vs templates-only on 8q 8-cycle MaxCut",
+  "novelty_rule": "max similarity to any template < 0.5",
+  "comparison": {
+    "templates_only": {
+      "found": 7,
+      "elapsed_s": 121.19243788719177,
+      "families": [
+        "all_to_all",
+        "brickwall",
+        "hardware_efficient",
+        "linear_entangler",
+        "strongly_entangling"
+      ],
+      "novel_count": 0
+    },
+    "with_mutation": {
+      "found": 8,
+      "elapsed_s": 21.16311502456665,
+      "families": [
+        "brickwall",
+        "hardware_efficient",
+        "linear_entangler",
+        "mutated"
+      ],
+      "novel_count": 0
+    }
+  },
+  "runs": [
+    {
+      "label": "A_baseline_templates_only",
+      "mutation_enabled": false,
+      "elapsed_s": 121.19243788719177,
+      "num_solutions_found": 7,
+      "solutions": [
+        {
+          "family": "hardware_efficient",
+          "verifier_score": 0.999975741135549,
+          "gate_count": 46,
+          "depth": 13,
+          "two_qubit_count": 14,
+          "num_params": 32,
+          "diversity_in_registry": 1.0,
+          "max_similarity_to_any_template": 1.0,
+          "min_similarity_to_any_template": 0.3416666666666667,
+          "novel_vs_templates": false
+        },
+        {
+          "family": "hardware_efficient",
+          "verifier_score": 0.9971159668629793,
+          "gate_count": 69,
+          "depth": 17,
+          "two_qubit_count": 21,
+          "num_params": 48,
+          "diversity_in_registry": 0.21372549019607845,
+          "max_similarity_to_any_template": 1.0,
+          "min_similarity_to_any_template": 0.34375,
+          "novel_vs_templates": false
+        },
+        {
+          "family": "linear_entangler",
+          "verifier_score": 0.9995601294474586,
+          "gate_count": 38,
+          "depth": 12,
+          "two_qubit_count": 14,
+          "num_params": 24,
+          "diversity_in_registry": 0.26538461538461533,
+          "max_similarity_to_any_template": 1.0,
+          "min_similarity_to_any_template": 0.31872727272727275,
+          "novel_vs_templates": false
+        },
+        {
+          "family": "brickwall",
+          "verifier_score": 0.9527488669929352,
+          "gate_count": 83,
+          "depth": 12,
+          "two_qubit_count": 11,
+          "num_params": 72,
+          "diversity_in_registry": 0.34337349397590367,
+          "max_similarity_to_any_template": 1.0,
+          "min_similarity_to_any_template": 0.19940909090909087,
+          "novel_vs_templates": false
+        },
+        {
+          "family": "brickwall",
+          "verifier_score": 0.8305395176127783,
+          "gate_count": 138,
+          "depth": 20,
+          "two_qubit_count": 18,
+          "num_params": 120,
+          "diversity_in_registry": 0.27927536231884054,
+          "max_similarity_to_any_template": 1.0,
+          "min_similarity_to_any_template": 0.3219565217391305,
+          "novel_vs_templates": false
+        },
+        {
+          "family": "all_to_all",
+          "verifier_score": 0.9999942130506796,
+          "gate_count": 88,
+          "depth": 25,
+          "two_qubit_count": 56,
+          "num_params": 32,
+          "diversity_in_registry": 0.5596363636363636,
+          "max_similarity_to_any_template": 1.0,
+          "min_similarity_to_any_template": 0.19940909090909087,
+          "novel_vs_templates": false
+        },
+        {
+          "family": "strongly_entangling",
+          "verifier_score": 0.7215602092686313,
+          "gate_count": 96,
+          "depth": 24,
+          "two_qubit_count": 24,
+          "num_params": 72,
+          "diversity_in_registry": 0.5143988095238096,
+          "max_similarity_to_any_template": 1.0,
+          "min_similarity_to_any_template": 0.3416666666666666,
+          "novel_vs_templates": false
+        }
+      ]
+    },
+    {
+      "label": "B_with_mutation_rounds",
+      "mutation_enabled": true,
+      "elapsed_s": 21.16311502456665,
+      "num_solutions_found": 8,
+      "solutions": [
+        {
+          "family": "hardware_efficient",
+          "verifier_score": 0.999975741135549,
+          "gate_count": 46,
+          "depth": 13,
+          "two_qubit_count": 14,
+          "num_params": 32,
+          "diversity_in_registry": 1.0,
+          "max_similarity_to_any_template": 1.0,
+          "min_similarity_to_any_template": 0.3416666666666667,
+          "novel_vs_templates": false
+        },
+        {
+          "family": "mutated",
+          "verifier_score": 0.9999923346429178,
+          "gate_count": 45,
+          "depth": 14,
+          "two_qubit_count": 14,
+          "num_params": 31,
+          "diversity_in_registry": 0.22569875776397508,
+          "max_similarity_to_any_template": 0.7743012422360249,
+          "min_similarity_to_any_template": 0.31004166666666666,
+          "novel_vs_templates": false
+        },
+        {
+          "family": "hardware_efficient",
+          "verifier_score": 0.9842728520209757,
+          "gate_count": 69,
+          "depth": 17,
+          "two_qubit_count": 21,
+          "num_params": 48,
+          "diversity_in_registry": 0.21372549019607845,
+          "max_similarity_to_any_template": 1.0,
+          "min_similarity_to_any_template": 0.34375,
+          "novel_vs_templates": false
+        },
+        {
+          "family": "mutated",
+          "verifier_score": 0.9999934909921737,
+          "gate_count": 46,
+          "depth": 12,
+          "two_qubit_count": 14,
+          "num_params": 30,
+          "diversity_in_registry": 0.32016722408026754,
+          "max_similarity_to_any_template": 0.6798327759197325,
+          "min_similarity_to_any_template": 0.24935064935064932,
+          "novel_vs_templates": false
+        },
+        {
+          "family": "linear_entangler",
+          "verifier_score": 0.9995601294474586,
+          "gate_count": 38,
+          "depth": 12,
+          "two_qubit_count": 14,
+          "num_params": 24,
+          "diversity_in_registry": 0.26538461538461533,
+          "max_similarity_to_any_template": 1.0,
+          "min_similarity_to_any_template": 0.31872727272727275,
+          "novel_vs_templates": false
+        },
+        {
+          "family": "brickwall",
+          "verifier_score": 0.9703331215907762,
+          "gate_count": 83,
+          "depth": 12,
+          "two_qubit_count": 11,
+          "num_params": 72,
+          "diversity_in_registry": 0.34337349397590367,
+          "max_similarity_to_any_template": 1.0,
+          "min_similarity_to_any_template": 0.19940909090909087,
+          "novel_vs_templates": false
+        },
+        {
+          "family": "mutated",
+          "verifier_score": 0.9969837304837068,
+          "gate_count": 49,
+          "depth": 16,
+          "two_qubit_count": 17,
+          "num_params": 30,
+          "diversity_in_registry": 0.41989795918367345,
+          "max_similarity_to_any_template": 0.5077119309262166,
+          "min_similarity_to_any_template": 0.27321428571428574,
+          "novel_vs_templates": false
+        },
+        {
+          "family": "brickwall",
+          "verifier_score": 0.7526404149743542,
+          "gate_count": 138,
+          "depth": 20,
+          "two_qubit_count": 18,
+          "num_params": 120,
+          "diversity_in_registry": 0.27927536231884054,
+          "max_similarity_to_any_template": 1.0,
+          "min_similarity_to_any_template": 0.3219565217391305,
+          "novel_vs_templates": false
+        }
+      ]
+    }
+  ]
+}

@@ -142,7 +142,29 @@ def _ryy(theta: float) -> np.ndarray:
     )
 
 
-_FIXED_2Q = {"cnot": _cnot(), "cx": _cnot(), "cz": _cz(), "swap": _swap()}
+def _iswap() -> np.ndarray:
+    m = np.eye(4, dtype=complex)
+    m[1, 1] = m[2, 2] = 0.0
+    m[1, 2] = m[2, 1] = 1j
+    return m
+
+
+def _sqrt_iswap() -> np.ndarray:
+    m = np.eye(4, dtype=complex)
+    inv2 = 1.0 / np.sqrt(2.0)
+    m[1, 1] = m[2, 2] = inv2
+    m[1, 2] = m[2, 1] = 1j * inv2
+    return m
+
+
+_FIXED_2Q = {
+    "cnot": _cnot(),
+    "cx": _cnot(),
+    "cz": _cz(),
+    "swap": _swap(),
+    "iswap": _iswap(),
+    "sqrt_iswap": _sqrt_iswap(),
+}
 
 
 def _gate_matrix(gate: GateSpec, params: np.ndarray) -> np.ndarray:

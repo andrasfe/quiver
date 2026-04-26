@@ -39,8 +39,29 @@ def optimize(
     num_params: int,
     config: OptimizerConfig,
     rng: np.random.Generator,
+    warm_start: np.ndarray | None = None,
 ) -> OptimizeResult:
-    seeds = _init_strategies(num_params, rng)
+    # Edge case: a fully non-parametric circuit (all gates fixed) — common
+    # for mutated specs after deletes — has nothing to optimize.
+    if num_params == 0:
+        params = np.zeros(0)
+        val = float(objective(params))
+        return OptimizeResult(
+            params=params, objective=val, nfev=1,
+            converged=val < config.tolerance,
+        )
+
+    if warm_start is not None and len(warm_start) == num_params:
+        # Mutation rounds: parent's verified params are usually a good
+        # neighbourhood. Front-load the seed list with warm starts.
+        warm = np.asarray(warm_start, dtype=float)
+        seeds = [
+            warm,
+            warm + rng.normal(0.0, 0.1, size=num_params),
+            warm + rng.normal(0.0, 0.5, size=num_params),
+        ]
+    else:
+        seeds = _init_strategies(num_params, rng)
     best_params = seeds[0]
     best_val = float(objective(best_params))
     total_nfev = 1

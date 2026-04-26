@@ -80,12 +80,28 @@ class AnsatzConfig:
 
 
 @dataclass
+class MutationConfig:
+    """Structural mutation of verified solutions during exploration.
+
+    When enabled, every `frequency`-th round in `Quiver.explore()` skips
+    the template library and instead mutates a randomly-chosen registry
+    entry. The mutated spec is then optimized and verified like any other
+    candidate. Default: disabled (backwards compatible).
+    """
+    enabled: bool = False
+    frequency: int = 3
+    chain_min: int = 1
+    chain_max: int = 3
+
+
+@dataclass
 class QuiverConfig:
     exploration: ExplorationConfig = field(default_factory=ExplorationConfig)
     optimizer: OptimizerConfig = field(default_factory=OptimizerConfig)
     diversity: DiversityConfig = field(default_factory=DiversityConfig)
     budget: BudgetConfig = field(default_factory=BudgetConfig)
     ansatz: AnsatzConfig = field(default_factory=AnsatzConfig)
+    mutation: MutationConfig = field(default_factory=MutationConfig)
 
 
 def _section(data: dict, name: str) -> dict:
@@ -101,4 +117,5 @@ def load_config(path: str | Path) -> QuiverConfig:
         diversity=DiversityConfig(**_section(data, "diversity")),
         budget=BudgetConfig(**_section(data, "budget")),
         ansatz=AnsatzConfig(**_section(data, "ansatz")),
+        mutation=MutationConfig(**_section(data, "mutation")),
     )

@@ -15,6 +15,7 @@ from quiver.backends.numpy_backend import NumpyBackend
 from quiver.circuit import CircuitSpec
 from quiver.config import QuiverConfig
 from quiver.diversity import DiversityWeights
+from quiver.mutation import Mutator
 from quiver.optimizer import optimize
 from quiver.registry import RegistryEntry, SolutionRegistry
 from quiver.verification import Verifier, fidelity_objective, fidelity_verifier
@@ -160,19 +161,45 @@ class Quiver:
         if not ansatz_list:
             raise ValueError("ansatz_library is empty")
 
+        mutator = Mutator(
+            chain_min=cfg.mutation.chain_min,
+            chain_max=cfg.mutation.chain_max,
+        )
+
         deadline = time.monotonic() + budget_s
+        rounds_done = 0
         ansatz_idx = 0
         rejected = 0
 
         while len(registry) < target_n and time.monotonic() < deadline:
-            ansatz = ansatz_list[ansatz_idx % len(ansatz_list)]
-            ansatz_idx += 1
-            spec = ansatz.build()
+            is_mutation_round = (
+                cfg.mutation.enabled
+                and len(registry) > 0
+                and rounds_done % cfg.mutation.frequency == cfg.mutation.frequency - 1
+            )
+
+            warm_start: np.ndarray | None = None
+            if is_mutation_round:
+                parent_idx = int(rng.integers(0, len(registry)))
+                parent = registry.entries[parent_idx]
+                spec, warm_start = mutator.chain(parent.spec, parent.params, rng)
+                family_tag = "mutated"
+            else:
+                ansatz = ansatz_list[ansatz_idx % len(ansatz_list)]
+                ansatz_idx += 1
+                spec = ansatz.build()
+                family_tag = ansatz.family
+
+            rounds_done += 1
+
             if not _within_budget(spec, cfg):
                 continue
 
             objective = self._build_objective(spec)
-            result = optimize(objective, spec.num_params, cfg.optimizer, rng)
+            result = optimize(
+                objective, spec.num_params, cfg.optimizer, rng,
+                warm_start=warm_start,
+            )
 
             if not isinstance(self.target, np.ndarray):
                 # Caller-provided objective + verifier: feed params through verifier.
@@ -188,7 +215,7 @@ class Quiver:
             entry = registry.try_add(
                 spec=spec,
                 params=result.params,
-                family=ansatz.family,
+                family=family_tag,
                 fidelity=score,
                 objective=result.objective,
             )
