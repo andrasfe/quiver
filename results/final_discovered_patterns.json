@@ -1,0 +1,321 @@
+{
+  "patterns": [
+    {
+      "occurrences": 7,
+      "width": 2,
+      "length": 2,
+      "canonical": [
+        {
+          "name": "ry",
+          "qubits": [
+            0
+          ],
+          "is_parametric": true
+        },
+        {
+          "name": "ry",
+          "qubits": [
+            1
+          ],
+          "is_parametric": true
+        }
+      ]
+    },
+    {
+      "occurrences": 5,
+      "width": 3,
+      "length": 2,
+      "canonical": [
+        {
+          "name": "rzz",
+          "qubits": [
+            0,
+            1
+          ],
+          "is_parametric": true
+        },
+        {
+          "name": "rzz",
+          "qubits": [
+            1,
+            2
+          ],
+          "is_parametric": true
+        }
+      ]
+    },
+    {
+      "occurrences": 3,
+      "width": 4,
+      "length": 3,
+      "canonical": [
+        {
+          "name": "rzz",
+          "qubits": [
+            0,
+            1
+          ],
+          "is_parametric": true
+        },
+        {
+          "name": "rzz",
+          "qubits": [
+            1,
+            2
+          ],
+          "is_parametric": true
+        },
+        {
+          "name": "rzz",
+          "qubits": [
+            2,
+            3
+          ],
+          "is_parametric": true
+        }
+      ]
+    },
+    {
+      "occurrences": 3,
+      "width": 4,
+      "length": 3,
+      "canonical": [
+        {
+          "name": "rz",
+          "qubits": [
+            0
+          ],
+          "is_parametric": true
+        },
+        {
+          "name": "cnot",
+          "qubits": [
+            1,
+            2
+          ],
+          "is_parametric": false
+        },
+        {
+          "name": "cnot",
+          "qubits": [
+            2,
+            3
+          ],
+          "is_parametric": false
+        }
+      ]
+    },
+    {
+      "occurrences": 2,
+      "width": 2,
+      "length": 3,
+      "canonical": [
+        {
+          "name": "rzz",
+          "qubits": [
+            0,
+            1
+          ],
+          "is_parametric": true
+        },
+        {
+          "name": "rx",
+          "qubits": [
+            0
+          ],
+          "is_parametric": true
+        },
+        {
+          "name": "rx",
+          "qubits": [
+            1
+          ],
+          "is_parametric": true
+        }
+      ]
+    },
+    {
+      "occurrences": 2,
+      "width": 2,
+      "length": 2,
+      "canonical": [
+        {
+          "name": "rx",
+          "qubits": [
+            0
+          ],
+          "is_parametric": true
+        },
+        {
+          "name": "rzz",
+          "qubits": [
+            1,
+            0
+          ],
+          "is_parametric": true
+        }
+      ]
+    },
+    {
+      "occurrences": 2,
+      "width": 2,
+      "length": 4,
+      "canonical": [
+        {
+          "name": "cnot",
+          "qubits": [
+            0,
+            1
+          ],
+          "is_parametric": false
+        },
+        {
+          "name": "ry",
+          "qubits": [
+            0
+          ],
+          "is_parametric": true
+        },
+        {
+          "name": "ry",
+          "qubits": [
+            1
+          ],
+          "is_parametric": true
+        },
+        {
+          "name": "rz",
+          "qubits": [
+            0
+          ],
+          "is_parametric": true
+        }
+      ]
+    },
+    {
+      "occurrences": 2,
+      "width": 2,
+      "length": 4,
+      "canonical": [
+        {
+          "name": "ry",
+          "qubits": [
+            0
+          ],
+          "is_parametric": true
+        },
+        {
+          "name": "rz",
+          "qubits": [
+            1
+          ],
+          "is_parametric": true
+        },
+        {
+          "name": "rz",
+          "qubits": [
+            0
+          ],
+          "is_parametric": true
+        },
+        {
+          "name": "cnot",
+          "qubits": [
+            1,
+            0
+          ],
+          "is_parametric": false
+        }
+      ]
+    },
+    {
+      "occurrences": 2,
+      "width": 3,
+      "length": 5,
+      "canonical": [
+        {
+          "name": "rzz",
+          "qubits": [
+            0,
+            1
+          ],
+          "is_parametric": true
+        },
+        {
+          "name": "rzz",
+          "qubits": [
+            1,
+            2
+          ],
+          "is_parametric": true
+        },
+        {
+          "name": "rzz",
+          "qubits": [
+            2,
+            0
+          ],
+          "is_parametric": true
+        },
+        {
+          "name": "rx",
+          "qubits": [
+            0
+          ],
+          "is_parametric": true
+        },
+        {
+          "name": "rx",
+          "qubits": [
+            1
+          ],
+          "is_parametric": true
+        }
+      ]
+    },
+    {
+      "occurrences": 2,
+      "width": 3,
+      "length": 5,
+      "canonical": [
+        {
+          "name": "rzz",
+          "qubits": [
+            0,
+            1
+          ],
+          "is_parametric": true
+        },
+        {
+          "name": "rzz",
+          "qubits": [
+            1,
+            2
+          ],
+          "is_parametric": true
+        },
+        {
+          "name": "rx",
+          "qubits": [
+            2
+          ],
+          "is_parametric": true
+        },
+        {
+          "name": "rx",
+          "qubits": [
+            0
+          ],
+          "is_parametric": true
+        },
+        {
+          "name": "rx",
+          "qubits": [
+            1
+          ],
+          "is_parametric": true
+        }
+      ]
+    }
+  ]
+}

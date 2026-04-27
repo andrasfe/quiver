@@ -1,0 +1,420 @@
+{
+  "study": "Curriculum bootstrap \u2014 easy-to-hard self-improvement",
+  "curriculum": [
+    {
+      "problem": "Bell-2",
+      "n": 2,
+      "elapsed_s": 2.069459915161133,
+      "found": 4,
+      "best_score": 0.9999999987199317,
+      "solutions": [
+        {
+          "family": "qaoa",
+          "score": 0.9999999883932416,
+          "gate_count": 8,
+          "depth": 5,
+          "two_qubit_count": 2,
+          "num_params": 4
+        },
+        {
+          "family": "qaoa",
+          "score": 0.9999999987199317,
+          "gate_count": 11,
+          "depth": 7,
+          "two_qubit_count": 3,
+          "num_params": 6
+        },
+        {
+          "family": "hardware_efficient",
+          "score": 0.9999984126604469,
+          "gate_count": 10,
+          "depth": 6,
+          "two_qubit_count": 2,
+          "num_params": 8
+        },
+        {
+          "family": "hardware_efficient",
+          "score": 0.9999942195619592,
+          "gate_count": 15,
+          "depth": 9,
+          "two_qubit_count": 3,
+          "num_params": 12
+        }
+      ]
+    },
+    {
+      "problem": "GHZ-3",
+      "n": 3,
+      "elapsed_s": 2.001901865005493,
+      "found": 4,
+      "best_score": 0.9999999986349806,
+      "solutions": [
+        {
+          "family": "qaoa",
+          "score": 0.9999999965112256,
+          "gate_count": 15,
+          "depth": 9,
+          "two_qubit_count": 6,
+          "num_params": 4
+        },
+        {
+          "family": "qaoa",
+          "score": 0.9999999986349806,
+          "gate_count": 21,
+          "depth": 13,
+          "two_qubit_count": 9,
+          "num_params": 6
+        },
+        {
+          "family": "hardware_efficient",
+          "score": 0.9999999962003734,
+          "gate_count": 16,
+          "depth": 8,
+          "two_qubit_count": 4,
+          "num_params": 12
+        },
+        {
+          "family": "hardware_efficient",
+          "score": 0.9999841220729743,
+          "gate_count": 24,
+          "depth": 12,
+          "two_qubit_count": 6,
+          "num_params": 18
+        }
+      ]
+    },
+    {
+      "problem": "GHZ-4",
+      "n": 4,
+      "elapsed_s": 1.9964330196380615,
+      "found": 4,
+      "best_score": 0.9999999961192527,
+      "solutions": [
+        {
+          "family": "qaoa",
+          "score": 0.9999999885434545,
+          "gate_count": 20,
+          "depth": 11,
+          "two_qubit_count": 8,
+          "num_params": 4
+        },
+        {
+          "family": "qaoa",
+          "score": 0.9999999961192527,
+          "gate_count": 28,
+          "depth": 16,
+          "two_qubit_count": 12,
+          "num_params": 6
+        },
+        {
+          "family": "hardware_efficient",
+          "score": 0.9999982796210222,
+          "gate_count": 22,
+          "depth": 9,
+          "two_qubit_count": 6,
+          "num_params": 16
+        },
+        {
+          "family": "hardware_efficient",
+          "score": 0.9999341878718826,
+          "gate_count": 33,
+          "depth": 13,
+          "two_qubit_count": 9,
+          "num_params": 24
+        }
+      ]
+    },
+    {
+      "problem": "Heisenberg-4",
+      "n": 4,
+      "elapsed_s": 18.810681104660034,
+      "found": 4,
+      "best_score": -6.325518903783112,
+      "solutions": [
+        {
+          "family": "adaptive",
+          "score": -6.113244794101002,
+          "gate_count": 50,
+          "depth": 32,
+          "two_qubit_count": 24,
+          "num_params": 29
+        },
+        {
+          "family": "hardware_efficient",
+          "score": -6.123104203889399,
+          "gate_count": 22,
+          "depth": 9,
+          "two_qubit_count": 6,
+          "num_params": 16
+        },
+        {
+          "family": "hardware_efficient",
+          "score": -6.325518903783112,
+          "gate_count": 33,
+          "depth": 13,
+          "two_qubit_count": 9,
+          "num_params": 24
+        },
+        {
+          "family": "adaptive",
+          "score": -6.111229189018642,
+          "gate_count": 50,
+          "depth": 32,
+          "two_qubit_count": 26,
+          "num_params": 30
+        }
+      ]
+    },
+    {
+      "problem": "Heisenberg-6",
+      "n": 6,
+      "elapsed_s": 143.42628812789917,
+      "found": 4,
+      "best_score": -9.654810620802355,
+      "solutions": [
+        {
+          "family": "hardware_efficient",
+          "score": -9.528017496599201,
+          "gate_count": 51,
+          "depth": 15,
+          "two_qubit_count": 15,
+          "num_params": 36
+        },
+        {
+          "family": "adaptive",
+          "score": -9.654810620802355,
+          "gate_count": 38,
+          "depth": 20,
+          "two_qubit_count": 20,
+          "num_params": 27
+        },
+        {
+          "family": "adaptive",
+          "score": -9.489012787820126,
+          "gate_count": 50,
+          "depth": 19,
+          "two_qubit_count": 26,
+          "num_params": 37
+        },
+        {
+          "family": "adaptive",
+          "score": -9.446804522094526,
+          "gate_count": 50,
+          "depth": 32,
+          "two_qubit_count": 34,
+          "num_params": 32
+        }
+      ]
+    },
+    {
+      "problem": "Heisenberg-8",
+      "n": 8,
+      "elapsed_s": 361.41573572158813,
+      "found": 1,
+      "best_score": -12.570449202181896,
+      "solutions": [
+        {
+          "family": "adaptive",
+          "score": -12.570449202181896,
+          "gate_count": 50,
+          "depth": 19,
+          "two_qubit_count": 24,
+          "num_params": 34
+        }
+      ]
+    }
+  ],
+  "pattern_history": [
+    {
+      "after_problem": "Bell-2",
+      "library_size": 16,
+      "patterns_distilled": 0,
+      "top_patterns": []
+    },
+    {
+      "after_problem": "GHZ-3",
+      "library_size": 32,
+      "patterns_distilled": 3,
+      "top_patterns": [
+        {
+          "occurrences": 2,
+          "width": 2,
+          "length": 3,
+          "gate_signature": "rzz \u00b7 rx \u00b7 rx"
+        },
+        {
+          "occurrences": 2,
+          "width": 2,
+          "length": 4,
+          "gate_signature": "cnot \u00b7 ry \u00b7 ry \u00b7 rz"
+        },
+        {
+          "occurrences": 2,
+          "width": 2,
+          "length": 4,
+          "gate_signature": "ry \u00b7 rz \u00b7 rz \u00b7 cnot"
+        }
+      ]
+    },
+    {
+      "after_problem": "GHZ-4",
+      "library_size": 48,
+      "patterns_distilled": 5,
+      "top_patterns": [
+        {
+          "occurrences": 2,
+          "width": 2,
+          "length": 3,
+          "gate_signature": "rzz \u00b7 rx \u00b7 rx"
+        },
+        {
+          "occurrences": 2,
+          "width": 2,
+          "length": 4,
+          "gate_signature": "cnot \u00b7 ry \u00b7 ry \u00b7 rz"
+        },
+        {
+          "occurrences": 2,
+          "width": 2,
+          "length": 4,
+          "gate_signature": "ry \u00b7 rz \u00b7 rz \u00b7 cnot"
+        },
+        {
+          "occurrences": 2,
+          "width": 3,
+          "length": 5,
+          "gate_signature": "rzz \u00b7 rzz \u00b7 rzz \u00b7 rx \u00b7 rx"
+        },
+        {
+          "occurrences": 2,
+          "width": 3,
+          "length": 5,
+          "gate_signature": "rzz \u00b7 rzz \u00b7 rx \u00b7 rx \u00b7 rx"
+        }
+      ]
+    },
+    {
+      "after_problem": "Heisenberg-4",
+      "library_size": 64,
+      "patterns_distilled": 6,
+      "top_patterns": [
+        {
+          "occurrences": 3,
+          "width": 2,
+          "length": 2,
+          "gate_signature": "ry \u00b7 ry"
+        },
+        {
+          "occurrences": 3,
+          "width": 4,
+          "length": 3,
+          "gate_signature": "rzz \u00b7 rzz \u00b7 rzz"
+        },
+        {
+          "occurrences": 2,
+          "width": 2,
+          "length": 3,
+          "gate_signature": "rzz \u00b7 rx \u00b7 rx"
+        },
+        {
+          "occurrences": 2,
+          "width": 2,
+          "length": 4,
+          "gate_signature": "cnot \u00b7 ry \u00b7 ry \u00b7 rz"
+        },
+        {
+          "occurrences": 2,
+          "width": 2,
+          "length": 4,
+          "gate_signature": "ry \u00b7 rz \u00b7 rz \u00b7 cnot"
+        }
+      ]
+    },
+    {
+      "after_problem": "Heisenberg-6",
+      "library_size": 80,
+      "patterns_distilled": 6,
+      "top_patterns": [
+        {
+          "occurrences": 5,
+          "width": 2,
+          "length": 2,
+          "gate_signature": "ry \u00b7 ry"
+        },
+        {
+          "occurrences": 3,
+          "width": 4,
+          "length": 3,
+          "gate_signature": "rzz \u00b7 rzz \u00b7 rzz"
+        },
+        {
+          "occurrences": 3,
+          "width": 3,
+          "length": 2,
+          "gate_signature": "rzz \u00b7 rzz"
+        },
+        {
+          "occurrences": 3,
+          "width": 4,
+          "length": 3,
+          "gate_signature": "rz \u00b7 cnot \u00b7 cnot"
+        },
+        {
+          "occurrences": 2,
+          "width": 2,
+          "length": 3,
+          "gate_signature": "rzz \u00b7 rx \u00b7 rx"
+        }
+      ]
+    },
+    {
+      "after_problem": "Heisenberg-8",
+      "library_size": 84,
+      "patterns_distilled": 6,
+      "top_patterns": [
+        {
+          "occurrences": 6,
+          "width": 2,
+          "length": 2,
+          "gate_signature": "ry \u00b7 ry"
+        },
+        {
+          "occurrences": 4,
+          "width": 3,
+          "length": 2,
+          "gate_signature": "rzz \u00b7 rzz"
+        },
+        {
+          "occurrences": 3,
+          "width": 4,
+          "length": 3,
+          "gate_signature": "rzz \u00b7 rzz \u00b7 rzz"
+        },
+        {
+          "occurrences": 3,
+          "width": 4,
+          "length": 3,
+          "gate_signature": "rz \u00b7 cnot \u00b7 cnot"
+        },
+        {
+          "occurrences": 2,
+          "width": 2,
+          "length": 3,
+          "gate_signature": "rzz \u00b7 rx \u00b7 rx"
+        }
+      ]
+    }
+  ],
+  "control_heisenberg_8q": {
+    "problem": "Heisenberg-8",
+    "n": 8,
+    "elapsed_s": 366.4491000175476,
+    "found": 0,
+    "best_score": null,
+    "solutions": []
+  },
+  "ground_energy": -13.499730394751525,
+  "accept_threshold": -12.499730394751525,
+  "final_pattern_count": 10,
+  "final_library_size": 84
+}

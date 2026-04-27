@@ -104,3 +104,43 @@ def fragment_from_canonical(canon: CanonicalForm) -> Fragment:
         else:
             gates.append(GateSpec(name, qs, None))
     return Fragment(gates=gates, params=np.zeros(param_counter, dtype=float))
+
+
+def save_patterns(patterns: list[DistilledPattern], path) -> None:
+    """Persist canonical patterns (no params, no occurrence counts) so a
+    distilled vocabulary becomes a portable artifact you can ship."""
+    import json
+    from pathlib import Path
+    out = {
+        "patterns": [
+            {
+                "occurrences": p.occurrences,
+                "width": p.width,
+                "length": p.length,
+                "canonical": [
+                    {"name": name, "qubits": list(qs), "is_parametric": ip}
+                    for name, qs, ip in p.canonical
+                ],
+            }
+            for p in patterns
+        ]
+    }
+    Path(path).write_text(json.dumps(out, indent=2))
+
+
+def load_patterns(path) -> list[DistilledPattern]:
+    import json
+    from pathlib import Path
+    data = json.loads(Path(path).read_text())
+    out: list[DistilledPattern] = []
+    for entry in data["patterns"]:
+        canon: CanonicalForm = tuple(
+            (g["name"], tuple(g["qubits"]), g["is_parametric"])
+            for g in entry["canonical"]
+        )
+        out.append(DistilledPattern(
+            canonical=canon,
+            exemplar=fragment_from_canonical(canon),
+            occurrences=entry["occurrences"],
+        ))
+    return out
