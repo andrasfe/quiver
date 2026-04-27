@@ -140,6 +140,11 @@ class AdaptiveConfig:
 
     anti_template_weight: float = 0.0
 
+    # Hamiltonian-aware scoring: list of coupled qubit pairs and the
+    # bonus per newly-added gate that acts on a coupled pair.
+    coupled_pairs: list = field(default_factory=list)  # list of [i, j]
+    coupling_bonus: float = 0.0
+
 
 @dataclass
 class QuiverConfig:

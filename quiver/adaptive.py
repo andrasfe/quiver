@@ -124,6 +124,13 @@ class AdaptiveGrowth:
     # template specs you want to push *away* from.
     anti_template_specs: tuple[CircuitSpec, ...] = ()
     anti_template_weight: float = 0.0
+    # Hamiltonian-aware scoring: pairs of qubits coupled by the target
+    # Hamiltonian. Candidates whose newly-added gate acts on a coupled
+    # pair (or on a qubit belonging to one) get a small score bonus.
+    # Helps adaptive growth on Hamiltonian targets where the relevant
+    # gates are dictated by problem structure.
+    coupled_pairs: frozenset[tuple[int, int]] = frozenset()
+    coupling_bonus: float = 0.0
 
     def grow(
         self,
@@ -157,17 +164,21 @@ class AdaptiveGrowth:
                 trial_spec, trial_params = applier(spec, params)
                 self._score_candidate(
                     trial_spec, trial_params, applier, make_objective, scored,
+                    parent_spec=spec,
                 )
 
             if self.microstructure_library is not None and fragment_count > 0:
                 for _ in range(fragment_count):
-                    frag = self.microstructure_library.sample(self.num_qubits, rng)
+                    frag, offset = self.microstructure_library.sample_with_offset(
+                        self.num_qubits, rng
+                    )
                     if frag is None or spec.gate_count + frag.length > self.max_gates:
                         continue
-                    applier = _fragment_applier(frag)
+                    applier = _fragment_applier(frag, offset)
                     trial_spec, trial_params = applier(spec, params)
                     self._score_candidate(
                         trial_spec, trial_params, applier, make_objective, scored,
+                        parent_spec=spec,
                     )
 
             if not scored:
@@ -218,16 +229,42 @@ class AdaptiveGrowth:
         sims = [structural_similarity(spec, t) for t in self.anti_template_specs]
         return 1.0 - max(sims)
 
+    def _coupling_bonus(self, trial_spec: CircuitSpec, parent_spec: CircuitSpec) -> float:
+        """Bonus proportional to how many newly-added gates act on
+        Hamiltonian-coupled qubit pairs."""
+        if not self.coupled_pairs or self.coupling_bonus <= 0.0:
+            return 0.0
+        bonus = 0.0
+        for g in trial_spec.gates[parent_spec.gate_count :]:
+            qs = g.qubits
+            if len(qs) == 2:
+                pair = (qs[0], qs[1]) if qs[0] < qs[1] else (qs[1], qs[0])
+                if pair in self.coupled_pairs:
+                    bonus += self.coupling_bonus
+            elif len(qs) == 1:
+                for a, b in self.coupled_pairs:
+                    if qs[0] in (a, b):
+                        bonus += self.coupling_bonus * 0.3
+                        break
+        return bonus
+
     def _score_candidate(
-        self, trial_spec, trial_params, applier, make_objective, scored
+        self, trial_spec, trial_params, applier, make_objective, scored,
+        parent_spec: CircuitSpec | None = None,
     ) -> None:
         obj = make_objective(trial_spec)
+        coupling = (
+            self._coupling_bonus(trial_spec, parent_spec) if parent_spec else 0.0
+        )
+
         if trial_spec.num_params == 0:
             try:
                 raw = float(obj(trial_params))
             except Exception:
                 return
-            combined = raw - self.anti_template_weight * self._novelty(trial_spec)
+            combined = (
+                raw - self.anti_template_weight * self._novelty(trial_spec) - coupling
+            )
             scored.append((combined, raw, applier, trial_params))
             return
         try:
@@ -245,7 +282,9 @@ class AdaptiveGrowth:
             final = np.asarray(result.x)
         except Exception:
             return
-        combined = raw - self.anti_template_weight * self._novelty(trial_spec)
+        combined = (
+            raw - self.anti_template_weight * self._novelty(trial_spec) - coupling
+        )
         scored.append((combined, raw, applier, final))
 
 
@@ -255,7 +294,7 @@ def _single_gate_applier(name: str, qubits: tuple[int, ...]):
     return apply
 
 
-def _fragment_applier(fragment):
+def _fragment_applier(fragment, offset: int = 0):
     def apply(spec: CircuitSpec, params: np.ndarray) -> tuple[CircuitSpec, np.ndarray]:
-        return weld(spec, params, fragment)
+        return weld(spec, params, fragment, qubit_offset=offset)
     return apply

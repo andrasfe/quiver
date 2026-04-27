@@ -154,23 +154,56 @@ class MicrostructureLibrary:
             return None
         return viable[int(rng.integers(0, len(viable)))]
 
+    def sample_with_offset(
+        self, host_num_qubits: int, rng: np.random.Generator
+    ) -> tuple["Fragment | None", int]:
+        """Like sample(), but also returns a random valid `qubit_offset`
+        for cross-scale welding. The fragment's footprint plus offset
+        is guaranteed to fit inside the host's qubit register."""
+        if not self.fragments:
+            return None, 0
+        f = self.fragments[int(rng.integers(0, len(self.fragments)))]
+        qubits = f.qubits_used()
+        if not qubits:
+            return f, 0
+        footprint = max(qubits) + 1
+        if footprint > host_num_qubits:
+            return None, 0
+        max_offset = host_num_qubits - footprint
+        if max_offset <= 0:
+            return f, 0
+        return f, int(rng.integers(0, max_offset + 1))
+
 
 def weld(
     spec: CircuitSpec,
     params: np.ndarray,
     fragment: Fragment,
+    qubit_offset: int = 0,
 ) -> tuple[CircuitSpec, np.ndarray]:
-    """Append a fragment to the host spec, allocating new param slots."""
+    """Append a fragment to the host spec, allocating new param slots.
+
+    `qubit_offset` shifts every fragment qubit by a constant amount so a
+    fragment learned at qubits {0,1,2} can be welded into a host of
+    larger width at any valid starting position. The shift is rejected
+    silently if any resulting qubit would be out of range — caller is
+    expected to choose offsets within bounds.
+    """
     new_spec = CircuitSpec(num_qubits=spec.num_qubits)
     new_spec.gates = list(spec.gates)
     new_spec.num_params = spec.num_params
 
     base = spec.num_params
     for g in fragment.gates:
+        shifted = tuple(q + qubit_offset for q in g.qubits)
+        if any(not (0 <= q < spec.num_qubits) for q in shifted):
+            # Skip gates that would land outside the host. Conservative —
+            # better than a malformed spec.
+            continue
         if g.is_parametric:
-            new_spec.gates.append(GateSpec(g.name, g.qubits, base + g.param_idx))
+            new_spec.gates.append(GateSpec(g.name, shifted, base + g.param_idx))
         else:
-            new_spec.gates.append(GateSpec(g.name, g.qubits, None))
+            new_spec.gates.append(GateSpec(g.name, shifted, None))
     new_spec.num_params = base + fragment.num_params
 
     new_params = np.concatenate([params, fragment.params])

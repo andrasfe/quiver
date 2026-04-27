@@ -1,0 +1,220 @@
+{
+  "study": "Meta-invention \u2014 system uses its own distilled ansatz templates",
+  "target": "Heisenberg-8q ground state preparation",
+  "ground_energy": -13.499730394751525,
+  "accept_threshold": -12.499730394751525,
+  "distilled_patterns": [
+    {
+      "pattern_id": 0,
+      "occurrences": 8,
+      "width": 2,
+      "length": 2,
+      "gate_signature": "ry \u00b7 cnot"
+    },
+    {
+      "pattern_id": 1,
+      "occurrences": 8,
+      "width": 2,
+      "length": 2,
+      "gate_signature": "rxx \u00b7 rz"
+    },
+    {
+      "pattern_id": 2,
+      "occurrences": 3,
+      "width": 3,
+      "length": 3,
+      "gate_signature": "rxx \u00b7 rz \u00b7 cnot"
+    },
+    {
+      "pattern_id": 3,
+      "occurrences": 3,
+      "width": 3,
+      "length": 5,
+      "gate_signature": "z \u00b7 rxx \u00b7 s \u00b7 rxx \u00b7 rz"
+    },
+    {
+      "pattern_id": 4,
+      "occurrences": 3,
+      "width": 4,
+      "length": 5,
+      "gate_signature": "rzz \u00b7 rxx \u00b7 rz \u00b7 cnot \u00b7 cnot"
+    },
+    {
+      "pattern_id": 5,
+      "occurrences": 2,
+      "width": 2,
+      "length": 3,
+      "gate_signature": "z \u00b7 rxx \u00b7 rz"
+    }
+  ],
+  "runs": [
+    {
+      "label": "A_canonical_only",
+      "elapsed_s": 240.2637870311737,
+      "found": 0,
+      "extreme_novel": 0,
+      "best_energy": null,
+      "ground_energy": -13.499730394751525,
+      "solutions": []
+    },
+    {
+      "label": "B_discovered_only",
+      "elapsed_s": 137.76601815223694,
+      "found": 4,
+      "extreme_novel": 2,
+      "best_energy": -12.715462143177255,
+      "ground_energy": -13.499730394751525,
+      "solutions": [
+        {
+          "family": "discovered_1_L3",
+          "energy": -12.584555339509992,
+          "gate_count": 42,
+          "depth": 14,
+          "two_qubit_count": 21,
+          "num_params": 42,
+          "novelty_vs_canonical": 0.402065404475043,
+          "gate_histogram": {
+            "rxx": 21,
+            "rz": 21
+          }
+        },
+        {
+          "family": "adaptive",
+          "energy": -12.577071901753394,
+          "gate_count": 50,
+          "depth": 22,
+          "two_qubit_count": 31,
+          "num_params": 37,
+          "novelty_vs_canonical": 0.5589999999999999,
+          "gate_histogram": {
+            "rxx": 7,
+            "iswap": 1,
+            "x": 2,
+            "ryy": 10,
+            "rzz": 7,
+            "rz": 6,
+            "rx": 4,
+            "cnot": 4,
+            "ry": 4,
+            "swap": 1,
+            "sqrt_iswap": 1,
+            "z": 1,
+            "t": 2
+          }
+        },
+        {
+          "family": "adaptive",
+          "energy": -12.715462143177255,
+          "gate_count": 50,
+          "depth": 24,
+          "two_qubit_count": 32,
+          "num_params": 38,
+          "novelty_vs_canonical": 0.5783333333333334,
+          "gate_histogram": {
+            "rxx": 9,
+            "rz": 4,
+            "ry": 4,
+            "rzz": 13,
+            "cnot": 2,
+            "ryy": 5,
+            "rx": 8,
+            "swap": 1,
+            "z": 1,
+            "t": 1,
+            "sqrt_iswap": 1,
+            "iswap": 1
+          }
+        },
+        {
+          "family": "discovered_5_L2",
+          "energy": -12.513096839532922,
+          "gate_count": 42,
+          "depth": 25,
+          "two_qubit_count": 14,
+          "num_params": 28,
+          "novelty_vs_canonical": 0.4892753623188406,
+          "gate_histogram": {
+            "z": 14,
+            "rxx": 14,
+            "rz": 14
+          }
+        }
+      ]
+    },
+    {
+      "label": "C_discovered_plus_canon_with_Haware",
+      "elapsed_s": 207.51646900177002,
+      "found": 4,
+      "extreme_novel": 1,
+      "best_energy": -12.584555339509992,
+      "ground_energy": -13.499730394751525,
+      "solutions": [
+        {
+          "family": "discovered_1_L3",
+          "energy": -12.584555339509992,
+          "gate_count": 42,
+          "depth": 14,
+          "two_qubit_count": 21,
+          "num_params": 42,
+          "novelty_vs_canonical": 0.402065404475043,
+          "gate_histogram": {
+            "rxx": 21,
+            "rz": 21
+          }
+        },
+        {
+          "family": "discovered_5_L2",
+          "energy": -12.513096839532922,
+          "gate_count": 42,
+          "depth": 25,
+          "two_qubit_count": 14,
+          "num_params": 28,
+          "novelty_vs_canonical": 0.4892753623188406,
+          "gate_histogram": {
+            "z": 14,
+            "rxx": 14,
+            "rz": 14
+          }
+        },
+        {
+          "family": "discovered_5_L3",
+          "energy": -12.517121671476783,
+          "gate_count": 63,
+          "depth": 29,
+          "two_qubit_count": 21,
+          "num_params": 42,
+          "novelty_vs_canonical": 0.48598200899550226,
+          "gate_histogram": {
+            "z": 21,
+            "rxx": 21,
+            "rz": 21
+          }
+        },
+        {
+          "family": "adaptive",
+          "energy": -12.573073922290407,
+          "gate_count": 50,
+          "depth": 21,
+          "two_qubit_count": 25,
+          "num_params": 34,
+          "novelty_vs_canonical": 0.6445416666666667,
+          "gate_histogram": {
+            "ry": 5,
+            "cnot": 1,
+            "ryy": 2,
+            "z": 6,
+            "rxx": 12,
+            "rz": 7,
+            "y": 1,
+            "sqrt_iswap": 3,
+            "rzz": 6,
+            "s": 3,
+            "rx": 2,
+            "swap": 1,
+            "t": 1
+          }
+        }
+      ]
+    }
+  ]
+}

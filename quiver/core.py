@@ -230,6 +230,9 @@ class Quiver:
             a.build() for a in ansatz_list
         ) if cfg.adaptive.anti_template_weight > 0 else ()
 
+        coupled_pairs = frozenset(
+            (min(p), max(p)) for p in cfg.adaptive.coupled_pairs if len(p) == 2
+        )
         grower = AdaptiveGrowth(
             num_qubits=adaptive_qubits,
             max_gates=cfg.adaptive.max_gates,
@@ -242,6 +245,8 @@ class Quiver:
             fragment_candidate_fraction=cfg.adaptive.fragment_candidate_fraction,
             anti_template_specs=anti_template_specs,
             anti_template_weight=cfg.adaptive.anti_template_weight,
+            coupled_pairs=coupled_pairs,
+            coupling_bonus=cfg.adaptive.coupling_bonus,
         )
 
         deadline = time.monotonic() + budget_s
