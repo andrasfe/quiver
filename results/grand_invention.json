@@ -1,0 +1,510 @@
+{
+  "study": "Grand invention \u2014 Hamiltonian targets + mut\u00d7lib + compactness + persistent library",
+  "problems_run": 5,
+  "total_verified": 16,
+  "extreme_novel": 10,
+  "moderate_novel": 10,
+  "mean_per_target_novelty": 0.40801728404364085,
+  "library_size_end": 160,
+  "global_gate_usage": {
+    "ryy": 50,
+    "cz": 18,
+    "cnot": 61,
+    "rxx": 64,
+    "rz": 57,
+    "rzz": 116,
+    "sqrt_iswap": 16,
+    "s": 10,
+    "rx": 83,
+    "t": 18,
+    "ry": 78,
+    "iswap": 8,
+    "z": 9,
+    "x": 2,
+    "swap": 12,
+    "h": 31
+  },
+  "top_bigrams": [
+    {
+      "a": "rxx",
+      "b": "rz",
+      "count": 37
+    },
+    {
+      "a": "ry",
+      "b": "cnot",
+      "count": 24
+    },
+    {
+      "a": "rzz",
+      "b": "rzz",
+      "count": 24
+    },
+    {
+      "a": "z",
+      "b": "rxx",
+      "count": 17
+    },
+    {
+      "a": "rx",
+      "b": "rx",
+      "count": 16
+    },
+    {
+      "a": "cnot",
+      "b": "ry",
+      "count": 14
+    },
+    {
+      "a": "rz",
+      "b": "cnot",
+      "count": 13
+    },
+    {
+      "a": "rzz",
+      "b": "rxx",
+      "count": 12
+    },
+    {
+      "a": "ry",
+      "b": "ry",
+      "count": 12
+    },
+    {
+      "a": "cnot",
+      "b": "cnot",
+      "count": 11
+    },
+    {
+      "a": "cz",
+      "b": "cnot",
+      "count": 9
+    },
+    {
+      "a": "s",
+      "b": "rxx",
+      "count": 8
+    },
+    {
+      "a": "sqrt_iswap",
+      "b": "rx",
+      "count": 8
+    },
+    {
+      "a": "rzz",
+      "b": "rx",
+      "count": 8
+    },
+    {
+      "a": "ryy",
+      "b": "swap",
+      "count": 6
+    },
+    {
+      "a": "cnot",
+      "b": "ryy",
+      "count": 6
+    },
+    {
+      "a": "rxx",
+      "b": "ryy",
+      "count": 6
+    },
+    {
+      "a": "rx",
+      "b": "z",
+      "count": 6
+    },
+    {
+      "a": "rz",
+      "b": "rx",
+      "count": 6
+    },
+    {
+      "a": "rxx",
+      "b": "s",
+      "count": 6
+    }
+  ],
+  "per_problem": [
+    {
+      "name": "heisenberg_6q",
+      "kind": "heisenberg",
+      "num_qubits": 6,
+      "elapsed_s": 234.27128076553345,
+      "fragments_added": 16,
+      "found": 4,
+      "extreme_novel": 4,
+      "moderate_novel": 4,
+      "novelty_mean": 0.5924245169082125,
+      "ground_energy": -9.974308535551698,
+      "solutions": [
+        {
+          "family": "adaptive",
+          "verifier_score": -9.381368799310666,
+          "gate_count": 40,
+          "depth": 19,
+          "two_qubit_count": 29,
+          "num_params": 30,
+          "novelty": 0.5691666666666667,
+          "gate_histogram": {
+            "ryy": 10,
+            "cz": 2,
+            "cnot": 2,
+            "rxx": 7,
+            "rz": 4,
+            "rzz": 6,
+            "sqrt_iswap": 1,
+            "s": 2,
+            "rx": 2,
+            "t": 2,
+            "ry": 1,
+            "iswap": 1
+          }
+        },
+        {
+          "family": "adaptive",
+          "verifier_score": -9.649549936921467,
+          "gate_count": 40,
+          "depth": 23,
+          "two_qubit_count": 30,
+          "num_params": 28,
+          "novelty": 0.6452536231884058,
+          "gate_histogram": {
+            "rxx": 9,
+            "iswap": 1,
+            "z": 1,
+            "rz": 3,
+            "x": 1,
+            "swap": 1,
+            "ryy": 6,
+            "t": 2,
+            "ry": 1,
+            "cnot": 1,
+            "s": 1,
+            "sqrt_iswap": 4,
+            "rzz": 8,
+            "rx": 1
+          }
+        },
+        {
+          "family": "adaptive",
+          "verifier_score": -9.398782022352629,
+          "gate_count": 40,
+          "depth": 17,
+          "two_qubit_count": 32,
+          "num_params": 25,
+          "novelty": 0.5961111111111111,
+          "gate_histogram": {
+            "sqrt_iswap": 2,
+            "rx": 1,
+            "rxx": 11,
+            "iswap": 2,
+            "swap": 1,
+            "z": 1,
+            "s": 2,
+            "rz": 1,
+            "cz": 4,
+            "rzz": 4,
+            "ryy": 8,
+            "t": 3
+          }
+        },
+        {
+          "family": "adaptive",
+          "verifier_score": -9.407451403622556,
+          "gate_count": 39,
+          "depth": 18,
+          "two_qubit_count": 31,
+          "num_params": 30,
+          "novelty": 0.5591666666666667,
+          "gate_histogram": {
+            "ryy": 8,
+            "rxx": 8,
+            "rz": 1,
+            "z": 1,
+            "iswap": 1,
+            "cnot": 1,
+            "t": 1,
+            "rzz": 9,
+            "swap": 2,
+            "sqrt_iswap": 2,
+            "ry": 3,
+            "s": 1,
+            "rx": 1
+          }
+        }
+      ]
+    },
+    {
+      "name": "tfim_6q_critical",
+      "kind": "tfim",
+      "num_qubits": 6,
+      "elapsed_s": 17.039541006088257,
+      "fragments_added": 16,
+      "found": 4,
+      "extreme_novel": 2,
+      "moderate_novel": 2,
+      "novelty_mean": 0.2814204545454545,
+      "ground_energy": -7.296229810558758,
+      "solutions": [
+        {
+          "family": "qaoa",
+          "verifier_score": -7.028070672439229,
+          "gate_count": 30,
+          "depth": 15,
+          "two_qubit_count": 12,
+          "num_params": 4,
+          "novelty": 0.0,
+          "gate_histogram": {
+            "h": 6,
+            "rzz": 12,
+            "rx": 12
+          }
+        },
+        {
+          "family": "adaptive",
+          "verifier_score": -6.853813817835211,
+          "gate_count": 40,
+          "depth": 19,
+          "two_qubit_count": 28,
+          "num_params": 24,
+          "novelty": 0.5422222222222222,
+          "gate_histogram": {
+            "ryy": 6,
+            "swap": 4,
+            "cz": 2,
+            "cnot": 3,
+            "ry": 3,
+            "rx": 2,
+            "s": 1,
+            "z": 2,
+            "sqrt_iswap": 1,
+            "rzz": 5,
+            "rxx": 7,
+            "rz": 1,
+            "t": 3
+          }
+        },
+        {
+          "family": "qaoa",
+          "verifier_score": -6.927924928649563,
+          "gate_count": 42,
+          "depth": 22,
+          "two_qubit_count": 18,
+          "num_params": 6,
+          "novelty": 0.0,
+          "gate_histogram": {
+            "h": 6,
+            "rzz": 18,
+            "rx": 18
+          }
+        },
+        {
+          "family": "adaptive",
+          "verifier_score": -7.010344865373081,
+          "gate_count": 40,
+          "depth": 22,
+          "two_qubit_count": 25,
+          "num_params": 22,
+          "novelty": 0.583459595959596,
+          "gate_histogram": {
+            "t": 4,
+            "ry": 8,
+            "ryy": 2,
+            "cz": 2,
+            "cnot": 4,
+            "iswap": 3,
+            "rzz": 6,
+            "swap": 3,
+            "rxx": 5,
+            "z": 1,
+            "s": 1,
+            "rx": 1
+          }
+        }
+      ]
+    },
+    {
+      "name": "maxcut_cycle_8q",
+      "kind": "maxcut_cycle",
+      "num_qubits": 8,
+      "elapsed_s": 11.285333156585693,
+      "fragments_added": 16,
+      "found": 4,
+      "extreme_novel": 2,
+      "moderate_novel": 2,
+      "novelty_mean": 0.4390760136126269,
+      "ground_energy": null,
+      "solutions": [
+        {
+          "family": "adaptive",
+          "verifier_score": 0.9999999991567614,
+          "gate_count": 14,
+          "depth": 6,
+          "two_qubit_count": 9,
+          "num_params": 8,
+          "novelty": 0.8659531772575251,
+          "gate_histogram": {
+            "x": 1,
+            "ryy": 3,
+            "z": 1,
+            "rxx": 2,
+            "rz": 1,
+            "sqrt_iswap": 1,
+            "rx": 1,
+            "cnot": 1,
+            "cz": 2,
+            "ry": 1
+          }
+        },
+        {
+          "family": "hardware_efficient",
+          "verifier_score": 0.999901606678802,
+          "gate_count": 46,
+          "depth": 13,
+          "two_qubit_count": 14,
+          "num_params": 32,
+          "novelty": 0.0,
+          "gate_histogram": {
+            "ry": 16,
+            "rz": 16,
+            "cnot": 14
+          }
+        },
+        {
+          "family": "adaptive",
+          "verifier_score": 0.99999999311623,
+          "gate_count": 17,
+          "depth": 5,
+          "two_qubit_count": 11,
+          "num_params": 9,
+          "novelty": 0.8903508771929824,
+          "gate_histogram": {
+            "sqrt_iswap": 3,
+            "rxx": 4,
+            "ryy": 3,
+            "ry": 2,
+            "t": 3,
+            "s": 1,
+            "cz": 1
+          }
+        },
+        {
+          "family": "hardware_efficient",
+          "verifier_score": 0.9768932544405438,
+          "gate_count": 69,
+          "depth": 17,
+          "two_qubit_count": 21,
+          "num_params": 48,
+          "novelty": 0.0,
+          "gate_histogram": {
+            "ry": 24,
+            "rz": 24,
+            "cnot": 21
+          }
+        }
+      ]
+    },
+    {
+      "name": "tfim_8q_easy",
+      "kind": "tfim",
+      "num_qubits": 8,
+      "elapsed_s": 22.843825101852417,
+      "fragments_added": 16,
+      "found": 4,
+      "extreme_novel": 2,
+      "moderate_novel": 2,
+      "novelty_mean": 0.31914815110826944,
+      "ground_energy": -16.885141493208195,
+      "solutions": [
+        {
+          "family": "qaoa",
+          "verifier_score": -16.734944686706882,
+          "gate_count": 40,
+          "depth": 19,
+          "two_qubit_count": 16,
+          "num_params": 4,
+          "novelty": 0.0,
+          "gate_histogram": {
+            "h": 8,
+            "rzz": 16,
+            "rx": 16
+          }
+        },
+        {
+          "family": "qaoa",
+          "verifier_score": -16.732757349011425,
+          "gate_count": 56,
+          "depth": 28,
+          "two_qubit_count": 24,
+          "num_params": 6,
+          "novelty": 0.0,
+          "gate_histogram": {
+            "h": 8,
+            "rzz": 24,
+            "rx": 24
+          }
+        },
+        {
+          "family": "adaptive",
+          "verifier_score": -16.330471270786344,
+          "gate_count": 40,
+          "depth": 22,
+          "two_qubit_count": 22,
+          "num_params": 26,
+          "novelty": 0.6497916666666667,
+          "gate_histogram": {
+            "cnot": 6,
+            "ry": 7,
+            "s": 1,
+            "rxx": 7,
+            "rz": 4,
+            "rzz": 4,
+            "sqrt_iswap": 1,
+            "z": 1,
+            "cz": 1,
+            "ryy": 2,
+            "rx": 2,
+            "h": 3,
+            "swap": 1
+          }
+        },
+        {
+          "family": "adaptive",
+          "verifier_score": -16.49231748931371,
+          "gate_count": 40,
+          "depth": 16,
+          "two_qubit_count": 23,
+          "num_params": 26,
+          "novelty": 0.626800937766411,
+          "gate_histogram": {
+            "rxx": 4,
+            "z": 1,
+            "rz": 2,
+            "cz": 4,
+            "cnot": 8,
+            "ry": 12,
+            "rzz": 4,
+            "sqrt_iswap": 1,
+            "ryy": 2,
+            "rx": 2
+          }
+        }
+      ]
+    },
+    {
+      "name": "heisenberg_8q",
+      "kind": "heisenberg",
+      "num_qubits": 8,
+      "elapsed_s": 365.3028600215912,
+      "fragments_added": 0,
+      "found": 0,
+      "extreme_novel": 0,
+      "moderate_novel": 0,
+      "novelty_mean": 0.0,
+      "ground_energy": -13.499730394751525,
+      "solutions": []
+    }
+  ]
+}

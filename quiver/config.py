@@ -63,6 +63,10 @@ class DiversityConfig:
     edit_weight: float = 0.5
     connectivity_weight: float = 0.3
     depth_weight: float = 0.2
+    # When True, a too-similar candidate that is more compact (fewer
+    # gates AND not deeper) replaces its closest registry neighbour
+    # instead of being rejected.
+    prefer_compact: bool = False
 
 
 @dataclass
@@ -87,11 +91,16 @@ class MutationConfig:
     the template library and instead mutates a randomly-chosen registry
     entry. The mutated spec is then optimized and verified like any other
     candidate. Default: disabled (backwards compatible).
+
+    `use_microstructures` adds a sixth operator: weld a learned fragment
+    onto the parent. Lets mutation rounds recombine across the library.
     """
     enabled: bool = False
     frequency: int = 3
     chain_min: int = 1
     chain_max: int = 3
+    use_microstructures: bool = False
+    weld_weight: float = 1.5
 
 
 @dataclass

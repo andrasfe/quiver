@@ -28,6 +28,7 @@ from typing import Callable
 import numpy as np
 
 from quiver.circuit import CircuitSpec, GateSpec
+from quiver.microstructures import MicrostructureLibrary, weld
 
 
 PARAM_1Q = ("rx", "ry", "rz")
@@ -165,12 +166,34 @@ class Mutator:
     weights: tuple[float, ...] = (1.0, 1.0, 1.0, 1.0, 1.0)
     chain_min: int = 1
     chain_max: int = 3
+    # When set, mutation rounds can also weld a learned fragment onto the
+    # parent circuit — this is structural recombination across the
+    # accumulated library, not just point edits.
+    microstructure_library: MicrostructureLibrary | None = None
+    weld_weight: float = 1.5
+
+    def _ops_and_weights(self) -> tuple[list[Callable], list[float]]:
+        ops = list(self.operations)
+        weights = list(self.weights)
+        if self.microstructure_library is not None and self.microstructure_library.fragments:
+            ops.append(self._weld_op)
+            weights.append(self.weld_weight)
+        return ops, weights
+
+    def _weld_op(self, spec: CircuitSpec, params: np.ndarray,
+                 rng: np.random.Generator) -> tuple[CircuitSpec, np.ndarray]:
+        assert self.microstructure_library is not None
+        frag = self.microstructure_library.sample(spec.num_qubits, rng)
+        if frag is None:
+            return spec, params.copy()
+        return weld(spec, params, frag)
 
     def step(self, spec: CircuitSpec, params: np.ndarray,
              rng: np.random.Generator) -> tuple[CircuitSpec, np.ndarray]:
-        w = np.asarray(self.weights, dtype=float)
+        ops, weights = self._ops_and_weights()
+        w = np.asarray(weights, dtype=float)
         w = w / w.sum()
-        op = self.operations[int(rng.choice(len(self.operations), p=w))]
+        op = ops[int(rng.choice(len(ops), p=w))]
         return op(spec, params, rng)
 
     def chain(self, spec: CircuitSpec, params: np.ndarray,

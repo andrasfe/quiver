@@ -104,9 +104,21 @@ class Quiver:
     objective: Callable[[np.ndarray], float] | None = None
     config: QuiverConfig = field(default_factory=QuiverConfig)
     microstructure_library: MicrostructureLibrary | None = None
+    # state_loss: optional state-based loss function. When provided, it
+    # replaces the default fidelity-based loss; the per-spec objective
+    # becomes `loss(backend(spec, params))`. This is what enables VQE-style
+    # Hamiltonian targets where the loss is <state|H|state>, not fidelity.
+    state_loss: Callable[[np.ndarray], float] | None = None
 
     def __post_init__(self) -> None:
-        if isinstance(self.target, np.ndarray):
+        if self.state_loss is not None:
+            # Generic state-based mode (Hamiltonian/VQE etc.). Target is
+            # opaque metadata; verifier and backend are required.
+            if self.backend is None:
+                raise ValueError("backend is required when state_loss is set")
+            if self.verifier is None:
+                raise ValueError("verifier is required when state_loss is set")
+        elif isinstance(self.target, np.ndarray) and self.target.ndim == 1:
             num_qubits = int(np.log2(self.target.size))
             if 2**num_qubits != self.target.size:
                 raise ValueError("target statevector length must be a power of 2")
@@ -127,12 +139,23 @@ class Quiver:
         return 0.99
 
     def _build_objective(self, spec: CircuitSpec) -> Objective:
+        if self.state_loss is not None:
+            backend = self.backend
+            assert backend is not None
+            user_loss = self.state_loss
+
+            def state_obj(params: np.ndarray) -> float:
+                state = backend.statevector(spec, params)
+                return float(user_loss(state))
+
+            return state_obj
+
         if self.objective is not None:
             user_obj = self.objective
             return lambda p: float(user_obj(p))
 
-        if not isinstance(self.target, np.ndarray):
-            raise ValueError("objective is required for non-statevector targets")
+        if not isinstance(self.target, np.ndarray) or self.target.ndim != 1:
+            raise ValueError("objective or state_loss is required for non-statevector targets")
 
         loss_fn = fidelity_objective(self.target)
         backend = self.backend
@@ -161,7 +184,9 @@ class Quiver:
             depth=cfg.diversity.depth_weight,
         )
         registry = SolutionRegistry(
-            diversity_threshold=cfg.diversity.threshold, weights=weights
+            diversity_threshold=cfg.diversity.threshold,
+            weights=weights,
+            prefer_compact=cfg.diversity.prefer_compact,
         )
 
         rng = np.random.default_rng(cfg.exploration.seed)
@@ -172,23 +197,34 @@ class Quiver:
         mutator = Mutator(
             chain_min=cfg.mutation.chain_min,
             chain_max=cfg.mutation.chain_max,
+            weld_weight=cfg.mutation.weld_weight,
         )
         # Adaptive grower built once per explore call; it consumes RNG
         # state via the shared rng so successive growth runs diverge.
-        if isinstance(self.target, np.ndarray):
+        if self.state_loss is not None:
+            adaptive_qubits = self.backend.num_qubits  # type: ignore[union-attr]
+        elif isinstance(self.target, np.ndarray) and self.target.ndim == 1:
             adaptive_qubits = int(np.log2(self.target.size))
         else:
             adaptive_qubits = self.backend.num_qubits  # type: ignore[union-attr]
 
         # Reuse the user-supplied library if any (continual learning across
-        # explore() calls / targets); otherwise build a fresh one.
+        # explore() calls / targets); otherwise build a fresh one if any
+        # mode (adaptive or mutation) wants to use it.
         micro_lib: MicrostructureLibrary | None = self.microstructure_library
-        if micro_lib is None and cfg.adaptive.microstructures_enabled:
+        wants_lib = (
+            cfg.adaptive.microstructures_enabled or cfg.mutation.use_microstructures
+        )
+        if micro_lib is None and wants_lib:
             micro_lib = MicrostructureLibrary(
                 fragments_per_solution=cfg.adaptive.microstructures_per_solution,
                 min_length=cfg.adaptive.microstructure_min_length,
                 max_length=cfg.adaptive.microstructure_max_length,
             )
+
+        # Mutator gets the library too if mutation×microstructures is on.
+        if cfg.mutation.use_microstructures and micro_lib is not None:
+            mutator.microstructure_library = micro_lib
 
         anti_template_specs: tuple[CircuitSpec, ...] = tuple(
             a.build() for a in ansatz_list
@@ -251,12 +287,16 @@ class Quiver:
                 warm_start=warm_start,
             )
 
-            if not isinstance(self.target, np.ndarray):
-                # Caller-provided objective + verifier: feed params through verifier.
-                passed, score = self.verifier(result.params)  # type: ignore[arg-type]
-            else:
+            state_based = (
+                self.state_loss is not None
+                or (isinstance(self.target, np.ndarray) and self.target.ndim == 1)
+            )
+            if state_based:
                 state = self.backend.statevector(spec, result.params)  # type: ignore[union-attr]
                 passed, score = self.verifier(state)  # type: ignore[misc]
+            else:
+                # Caller-provided objective + verifier: feed params through verifier.
+                passed, score = self.verifier(result.params)  # type: ignore[arg-type]
 
             if not passed:
                 rejected += 1

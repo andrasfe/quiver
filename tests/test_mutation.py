@@ -103,3 +103,24 @@ def test_chain_output_remains_valid_specification():
             assert 0 <= q < new_spec.num_qubits
         if g.is_parametric:
             assert 0 <= g.param_idx < new_spec.num_params
+
+
+def test_mutator_with_library_can_weld_fragments():
+    from quiver.microstructures import MicrostructureLibrary
+    spec, _ = _spec_from_he()
+    params = np.linspace(0.1, 0.9, spec.num_params)
+    lib = MicrostructureLibrary(fragments_per_solution=4, min_length=3, max_length=4)
+    lib.add_solution(spec, params, np.random.default_rng(0))
+    assert lib.fragments
+
+    rng = np.random.default_rng(99)
+    mutator = Mutator(
+        operations=(),  # disable point edits — only weld available
+        weights=(),
+        chain_min=1, chain_max=1,
+        microstructure_library=lib,
+    )
+    new_spec, new_params = mutator.step(spec, params, rng)
+    # Weld appends; the new spec should be at least as long.
+    assert new_spec.gate_count >= spec.gate_count
+    assert len(new_params) == new_spec.num_params
