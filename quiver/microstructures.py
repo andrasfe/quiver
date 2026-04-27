@@ -54,6 +54,51 @@ class MicrostructureLibrary:
     min_length: int = 2
     max_length: int = 6
 
+    def to_dict(self) -> dict:
+        return {
+            "fragments_per_solution": self.fragments_per_solution,
+            "min_length": self.min_length,
+            "max_length": self.max_length,
+            "fragments": [
+                {
+                    "gates": [
+                        {"name": g.name, "qubits": list(g.qubits),
+                         "param_idx": g.param_idx}
+                        for g in f.gates
+                    ],
+                    "params": f.params.tolist(),
+                }
+                for f in self.fragments
+            ],
+        }
+
+    @classmethod
+    def from_dict(cls, d: dict) -> "MicrostructureLibrary":
+        lib = cls(
+            fragments_per_solution=d.get("fragments_per_solution", 4),
+            min_length=d.get("min_length", 2),
+            max_length=d.get("max_length", 6),
+        )
+        for f_dict in d.get("fragments", []):
+            gates = [
+                GateSpec(g["name"], tuple(g["qubits"]), g["param_idx"])
+                for g in f_dict["gates"]
+            ]
+            params = np.array(f_dict["params"], dtype=float)
+            lib.fragments.append(Fragment(gates=gates, params=params))
+        return lib
+
+    def save_json(self, path) -> None:
+        import json
+        from pathlib import Path
+        Path(path).write_text(json.dumps(self.to_dict(), indent=2))
+
+    @classmethod
+    def load_json(cls, path) -> "MicrostructureLibrary":
+        import json
+        from pathlib import Path
+        return cls.from_dict(json.loads(Path(path).read_text()))
+
     def add_solution(
         self,
         spec: CircuitSpec,

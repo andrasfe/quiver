@@ -91,6 +91,11 @@ class Quiver:
     objective : Objective | None
         Loss in parameter space. Defaults to (1 - fidelity to target).
     config : QuiverConfig
+    microstructure_library : MicrostructureLibrary | None
+        Optional pre-built fragment library. If provided, Quiver uses it
+        instead of creating a fresh one — so a single library can be
+        shared across multiple Quiver instances on different targets
+        (continual learning across problems).
     """
 
     target: np.ndarray | dict
@@ -98,6 +103,7 @@ class Quiver:
     backend: Backend | None = None
     objective: Callable[[np.ndarray], float] | None = None
     config: QuiverConfig = field(default_factory=QuiverConfig)
+    microstructure_library: MicrostructureLibrary | None = None
 
     def __post_init__(self) -> None:
         if isinstance(self.target, np.ndarray):
@@ -174,8 +180,10 @@ class Quiver:
         else:
             adaptive_qubits = self.backend.num_qubits  # type: ignore[union-attr]
 
-        micro_lib: MicrostructureLibrary | None = None
-        if cfg.adaptive.microstructures_enabled:
+        # Reuse the user-supplied library if any (continual learning across
+        # explore() calls / targets); otherwise build a fresh one.
+        micro_lib: MicrostructureLibrary | None = self.microstructure_library
+        if micro_lib is None and cfg.adaptive.microstructures_enabled:
             micro_lib = MicrostructureLibrary(
                 fragments_per_solution=cfg.adaptive.microstructures_per_solution,
                 min_length=cfg.adaptive.microstructure_min_length,
