@@ -1,0 +1,208 @@
+{
+  "summary": {
+    "canonical_only": {
+      "seeds_run": 3,
+      "seeds_verifying": 3,
+      "best_energy_mean": -12.81555532334624,
+      "best_energy_std": 0.09851394146856096,
+      "best_energy_min": -12.954602019179307,
+      "all_results": [
+        {
+          "label": "canonical_only/seed42",
+          "seed": 42,
+          "condition": "canonical_only",
+          "elapsed_s": 363.010568857193,
+          "found": 3,
+          "best_energy": -12.954602019179307,
+          "all_energies": [
+            -12.737455358965358,
+            -12.954602019179307,
+            -12.710707359746866
+          ],
+          "ground": -13.499730394751525,
+          "accept_below": -12.499730394751525
+        },
+        {
+          "label": "canonical_only/seed13",
+          "seed": 13,
+          "condition": "canonical_only",
+          "elapsed_s": 360.3314321041107,
+          "found": 3,
+          "best_energy": -12.738481658950462,
+          "all_energies": [
+            -12.631790477365554,
+            -12.738481658950462,
+            -12.693546352801151
+          ],
+          "ground": -13.499730394751525,
+          "accept_below": -12.499730394751525
+        },
+        {
+          "label": "canonical_only/seed7",
+          "seed": 7,
+          "condition": "canonical_only",
+          "elapsed_s": 363.5838918685913,
+          "found": 3,
+          "best_energy": -12.753582291908954,
+          "all_energies": [
+            -12.67198611026209,
+            -12.753582291908954,
+            -12.512165282352047
+          ],
+          "ground": -13.499730394751525,
+          "accept_below": -12.499730394751525
+        }
+      ]
+    },
+    "canonical_plus_discovered": {
+      "seeds_run": 3,
+      "seeds_verifying": 3,
+      "best_energy_mean": -12.839653139542781,
+      "best_energy_std": 0.08208359605772791,
+      "best_energy_min": -12.944248215127939,
+      "all_results": [
+        {
+          "label": "canonical_plus_discovered/seed42",
+          "seed": 42,
+          "condition": "canonical_plus_discovered",
+          "elapsed_s": 260.57019424438477,
+          "found": 4,
+          "best_energy": -12.830961538675732,
+          "all_energies": [
+            -12.67936335393718,
+            -12.517436922971173,
+            -12.830961538675732,
+            -12.633276395868599
+          ],
+          "ground": -13.499730394751525,
+          "accept_below": -12.499730394751525
+        },
+        {
+          "label": "canonical_plus_discovered/seed13",
+          "seed": 13,
+          "condition": "canonical_plus_discovered",
+          "elapsed_s": 173.5384829044342,
+          "found": 4,
+          "best_energy": -12.944248215127939,
+          "all_energies": [
+            -12.944248215127939,
+            -12.703597048547696,
+            -12.512900685761375,
+            -12.61973450482692
+          ],
+          "ground": -13.499730394751525,
+          "accept_below": -12.499730394751525
+        },
+        {
+          "label": "canonical_plus_discovered/seed7",
+          "seed": 7,
+          "condition": "canonical_plus_discovered",
+          "elapsed_s": 360.39486718177795,
+          "found": 3,
+          "best_energy": -12.743749664824668,
+          "all_energies": [
+            -12.743749664824668,
+            -12.7116312903834,
+            -12.664246695532043
+          ],
+          "ground": -13.499730394751525,
+          "accept_below": -12.499730394751525
+        }
+      ]
+    }
+  },
+  "results": [
+    {
+      "label": "canonical_only/seed42",
+      "seed": 42,
+      "condition": "canonical_only",
+      "elapsed_s": 363.010568857193,
+      "found": 3,
+      "best_energy": -12.954602019179307,
+      "all_energies": [
+        -12.737455358965358,
+        -12.954602019179307,
+        -12.710707359746866
+      ],
+      "ground": -13.499730394751525,
+      "accept_below": -12.499730394751525
+    },
+    {
+      "label": "canonical_only/seed13",
+      "seed": 13,
+      "condition": "canonical_only",
+      "elapsed_s": 360.3314321041107,
+      "found": 3,
+      "best_energy": -12.738481658950462,
+      "all_energies": [
+        -12.631790477365554,
+        -12.738481658950462,
+        -12.693546352801151
+      ],
+      "ground": -13.499730394751525,
+      "accept_below": -12.499730394751525
+    },
+    {
+      "label": "canonical_only/seed7",
+      "seed": 7,
+      "condition": "canonical_only",
+      "elapsed_s": 363.5838918685913,
+      "found": 3,
+      "best_energy": -12.753582291908954,
+      "all_energies": [
+        -12.67198611026209,
+        -12.753582291908954,
+        -12.512165282352047
+      ],
+      "ground": -13.499730394751525,
+      "accept_below": -12.499730394751525
+    },
+    {
+      "label": "canonical_plus_discovered/seed42",
+      "seed": 42,
+      "condition": "canonical_plus_discovered",
+      "elapsed_s": 260.57019424438477,
+      "found": 4,
+      "best_energy": -12.830961538675732,
+      "all_energies": [
+        -12.67936335393718,
+        -12.517436922971173,
+        -12.830961538675732,
+        -12.633276395868599
+      ],
+      "ground": -13.499730394751525,
+      "accept_below": -12.499730394751525
+    },
+    {
+      "label": "canonical_plus_discovered/seed13",
+      "seed": 13,
+      "condition": "canonical_plus_discovered",
+      "elapsed_s": 173.5384829044342,
+      "found": 4,
+      "best_energy": -12.944248215127939,
+      "all_energies": [
+        -12.944248215127939,
+        -12.703597048547696,
+        -12.512900685761375,
+        -12.61973450482692
+      ],
+      "ground": -13.499730394751525,
+      "accept_below": -12.499730394751525
+    },
+    {
+      "label": "canonical_plus_discovered/seed7",
+      "seed": 7,
+      "condition": "canonical_plus_discovered",
+      "elapsed_s": 360.39486718177795,
+      "found": 3,
+      "best_energy": -12.743749664824668,
+      "all_energies": [
+        -12.743749664824668,
+        -12.7116312903834,
+        -12.664246695532043
+      ],
+      "ground": -13.499730394751525,
+      "accept_below": -12.499730394751525
+    }
+  ]
+}
