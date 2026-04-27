@@ -9,6 +9,7 @@ from typing import Callable, Iterable
 
 import numpy as np
 
+from quiver.adaptive import AdaptiveGrowth
 from quiver.ansatz.base import Ansatz
 from quiver.backends.base import Backend
 from quiver.backends.numpy_backend import NumpyBackend
@@ -165,6 +166,21 @@ class Quiver:
             chain_min=cfg.mutation.chain_min,
             chain_max=cfg.mutation.chain_max,
         )
+        # Adaptive grower built once per explore call; it consumes RNG
+        # state via the shared rng so successive growth runs diverge.
+        if isinstance(self.target, np.ndarray):
+            adaptive_qubits = int(np.log2(self.target.size))
+        else:
+            adaptive_qubits = self.backend.num_qubits  # type: ignore[union-attr]
+        grower = AdaptiveGrowth(
+            num_qubits=adaptive_qubits,
+            max_gates=cfg.adaptive.max_gates,
+            candidates_per_step=cfg.adaptive.candidates_per_step,
+            inner_max_iter=cfg.adaptive.inner_max_iter,
+            plateau_patience=cfg.adaptive.plateau_patience,
+            epsilon_random=cfg.adaptive.epsilon_random,
+            target_loss=cfg.adaptive.target_loss,
+        )
 
         deadline = time.monotonic() + budget_s
         rounds_done = 0
@@ -172,14 +188,22 @@ class Quiver:
         rejected = 0
 
         while len(registry) < target_n and time.monotonic() < deadline:
+            is_adaptive_round = (
+                cfg.adaptive.enabled
+                and rounds_done % cfg.adaptive.frequency == cfg.adaptive.frequency - 1
+            )
             is_mutation_round = (
-                cfg.mutation.enabled
+                not is_adaptive_round
+                and cfg.mutation.enabled
                 and len(registry) > 0
                 and rounds_done % cfg.mutation.frequency == cfg.mutation.frequency - 1
             )
 
             warm_start: np.ndarray | None = None
-            if is_mutation_round:
+            if is_adaptive_round:
+                spec, warm_start = grower.grow(self._build_objective, rng)
+                family_tag = "adaptive"
+            elif is_mutation_round:
                 parent_idx = int(rng.integers(0, len(registry)))
                 parent = registry.entries[parent_idx]
                 spec, warm_start = mutator.chain(parent.spec, parent.params, rng)

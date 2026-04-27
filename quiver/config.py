@@ -95,6 +95,25 @@ class MutationConfig:
 
 
 @dataclass
+class AdaptiveConfig:
+    """ADAPT-style growth: build circuits gate-by-gate using the verifier.
+
+    When enabled, every `frequency`-th round runs an `AdaptiveGrowth`
+    instead of using a template or mutation. The grown circuits have no
+    template ancestry and are problem-shaped — useful for *inventing*
+    novel circuit families rather than rediscovering known ones.
+    """
+    enabled: bool = False
+    frequency: int = 4
+    max_gates: int = 80
+    candidates_per_step: int = 16
+    inner_max_iter: int = 40
+    plateau_patience: int = 3
+    epsilon_random: float = 0.15
+    target_loss: float = 1e-3
+
+
+@dataclass
 class QuiverConfig:
     exploration: ExplorationConfig = field(default_factory=ExplorationConfig)
     optimizer: OptimizerConfig = field(default_factory=OptimizerConfig)
@@ -102,6 +121,7 @@ class QuiverConfig:
     budget: BudgetConfig = field(default_factory=BudgetConfig)
     ansatz: AnsatzConfig = field(default_factory=AnsatzConfig)
     mutation: MutationConfig = field(default_factory=MutationConfig)
+    adaptive: AdaptiveConfig = field(default_factory=AdaptiveConfig)
 
 
 def _section(data: dict, name: str) -> dict:
@@ -118,4 +138,5 @@ def load_config(path: str | Path) -> QuiverConfig:
         budget=BudgetConfig(**_section(data, "budget")),
         ansatz=AnsatzConfig(**_section(data, "ansatz")),
         mutation=MutationConfig(**_section(data, "mutation")),
+        adaptive=AdaptiveConfig(**_section(data, "adaptive")),
     )

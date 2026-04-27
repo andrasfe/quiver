@@ -1,0 +1,377 @@
+{
+  "study": "Invention via ADAPT-style growth (8q 8-cycle MaxCut)",
+  "novelty_definitions": {
+    "moderate": "novelty > 0.25 (less than 75% template-shared)",
+    "extreme": "novelty > 0.50 (less than 50% template-shared)"
+  },
+  "comparison": {
+    "A_templates_only": {
+      "found": 7,
+      "elapsed_s": 180.0336480140686,
+      "moderate_novel": 0,
+      "extreme_novel": 0
+    },
+    "B_templates_plus_mut": {
+      "found": 8,
+      "elapsed_s": 21.09212017059326,
+      "moderate_novel": 2,
+      "extreme_novel": 0
+    },
+    "C_templates_mut_adapt": {
+      "found": 8,
+      "elapsed_s": 21.90237593650818,
+      "moderate_novel": 3,
+      "extreme_novel": 0
+    },
+    "D_adaptive_dominant": {
+      "found": 0,
+      "elapsed_s": 240.00801181793213,
+      "moderate_novel": 0,
+      "extreme_novel": 0
+    }
+  },
+  "runs": [
+    {
+      "label": "A_templates_only",
+      "mutation_enabled": false,
+      "adaptive_enabled": false,
+      "elapsed_s": 180.0336480140686,
+      "num_solutions_found": 7,
+      "extreme_novel_count": 0,
+      "moderate_novel_count": 0,
+      "solutions": [
+        {
+          "family": "hardware_efficient",
+          "verifier_score": 0.999975741135549,
+          "gate_count": 46,
+          "depth": 13,
+          "two_qubit_count": 14,
+          "num_params": 32,
+          "diversity_in_registry": 1.0,
+          "max_similarity_to_template": 1.0,
+          "novelty": 0.0,
+          "novel_extreme": false,
+          "novel_moderate": false
+        },
+        {
+          "family": "hardware_efficient",
+          "verifier_score": 0.9971159668629793,
+          "gate_count": 69,
+          "depth": 17,
+          "two_qubit_count": 21,
+          "num_params": 48,
+          "diversity_in_registry": 0.21372549019607845,
+          "max_similarity_to_template": 1.0,
+          "novelty": 0.0,
+          "novel_extreme": false,
+          "novel_moderate": false
+        },
+        {
+          "family": "linear_entangler",
+          "verifier_score": 0.9995601294474586,
+          "gate_count": 38,
+          "depth": 12,
+          "two_qubit_count": 14,
+          "num_params": 24,
+          "diversity_in_registry": 0.26538461538461533,
+          "max_similarity_to_template": 1.0,
+          "novelty": 0.0,
+          "novel_extreme": false,
+          "novel_moderate": false
+        },
+        {
+          "family": "brickwall",
+          "verifier_score": 0.9527488669929352,
+          "gate_count": 83,
+          "depth": 12,
+          "two_qubit_count": 11,
+          "num_params": 72,
+          "diversity_in_registry": 0.34337349397590367,
+          "max_similarity_to_template": 1.0,
+          "novelty": 0.0,
+          "novel_extreme": false,
+          "novel_moderate": false
+        },
+        {
+          "family": "brickwall",
+          "verifier_score": 0.8305395176127783,
+          "gate_count": 138,
+          "depth": 20,
+          "two_qubit_count": 18,
+          "num_params": 120,
+          "diversity_in_registry": 0.27927536231884054,
+          "max_similarity_to_template": 1.0,
+          "novelty": 0.0,
+          "novel_extreme": false,
+          "novel_moderate": false
+        },
+        {
+          "family": "all_to_all",
+          "verifier_score": 0.9999942130506796,
+          "gate_count": 88,
+          "depth": 25,
+          "two_qubit_count": 56,
+          "num_params": 32,
+          "diversity_in_registry": 0.5596363636363636,
+          "max_similarity_to_template": 1.0,
+          "novelty": 0.0,
+          "novel_extreme": false,
+          "novel_moderate": false
+        },
+        {
+          "family": "strongly_entangling",
+          "verifier_score": 0.7215602092686313,
+          "gate_count": 96,
+          "depth": 24,
+          "two_qubit_count": 24,
+          "num_params": 72,
+          "diversity_in_registry": 0.5143988095238096,
+          "max_similarity_to_template": 1.0,
+          "novelty": 0.0,
+          "novel_extreme": false,
+          "novel_moderate": false
+        }
+      ]
+    },
+    {
+      "label": "B_templates_plus_mut",
+      "mutation_enabled": true,
+      "adaptive_enabled": false,
+      "elapsed_s": 21.09212017059326,
+      "num_solutions_found": 8,
+      "extreme_novel_count": 0,
+      "moderate_novel_count": 2,
+      "solutions": [
+        {
+          "family": "hardware_efficient",
+          "verifier_score": 0.999975741135549,
+          "gate_count": 46,
+          "depth": 13,
+          "two_qubit_count": 14,
+          "num_params": 32,
+          "diversity_in_registry": 1.0,
+          "max_similarity_to_template": 1.0,
+          "novelty": 0.0,
+          "novel_extreme": false,
+          "novel_moderate": false
+        },
+        {
+          "family": "mutated",
+          "verifier_score": 0.9999923346429178,
+          "gate_count": 45,
+          "depth": 14,
+          "two_qubit_count": 14,
+          "num_params": 31,
+          "diversity_in_registry": 0.22569875776397508,
+          "max_similarity_to_template": 0.7743012422360249,
+          "novelty": 0.22569875776397508,
+          "novel_extreme": false,
+          "novel_moderate": false
+        },
+        {
+          "family": "hardware_efficient",
+          "verifier_score": 0.9842728520209757,
+          "gate_count": 69,
+          "depth": 17,
+          "two_qubit_count": 21,
+          "num_params": 48,
+          "diversity_in_registry": 0.21372549019607845,
+          "max_similarity_to_template": 1.0,
+          "novelty": 0.0,
+          "novel_extreme": false,
+          "novel_moderate": false
+        },
+        {
+          "family": "mutated",
+          "verifier_score": 0.9999934909921737,
+          "gate_count": 46,
+          "depth": 12,
+          "two_qubit_count": 14,
+          "num_params": 30,
+          "diversity_in_registry": 0.32016722408026754,
+          "max_similarity_to_template": 0.6798327759197325,
+          "novelty": 0.32016722408026754,
+          "novel_extreme": false,
+          "novel_moderate": true
+        },
+        {
+          "family": "linear_entangler",
+          "verifier_score": 0.9995601294474586,
+          "gate_count": 38,
+          "depth": 12,
+          "two_qubit_count": 14,
+          "num_params": 24,
+          "diversity_in_registry": 0.26538461538461533,
+          "max_similarity_to_template": 1.0,
+          "novelty": 0.0,
+          "novel_extreme": false,
+          "novel_moderate": false
+        },
+        {
+          "family": "brickwall",
+          "verifier_score": 0.9703331215907762,
+          "gate_count": 83,
+          "depth": 12,
+          "two_qubit_count": 11,
+          "num_params": 72,
+          "diversity_in_registry": 0.34337349397590367,
+          "max_similarity_to_template": 1.0,
+          "novelty": 0.0,
+          "novel_extreme": false,
+          "novel_moderate": false
+        },
+        {
+          "family": "mutated",
+          "verifier_score": 0.9969837304837068,
+          "gate_count": 49,
+          "depth": 16,
+          "two_qubit_count": 17,
+          "num_params": 30,
+          "diversity_in_registry": 0.41989795918367345,
+          "max_similarity_to_template": 0.5077119309262166,
+          "novelty": 0.4922880690737834,
+          "novel_extreme": false,
+          "novel_moderate": true
+        },
+        {
+          "family": "brickwall",
+          "verifier_score": 0.7526404149743542,
+          "gate_count": 138,
+          "depth": 20,
+          "two_qubit_count": 18,
+          "num_params": 120,
+          "diversity_in_registry": 0.27927536231884054,
+          "max_similarity_to_template": 1.0,
+          "novelty": 0.0,
+          "novel_extreme": false,
+          "novel_moderate": false
+        }
+      ]
+    },
+    {
+      "label": "C_templates_mut_adapt",
+      "mutation_enabled": true,
+      "adaptive_enabled": true,
+      "elapsed_s": 21.90237593650818,
+      "num_solutions_found": 8,
+      "extreme_novel_count": 0,
+      "moderate_novel_count": 3,
+      "solutions": [
+        {
+          "family": "hardware_efficient",
+          "verifier_score": 0.9995435464976743,
+          "gate_count": 46,
+          "depth": 13,
+          "two_qubit_count": 14,
+          "num_params": 32,
+          "diversity_in_registry": 1.0,
+          "max_similarity_to_template": 1.0,
+          "novelty": 0.0,
+          "novel_extreme": false,
+          "novel_moderate": false
+        },
+        {
+          "family": "hardware_efficient",
+          "verifier_score": 0.990104087942471,
+          "gate_count": 69,
+          "depth": 17,
+          "two_qubit_count": 21,
+          "num_params": 48,
+          "diversity_in_registry": 0.21372549019607845,
+          "max_similarity_to_template": 1.0,
+          "novelty": 0.0,
+          "novel_extreme": false,
+          "novel_moderate": false
+        },
+        {
+          "family": "linear_entangler",
+          "verifier_score": 0.9996780137160516,
+          "gate_count": 38,
+          "depth": 12,
+          "two_qubit_count": 14,
+          "num_params": 24,
+          "diversity_in_registry": 0.26538461538461533,
+          "max_similarity_to_template": 1.0,
+          "novelty": 0.0,
+          "novel_extreme": false,
+          "novel_moderate": false
+        },
+        {
+          "family": "mutated",
+          "verifier_score": 0.9587728554806751,
+          "gate_count": 69,
+          "depth": 20,
+          "two_qubit_count": 22,
+          "num_params": 47,
+          "diversity_in_registry": 0.25503293807641636,
+          "max_similarity_to_template": 0.7449670619235836,
+          "novelty": 0.25503293807641636,
+          "novel_extreme": false,
+          "novel_moderate": true
+        },
+        {
+          "family": "mutated",
+          "verifier_score": 0.9999980742490114,
+          "gate_count": 34,
+          "depth": 10,
+          "two_qubit_count": 13,
+          "num_params": 20,
+          "diversity_in_registry": 0.3320175438596491,
+          "max_similarity_to_template": 0.6679824561403509,
+          "novelty": 0.3320175438596491,
+          "novel_extreme": false,
+          "novel_moderate": true
+        },
+        {
+          "family": "brickwall",
+          "verifier_score": 0.9771415052449883,
+          "gate_count": 83,
+          "depth": 12,
+          "two_qubit_count": 11,
+          "num_params": 72,
+          "diversity_in_registry": 0.34337349397590367,
+          "max_similarity_to_template": 1.0,
+          "novelty": 0.0,
+          "novel_extreme": false,
+          "novel_moderate": false
+        },
+        {
+          "family": "brickwall",
+          "verifier_score": 0.8031878829684327,
+          "gate_count": 138,
+          "depth": 20,
+          "two_qubit_count": 18,
+          "num_params": 120,
+          "diversity_in_registry": 0.27927536231884054,
+          "max_similarity_to_template": 1.0,
+          "novelty": 0.0,
+          "novel_extreme": false,
+          "novel_moderate": false
+        },
+        {
+          "family": "mutated",
+          "verifier_score": 0.9937697960312227,
+          "gate_count": 78,
+          "depth": 15,
+          "two_qubit_count": 13,
+          "num_params": 65,
+          "diversity_in_registry": 0.2572690763052209,
+          "max_similarity_to_template": 0.7427309236947791,
+          "novelty": 0.2572690763052209,
+          "novel_extreme": false,
+          "novel_moderate": true
+        }
+      ]
+    },
+    {
+      "label": "D_adaptive_dominant",
+      "mutation_enabled": false,
+      "adaptive_enabled": true,
+      "elapsed_s": 240.00801181793213,
+      "num_solutions_found": 0,
+      "extreme_novel_count": 0,
+      "moderate_novel_count": 0,
+      "solutions": []
+    }
+  ]
+}

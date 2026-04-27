@@ -1,7 +1,8 @@
 """Quiver: structurally diverse quantum circuit exploration."""
 
+from quiver.adaptive import AdaptiveGrowth
 from quiver.circuit import CircuitSpec, GateSpec
-from quiver.config import MutationConfig, QuiverConfig, load_config
+from quiver.config import AdaptiveConfig, MutationConfig, QuiverConfig, load_config
 from quiver.core import Quiver, Solution
 from quiver.diversity import diversity_score, structural_similarity
 from quiver.mutation import Mutator
@@ -15,6 +16,8 @@ __all__ = [
     "SolutionRegistry",
     "CircuitSpec",
     "GateSpec",
+    "AdaptiveGrowth",
+    "AdaptiveConfig",
     "Mutator",
     "MutationConfig",
     "QuiverConfig",
