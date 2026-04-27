@@ -16,6 +16,7 @@ from quiver.backends.numpy_backend import NumpyBackend
 from quiver.circuit import CircuitSpec
 from quiver.config import QuiverConfig
 from quiver.diversity import DiversityWeights
+from quiver.microstructures import MicrostructureLibrary
 from quiver.mutation import Mutator
 from quiver.optimizer import optimize
 from quiver.registry import RegistryEntry, SolutionRegistry
@@ -172,6 +173,19 @@ class Quiver:
             adaptive_qubits = int(np.log2(self.target.size))
         else:
             adaptive_qubits = self.backend.num_qubits  # type: ignore[union-attr]
+
+        micro_lib: MicrostructureLibrary | None = None
+        if cfg.adaptive.microstructures_enabled:
+            micro_lib = MicrostructureLibrary(
+                fragments_per_solution=cfg.adaptive.microstructures_per_solution,
+                min_length=cfg.adaptive.microstructure_min_length,
+                max_length=cfg.adaptive.microstructure_max_length,
+            )
+
+        anti_template_specs: tuple[CircuitSpec, ...] = tuple(
+            a.build() for a in ansatz_list
+        ) if cfg.adaptive.anti_template_weight > 0 else ()
+
         grower = AdaptiveGrowth(
             num_qubits=adaptive_qubits,
             max_gates=cfg.adaptive.max_gates,
@@ -180,6 +194,10 @@ class Quiver:
             plateau_patience=cfg.adaptive.plateau_patience,
             epsilon_random=cfg.adaptive.epsilon_random,
             target_loss=cfg.adaptive.target_loss,
+            microstructure_library=micro_lib,
+            fragment_candidate_fraction=cfg.adaptive.fragment_candidate_fraction,
+            anti_template_specs=anti_template_specs,
+            anti_template_weight=cfg.adaptive.anti_template_weight,
         )
 
         deadline = time.monotonic() + budget_s
@@ -245,5 +263,9 @@ class Quiver:
             )
             if entry is None:
                 rejected += 1
+            elif micro_lib is not None:
+                # Continual learning: every accepted circuit teaches the
+                # adaptive grower new fragments.
+                micro_lib.add_solution(entry.spec, entry.params, rng)
 
         return [Solution.from_entry(e) for e in registry]

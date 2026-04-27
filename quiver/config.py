@@ -102,6 +102,17 @@ class AdaptiveConfig:
     instead of using a template or mutation. The grown circuits have no
     template ancestry and are problem-shaped — useful for *inventing*
     novel circuit families rather than rediscovering known ones.
+
+    Two extensions for stronger novelty:
+
+    `microstructure_*`: a continual-learning library of gate fragments
+    extracted from each verified solution. Adaptive growth uses fragments
+    as candidate "macro-blocks" alongside single gates, so the system
+    learns its own primitives over the course of an exploration.
+
+    `anti_template_weight`: bonus added to candidate scores during growth
+    that rewards structural distance from every spec in the configured
+    template library. Pushes growth toward genuinely novel shapes.
     """
     enabled: bool = False
     frequency: int = 4
@@ -111,6 +122,14 @@ class AdaptiveConfig:
     plateau_patience: int = 3
     epsilon_random: float = 0.15
     target_loss: float = 1e-3
+
+    microstructures_enabled: bool = False
+    microstructures_per_solution: int = 4
+    microstructure_min_length: int = 2
+    microstructure_max_length: int = 6
+    fragment_candidate_fraction: float = 0.4
+
+    anti_template_weight: float = 0.0
 
 
 @dataclass

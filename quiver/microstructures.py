@@ -1,0 +1,132 @@
+"""Microstructure library — continual learning of useful gate fragments.
+
+Every time Quiver accepts a verified circuit, the library indexes random
+contiguous sub-sequences of that circuit as reusable fragments. Adaptive
+growth can then propose adding either a single gate *or* a learned
+fragment in any given step. As the registry grows, the library grows
+with it, and the growth process effectively learns its own primitives.
+
+A "fragment" is a list of `GateSpec`s with parameter slots remapped to
+[0, k) so a fragment with k parametric gates becomes a self-contained
+sub-circuit that can be welded onto any growing spec by:
+
+  1. allocating k new param slots in the host spec
+  2. shifting the fragment's param_idx values into those slots
+  3. appending the gates verbatim (qubits unchanged)
+
+Fragments only weld in when their qubit set is a subset of the host's
+qubits — same-problem assumption keeps the design simple.
+"""
+
+from __future__ import annotations
+
+from dataclasses import dataclass, field
+
+import numpy as np
+
+from quiver.circuit import CircuitSpec, GateSpec
+
+
+@dataclass
+class Fragment:
+    gates: list[GateSpec]                # param_idx values are 0..k-1
+    params: np.ndarray                    # length k
+
+    @property
+    def num_params(self) -> int:
+        return len(self.params)
+
+    @property
+    def length(self) -> int:
+        return len(self.gates)
+
+    def qubits_used(self) -> set[int]:
+        out: set[int] = set()
+        for g in self.gates:
+            out.update(g.qubits)
+        return out
+
+
+@dataclass
+class MicrostructureLibrary:
+    fragments: list[Fragment] = field(default_factory=list)
+    fragments_per_solution: int = 4
+    min_length: int = 2
+    max_length: int = 6
+
+    def add_solution(
+        self,
+        spec: CircuitSpec,
+        params: np.ndarray,
+        rng: np.random.Generator,
+    ) -> int:
+        """Index up to `fragments_per_solution` random contiguous windows
+        from the verified circuit. Returns the number actually added."""
+        if spec.gate_count < self.min_length:
+            return 0
+        added = 0
+        for _ in range(self.fragments_per_solution):
+            length = int(rng.integers(
+                self.min_length,
+                min(self.max_length, spec.gate_count) + 1,
+            ))
+            start = int(rng.integers(0, spec.gate_count - length + 1))
+            window = spec.gates[start : start + length]
+
+            param_idx_in_window = sorted(
+                {g.param_idx for g in window if g.is_parametric}
+            )
+            slot_remap = {old: new for new, old in enumerate(param_idx_in_window)}
+            remapped_gates = []
+            for g in window:
+                if g.is_parametric:
+                    remapped_gates.append(
+                        GateSpec(g.name, g.qubits, slot_remap[g.param_idx])
+                    )
+                else:
+                    remapped_gates.append(GateSpec(g.name, g.qubits, None))
+
+            fragment_params = np.array(
+                [params[idx] for idx in param_idx_in_window], dtype=float
+            )
+            self.fragments.append(
+                Fragment(gates=remapped_gates, params=fragment_params)
+            )
+            added += 1
+        return added
+
+    def sample(
+        self, host_num_qubits: int, rng: np.random.Generator
+    ) -> Fragment | None:
+        """Return a random fragment whose qubits fit inside the host's
+        qubit set. None if no such fragment exists."""
+        if not self.fragments:
+            return None
+        viable = [
+            f for f in self.fragments if max(f.qubits_used(), default=-1) < host_num_qubits
+        ]
+        if not viable:
+            return None
+        return viable[int(rng.integers(0, len(viable)))]
+
+
+def weld(
+    spec: CircuitSpec,
+    params: np.ndarray,
+    fragment: Fragment,
+) -> tuple[CircuitSpec, np.ndarray]:
+    """Append a fragment to the host spec, allocating new param slots."""
+    new_spec = CircuitSpec(num_qubits=spec.num_qubits)
+    new_spec.gates = list(spec.gates)
+    new_spec.num_params = spec.num_params
+
+    base = spec.num_params
+    for g in fragment.gates:
+        if g.is_parametric:
+            new_spec.gates.append(GateSpec(g.name, g.qubits, base + g.param_idx))
+        else:
+            new_spec.gates.append(GateSpec(g.name, g.qubits, None))
+    new_spec.num_params = base + fragment.num_params
+
+    new_params = np.concatenate([params, fragment.params])
+    return new_spec, new_params

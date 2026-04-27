@@ -34,6 +34,8 @@ import numpy as np
 from scipy.optimize import minimize
 
 from quiver.circuit import CircuitSpec, GateSpec
+from quiver.diversity import structural_similarity
+from quiver.microstructures import MicrostructureLibrary, weld
 
 
 _PARAM_1Q = ("rx", "ry", "rz")
@@ -111,6 +113,17 @@ class AdaptiveGrowth:
     epsilon_random: float = 0.15
     target_loss: float = 1e-3
     family: str = "adaptive"
+    # Continual learning: when present, the library is mined for fragment
+    # candidates in addition to single-gate candidates. Quiver populates
+    # this from verified registry entries during exploration.
+    microstructure_library: MicrostructureLibrary | None = None
+    fragment_candidate_fraction: float = 0.4
+    # Anti-template active reward: candidates are scored by
+    #   loss(after_brief_optimisation) - anti_template_weight * novelty
+    # so circuits that drift from canonical shapes win ties. Pass the
+    # template specs you want to push *away* from.
+    anti_template_specs: tuple[CircuitSpec, ...] = ()
+    anti_template_weight: float = 0.0
 
     def grow(
         self,
@@ -130,69 +143,119 @@ class AdaptiveGrowth:
         plateau = 0
 
         while spec.gate_count < self.max_gates and plateau < self.plateau_patience:
-            n_sample = min(self.candidates_per_step, len(pool))
-            sampled_idx = rng.choice(len(pool), size=n_sample, replace=False)
-            candidates = [pool[i] for i in sampled_idx]
+            single_count, fragment_count = self._budget_split()
+            single_idx = rng.choice(len(pool), size=min(single_count, len(pool)),
+                                    replace=False)
+            single_candidates = [pool[i] for i in single_idx]
 
-            best_cand: tuple[str, tuple[int, ...]] | None = None
-            best_cand_loss = best_loss
-            best_cand_params = params
+            # scored entries: (combined_score, raw_loss, applier, final_params)
+            # applier(spec, params) -> (new_spec, new_params)
+            scored: list = []
 
-            scored: list[tuple[float, tuple[str, tuple[int, ...]], np.ndarray]] = []
-            for name, qubits in candidates:
-                trial_spec, trial_params = _append(spec, params, name, qubits)
-                obj = make_objective(trial_spec)
+            for name, qubits in single_candidates:
+                applier = _single_gate_applier(name, qubits)
+                trial_spec, trial_params = applier(spec, params)
+                self._score_candidate(
+                    trial_spec, trial_params, applier, make_objective, scored,
+                )
 
-                if trial_spec.num_params == 0:
-                    val = float(obj(trial_params))
-                    scored.append((val, (name, qubits), trial_params))
-                    if val < best_cand_loss:
-                        best_cand_loss = val
-                        best_cand = (name, qubits)
-                        best_cand_params = trial_params
-                    continue
-
-                try:
-                    result = minimize(
-                        obj,
-                        trial_params,
-                        method="COBYLA",
-                        options={
-                            "maxiter": max(self.inner_max_iter, trial_spec.num_params + 5),
-                            "rhobeg": 0.3,
-                            "catol": 1e-4,
-                        },
+            if self.microstructure_library is not None and fragment_count > 0:
+                for _ in range(fragment_count):
+                    frag = self.microstructure_library.sample(self.num_qubits, rng)
+                    if frag is None or spec.gate_count + frag.length > self.max_gates:
+                        continue
+                    applier = _fragment_applier(frag)
+                    trial_spec, trial_params = applier(spec, params)
+                    self._score_candidate(
+                        trial_spec, trial_params, applier, make_objective, scored,
                     )
-                    val = float(result.fun)
-                    final_p = np.asarray(result.x)
-                except Exception:
-                    continue
 
-                scored.append((val, (name, qubits), final_p))
-                if val < best_cand_loss:
-                    best_cand_loss = val
-                    best_cand = (name, qubits)
-                    best_cand_params = final_p
-
-            if best_cand is None:
+            if not scored:
                 plateau += 1
                 continue
 
-            # ε-greedy: occasionally take a *non-best* improving candidate.
-            if scored and rng.random() < self.epsilon_random:
-                improving = [
-                    s for s in scored if s[0] < best_loss - 1e-6 and s[1] != best_cand
-                ]
-                if improving:
-                    pick = improving[int(rng.integers(0, len(improving)))]
-                    best_cand_loss, best_cand, best_cand_params = pick
+            # Best = lowest combined score (loss minus novelty bonus).
+            scored.sort(key=lambda x: x[0])
+            best_combined, best_loss_after, best_applier, best_final_params = scored[0]
 
-            spec, _ = _append(spec, params, *best_cand)
-            params = best_cand_params
-            best_loss = best_cand_loss
-            plateau = 0
+            # ε-greedy among non-worse candidates.
+            if rng.random() < self.epsilon_random:
+                non_worse = [s for s in scored if s[1] <= best_loss + 1e-6]
+                if len(non_worse) > 1:
+                    pick = non_worse[int(rng.integers(0, len(non_worse)))]
+                    best_combined, best_loss_after, best_applier, best_final_params = pick
+
+            # Reject only if the candidate makes loss strictly *worse*.
+            # Committing tie-steps lets the optimizer build up multi-gate
+            # combinations whose individual additions were no-ops but whose
+            # combined effect crosses the basin (e.g. RY then CNOT for Bell).
+            if best_loss_after > best_loss + 1e-6:
+                plateau += 1
+                continue
+
+            spec, _ = best_applier(spec, params)
+            params = best_final_params
+            improved = best_loss_after < best_loss - 1e-6
+            best_loss = best_loss_after
+            plateau = 0 if improved else plateau + 1
 
             if best_loss < self.target_loss:
                 break
 
         return spec, params
+
+    # ---------- helpers --------------------------------------------------
+
+    def _budget_split(self) -> tuple[int, int]:
+        if self.microstructure_library is None or not self.microstructure_library.fragments:
+            return self.candidates_per_step, 0
+        frag = int(round(self.candidates_per_step * self.fragment_candidate_fraction))
+        return self.candidates_per_step - frag, frag
+
+    def _novelty(self, spec: CircuitSpec) -> float:
+        if not self.anti_template_specs:
+            return 0.0
+        sims = [structural_similarity(spec, t) for t in self.anti_template_specs]
+        return 1.0 - max(sims)
+
+    def _score_candidate(
+        self, trial_spec, trial_params, applier, make_objective, scored
+    ) -> None:
+        obj = make_objective(trial_spec)
+        if trial_spec.num_params == 0:
+            try:
+                raw = float(obj(trial_params))
+            except Exception:
+                return
+            combined = raw - self.anti_template_weight * self._novelty(trial_spec)
+            scored.append((combined, raw, applier, trial_params))
+            return
+        try:
+            result = minimize(
+                obj,
+                trial_params,
+                method="COBYLA",
+                options={
+                    "maxiter": max(self.inner_max_iter, trial_spec.num_params + 5),
+                    "rhobeg": 0.3,
+                    "catol": 1e-4,
+                },
+            )
+            raw = float(result.fun)
+            final = np.asarray(result.x)
+        except Exception:
+            return
+        combined = raw - self.anti_template_weight * self._novelty(trial_spec)
+        scored.append((combined, raw, applier, final))
+
+
+def _single_gate_applier(name: str, qubits: tuple[int, ...]):
+    def apply(spec: CircuitSpec, params: np.ndarray) -> tuple[CircuitSpec, np.ndarray]:
+        return _append(spec, params, name, qubits)
+    return apply
+
+
+def _fragment_applier(fragment):
+    def apply(spec: CircuitSpec, params: np.ndarray) -> tuple[CircuitSpec, np.ndarray]:
+        return weld(spec, params, fragment)
+    return apply

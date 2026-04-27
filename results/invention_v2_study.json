@@ -1,0 +1,411 @@
+{
+  "study": "Invention v2 \u2014 microstructure library + anti-template reward",
+  "target": "4q Bell-pair-pair: |0011> + |1100>",
+  "fidelity_threshold": 0.95,
+  "comparison": {
+    "A_plain_adapt": {
+      "found": 6,
+      "extreme": 4,
+      "moderate": 6,
+      "novelty_mean": 0.5908585858585859
+    },
+    "B_microstructures": {
+      "found": 6,
+      "extreme": 4,
+      "moderate": 6,
+      "novelty_mean": 0.5408333333333334
+    },
+    "C_micro_plus_anti": {
+      "found": 6,
+      "extreme": 6,
+      "moderate": 6,
+      "novelty_mean": 0.6759764309764309
+    }
+  },
+  "runs": [
+    {
+      "label": "A_plain_adapt",
+      "microstructures": false,
+      "anti_template_weight": 0.0,
+      "elapsed_s": 152.07970476150513,
+      "num_solutions_found": 6,
+      "extreme_novel_count": 4,
+      "moderate_novel_count": 6,
+      "novelty_mean": 0.5908585858585859,
+      "solutions": [
+        {
+          "family": "adaptive",
+          "verifier_score": 0.9999999991515043,
+          "gate_count": 6,
+          "depth": 5,
+          "two_qubit_count": 6,
+          "num_params": 5,
+          "diversity_in_registry": 1.0,
+          "max_similarity_to_template": 0.5,
+          "novelty": 0.5,
+          "extreme_novel": false,
+          "moderate_novel": true,
+          "gate_histogram": {
+            "rxx": 1,
+            "ryy": 3,
+            "rzz": 1,
+            "cz": 1
+          }
+        },
+        {
+          "family": "adaptive",
+          "verifier_score": 0.9999999991548523,
+          "gate_count": 11,
+          "depth": 9,
+          "two_qubit_count": 8,
+          "num_params": 6,
+          "diversity_in_registry": 0.663888888888889,
+          "max_similarity_to_template": 0.4477272727272727,
+          "novelty": 0.5522727272727272,
+          "extreme_novel": true,
+          "moderate_novel": true,
+          "gate_histogram": {
+            "h": 1,
+            "rxx": 2,
+            "s": 1,
+            "ryy": 1,
+            "ry": 1,
+            "rzz": 2,
+            "cz": 3
+          }
+        },
+        {
+          "family": "adaptive",
+          "verifier_score": 0.9999999988104973,
+          "gate_count": 8,
+          "depth": 5,
+          "two_qubit_count": 7,
+          "num_params": 5,
+          "diversity_in_registry": 0.5875,
+          "max_similarity_to_template": 0.35,
+          "novelty": 0.65,
+          "extreme_novel": true,
+          "moderate_novel": true,
+          "gate_histogram": {
+            "s": 1,
+            "cz": 2,
+            "ryy": 1,
+            "rzz": 1,
+            "rxx": 3
+          }
+        },
+        {
+          "family": "adaptive",
+          "verifier_score": 0.9999999999829958,
+          "gate_count": 8,
+          "depth": 5,
+          "two_qubit_count": 4,
+          "num_params": 3,
+          "diversity_in_registry": 0.65,
+          "max_similarity_to_template": 0.39166666666666666,
+          "novelty": 0.6083333333333334,
+          "extreme_novel": true,
+          "moderate_novel": true,
+          "gate_histogram": {
+            "y": 1,
+            "z": 1,
+            "rx": 1,
+            "ryy": 1,
+            "rzz": 1,
+            "cnot": 2,
+            "s": 1
+          }
+        },
+        {
+          "family": "adaptive",
+          "verifier_score": 0.9999999994215623,
+          "gate_count": 7,
+          "depth": 4,
+          "two_qubit_count": 3,
+          "num_params": 3,
+          "diversity_in_registry": 0.69,
+          "max_similarity_to_template": 0.2654545454545455,
+          "novelty": 0.7345454545454545,
+          "extreme_novel": true,
+          "moderate_novel": true,
+          "gate_histogram": {
+            "y": 1,
+            "rxx": 1,
+            "cnot": 2,
+            "rz": 2,
+            "x": 1
+          }
+        },
+        {
+          "family": "adaptive",
+          "verifier_score": 0.9999999995343316,
+          "gate_count": 6,
+          "depth": 5,
+          "two_qubit_count": 5,
+          "num_params": 4,
+          "diversity_in_registry": 0.33333333333333326,
+          "max_similarity_to_template": 0.5,
+          "novelty": 0.5,
+          "extreme_novel": false,
+          "moderate_novel": true,
+          "gate_histogram": {
+            "z": 1,
+            "ryy": 3,
+            "rxx": 1,
+            "cz": 1
+          }
+        }
+      ]
+    },
+    {
+      "label": "B_microstructures",
+      "microstructures": true,
+      "anti_template_weight": 0.0,
+      "elapsed_s": 72.87175178527832,
+      "num_solutions_found": 6,
+      "extreme_novel_count": 4,
+      "moderate_novel_count": 6,
+      "novelty_mean": 0.5408333333333334,
+      "solutions": [
+        {
+          "family": "adaptive",
+          "verifier_score": 0.9999999991515043,
+          "gate_count": 6,
+          "depth": 5,
+          "two_qubit_count": 6,
+          "num_params": 5,
+          "diversity_in_registry": 1.0,
+          "max_similarity_to_template": 0.5,
+          "novelty": 0.5,
+          "extreme_novel": false,
+          "moderate_novel": true,
+          "gate_histogram": {
+            "rxx": 1,
+            "ryy": 3,
+            "rzz": 1,
+            "cz": 1
+          }
+        },
+        {
+          "family": "adaptive",
+          "verifier_score": 0.9999999998123539,
+          "gate_count": 10,
+          "depth": 8,
+          "two_qubit_count": 10,
+          "num_params": 8,
+          "diversity_in_registry": 0.275,
+          "max_similarity_to_template": 0.5,
+          "novelty": 0.5,
+          "extreme_novel": false,
+          "moderate_novel": true,
+          "gate_histogram": {
+            "rxx": 2,
+            "ryy": 4,
+            "rzz": 2,
+            "cz": 2
+          }
+        },
+        {
+          "family": "adaptive",
+          "verifier_score": 0.999999998995857,
+          "gate_count": 9,
+          "depth": 7,
+          "two_qubit_count": 9,
+          "num_params": 6,
+          "diversity_in_registry": 0.32499999999999996,
+          "max_similarity_to_template": 0.475,
+          "novelty": 0.525,
+          "extreme_novel": true,
+          "moderate_novel": true,
+          "gate_histogram": {
+            "rzz": 1,
+            "cz": 3,
+            "ryy": 3,
+            "rxx": 2
+          }
+        },
+        {
+          "family": "adaptive",
+          "verifier_score": 0.9999999994765054,
+          "gate_count": 9,
+          "depth": 8,
+          "two_qubit_count": 9,
+          "num_params": 8,
+          "diversity_in_registry": 0.17500000000000004,
+          "max_similarity_to_template": 0.425,
+          "novelty": 0.575,
+          "extreme_novel": true,
+          "moderate_novel": true,
+          "gate_histogram": {
+            "rxx": 1,
+            "ryy": 4,
+            "rzz": 3,
+            "cz": 1
+          }
+        },
+        {
+          "family": "adaptive",
+          "verifier_score": 0.9999999988750339,
+          "gate_count": 12,
+          "depth": 11,
+          "two_qubit_count": 12,
+          "num_params": 9,
+          "diversity_in_registry": 0.3977272727272727,
+          "max_similarity_to_template": 0.43,
+          "novelty": 0.5700000000000001,
+          "extreme_novel": true,
+          "moderate_novel": true,
+          "gate_histogram": {
+            "ryy": 5,
+            "rzz": 3,
+            "cz": 3,
+            "rxx": 1
+          }
+        },
+        {
+          "family": "adaptive",
+          "verifier_score": 0.9999999994418018,
+          "gate_count": 9,
+          "depth": 9,
+          "two_qubit_count": 9,
+          "num_params": 6,
+          "diversity_in_registry": 0.39722222222222225,
+          "max_similarity_to_template": 0.425,
+          "novelty": 0.575,
+          "extreme_novel": true,
+          "moderate_novel": true,
+          "gate_histogram": {
+            "rzz": 1,
+            "ryy": 3,
+            "cz": 3,
+            "rxx": 2
+          }
+        }
+      ]
+    },
+    {
+      "label": "C_micro_plus_anti",
+      "microstructures": true,
+      "anti_template_weight": 0.5,
+      "elapsed_s": 137.1178538799286,
+      "num_solutions_found": 6,
+      "extreme_novel_count": 6,
+      "moderate_novel_count": 6,
+      "novelty_mean": 0.6759764309764309,
+      "solutions": [
+        {
+          "family": "adaptive",
+          "verifier_score": 0.9999999988313215,
+          "gate_count": 6,
+          "depth": 4,
+          "two_qubit_count": 5,
+          "num_params": 4,
+          "diversity_in_registry": 1.0,
+          "max_similarity_to_template": 0.35545454545454547,
+          "novelty": 0.6445454545454545,
+          "extreme_novel": true,
+          "moderate_novel": true,
+          "gate_histogram": {
+            "rxx": 3,
+            "ry": 1,
+            "cz": 1,
+            "swap": 1
+          }
+        },
+        {
+          "family": "adaptive",
+          "verifier_score": 0.999999999300027,
+          "gate_count": 5,
+          "depth": 4,
+          "two_qubit_count": 4,
+          "num_params": 4,
+          "diversity_in_registry": 0.16666666666666674,
+          "max_similarity_to_template": 0.35545454545454547,
+          "novelty": 0.6445454545454545,
+          "extreme_novel": true,
+          "moderate_novel": true,
+          "gate_histogram": {
+            "rxx": 3,
+            "ry": 1,
+            "cz": 1
+          }
+        },
+        {
+          "family": "adaptive",
+          "verifier_score": 0.9999999990220636,
+          "gate_count": 6,
+          "depth": 4,
+          "two_qubit_count": 5,
+          "num_params": 5,
+          "diversity_in_registry": 0.2416666666666667,
+          "max_similarity_to_template": 0.3254545454545455,
+          "novelty": 0.6745454545454546,
+          "extreme_novel": true,
+          "moderate_novel": true,
+          "gate_histogram": {
+            "rzz": 1,
+            "ryy": 1,
+            "ry": 1,
+            "rxx": 2,
+            "cz": 1
+          }
+        },
+        {
+          "family": "adaptive",
+          "verifier_score": 0.9999999990680752,
+          "gate_count": 8,
+          "depth": 6,
+          "two_qubit_count": 7,
+          "num_params": 5,
+          "diversity_in_registry": 0.31666666666666665,
+          "max_similarity_to_template": 0.32777777777777783,
+          "novelty": 0.6722222222222222,
+          "extreme_novel": true,
+          "moderate_novel": true,
+          "gate_histogram": {
+            "cz": 2,
+            "rxx": 3,
+            "swap": 1,
+            "ryy": 1,
+            "ry": 1
+          }
+        },
+        {
+          "family": "adaptive",
+          "verifier_score": 0.9999999997554994,
+          "gate_count": 6,
+          "depth": 4,
+          "two_qubit_count": 6,
+          "num_params": 3,
+          "diversity_in_registry": 0.16666666666666674,
+          "max_similarity_to_template": 0.31000000000000005,
+          "novelty": 0.69,
+          "extreme_novel": true,
+          "moderate_novel": true,
+          "gate_histogram": {
+            "cz": 2,
+            "rxx": 3,
+            "swap": 1
+          }
+        },
+        {
+          "family": "adaptive",
+          "verifier_score": 0.9999999997554994,
+          "gate_count": 4,
+          "depth": 3,
+          "two_qubit_count": 4,
+          "num_params": 3,
+          "diversity_in_registry": 0.21666666666666667,
+          "max_similarity_to_template": 0.27,
+          "novelty": 0.73,
+          "extreme_novel": true,
+          "moderate_novel": true,
+          "gate_histogram": {
+            "rxx": 3,
+            "cz": 1
+          }
+        }
+      ]
+    }
+  ]
+}
