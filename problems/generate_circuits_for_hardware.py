@@ -31,6 +31,7 @@ from quiver import (
     save_registry,
 )
 from quiver.ansatz import (
+    AllToAll,
     BrickWall,
     HardwareEfficient,
     LinearEntangler,
@@ -85,25 +86,62 @@ def verifier(state: np.ndarray) -> tuple[bool, float]:
     return p > PROB_THRESHOLD, p
 
 
-# ---------- ansatz library ---------------------------------------------
+# ---------- ansatz library: hyperparameter sweep ------------------------
 
 
 def build_library() -> list:
-    return [
-        QAOAInspired(num_qubits=NUM_QUBITS, num_layers=1, ring=True),
-        QAOAInspired(num_qubits=NUM_QUBITS, num_layers=2, ring=True),
-        HardwareEfficient(num_qubits=NUM_QUBITS, num_layers=1),
-        HardwareEfficient(num_qubits=NUM_QUBITS, num_layers=2),
-        HardwareEfficient(num_qubits=NUM_QUBITS, num_layers=2,
-                          rotation_axes=("rx", "ry")),
-        LinearEntangler(num_qubits=NUM_QUBITS, num_layers=1),
-        LinearEntangler(num_qubits=NUM_QUBITS, num_layers=2),
-        BrickWall(num_qubits=NUM_QUBITS, num_layers=2),
-        StronglyEntangling(num_qubits=NUM_QUBITS, num_layers=2),
-    ]
+    """Sweep hyperparameters for every canonical template. Each
+    combination produces a structurally different CircuitSpec; Quiver's
+    diversity gate then filters the registry down to the structurally-
+    distinct survivors. The library is large (~45 entries) but cheap to
+    construct — circuits are only built when actually attempted."""
+    n = NUM_QUBITS
+    library: list = []
+
+    # QAOA-inspired: layers × ring topology
+    for layers in (1, 2, 3, 4):
+        for ring in (True, False):
+            library.append(QAOAInspired(num_qubits=n, num_layers=layers, ring=ring))
+
+    # HardwareEfficient: layers × rotation-axis combinations
+    he_axes = (
+        ("ry", "rz"),     # default
+        ("rx", "ry"),     # alternate basis
+        ("rx", "rz"),
+        ("ry",),          # single-axis (cheaper, less expressive)
+        ("rx",),
+    )
+    for layers in (1, 2, 3, 4):
+        for axes in he_axes:
+            library.append(HardwareEfficient(
+                num_qubits=n, num_layers=layers, rotation_axes=axes,
+            ))
+
+    # LinearEntangler: layers
+    for layers in (1, 2, 3, 4):
+        library.append(LinearEntangler(num_qubits=n, num_layers=layers))
+
+    # BrickWall: layers (alternating-offset CNOT pairs spread entanglement
+    # faster than chain ansätze)
+    for layers in (1, 2, 3, 4, 5):
+        library.append(BrickWall(num_qubits=n, num_layers=layers))
+
+    # StronglyEntangling: layers (varying-stride CNOT ring)
+    for layers in (1, 2, 3, 4):
+        library.append(StronglyEntangling(num_qubits=n, num_layers=layers))
+
+    # AllToAll: layers × axes (maximally connected per layer; expensive
+    # but worth a few configurations as a counterpoint to chain ansätze)
+    for layers in (1, 2):
+        for axes in (("ry", "rz"), ("rx", "ry"), ("ry",)):
+            library.append(AllToAll(
+                num_qubits=n, num_layers=layers, rotation_axes=axes,
+            ))
+
+    return library
 
 
-def main(num_solutions: int = 24, time_budget_s: int = 300) -> None:
+def main(num_solutions: int = 32, time_budget_s: int = 360) -> None:
     target = cycle_alt_target()
     config = QuiverConfig(
         exploration=ExplorationConfig(
@@ -140,7 +178,19 @@ def main(num_solutions: int = 24, time_budget_s: int = 300) -> None:
     )
 
     quiver = Quiver(target=target, verifier=verifier, config=config)
-    solutions = quiver.explore(build_library())
+    library = build_library()
+
+    # Report the swept hyperparameter space.
+    from collections import Counter
+    family_counts = Counter(a.family for a in library)
+    print("# canonical-template hyperparameter sweep:", flush=True)
+    for family, count in family_counts.most_common():
+        print(f"    {family:<22} {count} configurations", flush=True)
+    print(f"  total sweep size: {len(library)} candidates", flush=True)
+    print(f"  exploration target: {num_solutions} verified diverse circuits", flush=True)
+    print(f"  time budget: {time_budget_s}s\n", flush=True)
+
+    solutions = quiver.explore(library)
 
     print(f"\ngenerated {len(solutions)} verified diverse circuits", flush=True)
     for i, s in enumerate(solutions, 1):
