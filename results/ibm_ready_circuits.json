@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "saved_at": "2026-04-28T12:02:52",
+  "saved_at": "2026-04-28T13:22:37",
   "metadata": {
     "target_kind": "maxcut_cycle",
     "target_description": "4-qubit square (4-cycle) MaxCut. Optimal cut value 4 achieved by alternating bitstrings 0101 (idx 10) and 1010 (idx 5). Verifier accepts if P(alternating) > 0.7.",
@@ -211,17 +211,17 @@
       "two_qubit_count": 3,
       "num_params": 8,
       "params": [
-        1.5707989766038513,
-        3.141591775403144,
-        3.141626305619883,
-        3.1415719619889053,
-        -2.7584030570223482e-05,
-        -0.6049584128651836,
-        -0.6018766985612116,
-        0.6415119150760773
+        1.5707937339579388,
+        3.1415944108431666,
+        3.1415850695453824,
+        3.1416143405226054,
+        5.813781923186993e-06,
+        -0.3169682033156006,
+        0.16182827254730214,
+        -0.5083666325512027
       ],
-      "verifier_score": 0.9999999996096569,
-      "objective": 5.82322634556931e-10,
+      "verifier_score": 0.9999999998672677,
+      "objective": 1.4286682947783902e-10,
       "diversity": 0.6840909090909091,
       "spec": {
         "num_qubits": 4,
@@ -304,6 +304,118 @@
             "qubits": [
               2,
               3
+            ],
+            "param_idx": null
+          }
+        ]
+      }
+    },
+    {
+      "family": "adaptive",
+      "num_qubits": 4,
+      "gate_count": 12,
+      "depth": 6,
+      "two_qubit_count": 4,
+      "num_params": 5,
+      "params": [
+        3.1415854986213154,
+        3.1415973059920117,
+        0.7794671209245315,
+        0.20991761058729097,
+        -1.5638006047970892
+      ],
+      "verifier_score": 0.9999999999786584,
+      "objective": 0.5000000000106725,
+      "diversity": 0.6709090909090909,
+      "spec": {
+        "num_qubits": 4,
+        "num_params": 5,
+        "gates": [
+          {
+            "name": "rx",
+            "qubits": [
+              0
+            ],
+            "param_idx": 0
+          },
+          {
+            "name": "rx",
+            "qubits": [
+              1
+            ],
+            "param_idx": 0
+          },
+          {
+            "name": "rx",
+            "qubits": [
+              2
+            ],
+            "param_idx": 0
+          },
+          {
+            "name": "swap",
+            "qubits": [
+              3,
+              2
+            ],
+            "param_idx": null
+          },
+          {
+            "name": "rx",
+            "qubits": [
+              0
+            ],
+            "param_idx": 1
+          },
+          {
+            "name": "rx",
+            "qubits": [
+              1
+            ],
+            "param_idx": 1
+          },
+          {
+            "name": "rx",
+            "qubits": [
+              2
+            ],
+            "param_idx": 1
+          },
+          {
+            "name": "iswap",
+            "qubits": [
+              0,
+              3
+            ],
+            "param_idx": null
+          },
+          {
+            "name": "rzz",
+            "qubits": [
+              2,
+              3
+            ],
+            "param_idx": 2
+          },
+          {
+            "name": "rz",
+            "qubits": [
+              0
+            ],
+            "param_idx": 3
+          },
+          {
+            "name": "rzz",
+            "qubits": [
+              2,
+              0
+            ],
+            "param_idx": 4
+          },
+          {
+            "name": "t",
+            "qubits": [
+              0
             ],
             "param_idx": null
           }
@@ -506,6 +618,182 @@
       }
     },
     {
+      "family": "mutated",
+      "num_qubits": 4,
+      "gate_count": 20,
+      "depth": 8,
+      "two_qubit_count": 4,
+      "num_params": 13,
+      "params": [
+        4.7637446077271155e-06,
+        3.1423109789276524,
+        3.140833033404068,
+        3.141357337028587,
+        -0.28601602138041987,
+        -0.32948933874090003,
+        -0.0005160876868690123,
+        -0.47120262568330806,
+        3.1425665043048454,
+        3.1415642761247122,
+        3.1418106940995174,
+        3.140462941663992,
+        3.141364830987354
+      ],
+      "verifier_score": 0.9999994127440922,
+      "objective": 9.063772570261364e-07,
+      "diversity": 0.3244949494949495,
+      "spec": {
+        "num_qubits": 4,
+        "num_params": 13,
+        "gates": [
+          {
+            "name": "ry",
+            "qubits": [
+              0
+            ],
+            "param_idx": 0
+          },
+          {
+            "name": "ry",
+            "qubits": [
+              1
+            ],
+            "param_idx": 1
+          },
+          {
+            "name": "ry",
+            "qubits": [
+              2
+            ],
+            "param_idx": 2
+          },
+          {
+            "name": "ry",
+            "qubits": [
+              3
+            ],
+            "param_idx": 3
+          },
+          {
+            "name": "rz",
+            "qubits": [
+              0
+            ],
+            "param_idx": 4
+          },
+          {
+            "name": "rz",
+            "qubits": [
+              1
+            ],
+            "param_idx": 5
+          },
+          {
+            "name": "rx",
+            "qubits": [
+              2
+            ],
+            "param_idx": 6
+          },
+          {
+            "name": "rz",
+            "qubits": [
+              3
+            ],
+            "param_idx": 7
+          },
+          {
+            "name": "sqrt_iswap",
+            "qubits": [
+              0,
+              1
+            ],
+            "param_idx": null
+          },
+          {
+            "name": "s",
+            "qubits": [
+              1
+            ],
+            "param_idx": null
+          },
+          {
+            "name": "cnot",
+            "qubits": [
+              1,
+              2
+            ],
+            "param_idx": null
+          },
+          {
+            "name": "cnot",
+            "qubits": [
+              2,
+              3
+            ],
+            "param_idx": null
+          },
+          {
+            "name": "ry",
+            "qubits": [
+              1
+            ],
+            "param_idx": 8
+          },
+          {
+            "name": "ry",
+            "qubits": [
+              2
+            ],
+            "param_idx": 9
+          },
+          {
+            "name": "ry",
+            "qubits": [
+              3
+            ],
+            "param_idx": 10
+          },
+          {
+            "name": "rz",
+            "qubits": [
+              0
+            ],
+            "param_idx": 11
+          },
+          {
+            "name": "rx",
+            "qubits": [
+              0
+            ],
+            "param_idx": 12
+          },
+          {
+            "name": "rx",
+            "qubits": [
+              1
+            ],
+            "param_idx": 12
+          },
+          {
+            "name": "swap",
+            "qubits": [
+              3,
+              0
+            ],
+            "param_idx": null
+          },
+          {
+            "name": "rx",
+            "qubits": [
+              2
+            ],
+            "param_idx": 12
+          }
+        ]
+      }
+    },
+    {
       "family": "hardware_efficient",
       "num_qubits": 4,
       "gate_count": 22,
@@ -701,6 +989,116 @@
       }
     },
     {
+      "family": "adaptive",
+      "num_qubits": 4,
+      "gate_count": 12,
+      "depth": 5,
+      "two_qubit_count": 2,
+      "num_params": 5,
+      "params": [
+        3.1415815241223695,
+        6.351038901025156,
+        6.28320303577488,
+        3.0737030489472814,
+        0.5315943167664505
+      ],
+      "verifier_score": 0.9999999995043312,
+      "objective": 0.5000000002478365,
+      "diversity": 0.65,
+      "spec": {
+        "num_qubits": 4,
+        "num_params": 5,
+        "gates": [
+          {
+            "name": "s",
+            "qubits": [
+              2
+            ],
+            "param_idx": null
+          },
+          {
+            "name": "rx",
+            "qubits": [
+              0
+            ],
+            "param_idx": 0
+          },
+          {
+            "name": "rx",
+            "qubits": [
+              1
+            ],
+            "param_idx": 0
+          },
+          {
+            "name": "swap",
+            "qubits": [
+              3,
+              0
+            ],
+            "param_idx": null
+          },
+          {
+            "name": "rx",
+            "qubits": [
+              2
+            ],
+            "param_idx": 0
+          },
+          {
+            "name": "ry",
+            "qubits": [
+              2
+            ],
+            "param_idx": 1
+          },
+          {
+            "name": "ry",
+            "qubits": [
+              3
+            ],
+            "param_idx": 2
+          },
+          {
+            "name": "t",
+            "qubits": [
+              1
+            ],
+            "param_idx": null
+          },
+          {
+            "name": "ry",
+            "qubits": [
+              2
+            ],
+            "param_idx": 3
+          },
+          {
+            "name": "t",
+            "qubits": [
+              1
+            ],
+            "param_idx": null
+          },
+          {
+            "name": "cnot",
+            "qubits": [
+              0,
+              1
+            ],
+            "param_idx": null
+          },
+          {
+            "name": "rz",
+            "qubits": [
+              1
+            ],
+            "param_idx": 4
+          }
+        ]
+      }
+    },
+    {
       "family": "linear_entangler",
       "num_qubits": 4,
       "gate_count": 11,
@@ -708,17 +1106,17 @@
       "two_qubit_count": 3,
       "num_params": 8,
       "params": [
-        -1.5708026102379846,
-        3.141638086484789,
-        -3.1415685737661723,
-        -1.8987733809437456e-05,
-        -1.1653431554248603e-05,
-        -2.636246540443824e-05,
-        6.580584214716075e-06,
-        3.141571862679876
+        -1.5708153012587307,
+        3.1416016634029553,
+        -2.769681667593452e-06,
+        7.26607544642996e-06,
+        8.047759170280232e-06,
+        3.9122487355816005e-05,
+        3.1415739244666767,
+        3.79423390286565e-05
       ],
-      "verifier_score": 0.9999999989222839,
-      "objective": 1.0875909062235678e-09,
+      "verifier_score": 0.9999999991181527,
+      "objective": 9.718581495121725e-10,
       "diversity": 0.3181818181818181,
       "spec": {
         "num_qubits": 4,
@@ -803,6 +1201,231 @@
               3
             ],
             "param_idx": 7
+          }
+        ]
+      }
+    },
+    {
+      "family": "mutated",
+      "num_qubits": 4,
+      "gate_count": 26,
+      "depth": 10,
+      "two_qubit_count": 7,
+      "num_params": 17,
+      "params": [
+        3.1453699283713026,
+        5.338038131579994,
+        4.730371935354899,
+        6.289941245917303,
+        2.718065348191143,
+        1.5684548727813374,
+        -1.321695078530766,
+        -1.645354010886076,
+        1.5697577145109571,
+        -1.5653628190959858,
+        -4.719464740122508,
+        0.007051473960408576,
+        1.5681982926469145,
+        1.57258668100467,
+        1.5648321909962282,
+        0.9239427471055103,
+        -4.712498172383259
+      ],
+      "verifier_score": 0.9999450085595144,
+      "objective": 5.644133054283351e-05,
+      "diversity": 0.345,
+      "spec": {
+        "num_qubits": 4,
+        "num_params": 17,
+        "gates": [
+          {
+            "name": "ry",
+            "qubits": [
+              0
+            ],
+            "param_idx": 0
+          },
+          {
+            "name": "ry",
+            "qubits": [
+              1
+            ],
+            "param_idx": 1
+          },
+          {
+            "name": "ry",
+            "qubits": [
+              1
+            ],
+            "param_idx": 2
+          },
+          {
+            "name": "rz",
+            "qubits": [
+              0
+            ],
+            "param_idx": 4
+          },
+          {
+            "name": "ry",
+            "qubits": [
+              3
+            ],
+            "param_idx": 3
+          },
+          {
+            "name": "rx",
+            "qubits": [
+              1
+            ],
+            "param_idx": 5
+          },
+          {
+            "name": "rz",
+            "qubits": [
+              2
+            ],
+            "param_idx": 6
+          },
+          {
+            "name": "rz",
+            "qubits": [
+              3
+            ],
+            "param_idx": 7
+          },
+          {
+            "name": "cnot",
+            "qubits": [
+              0,
+              2
+            ],
+            "param_idx": null
+          },
+          {
+            "name": "cnot",
+            "qubits": [
+              1,
+              2
+            ],
+            "param_idx": null
+          },
+          {
+            "name": "y",
+            "qubits": [
+              1
+            ],
+            "param_idx": null
+          },
+          {
+            "name": "cnot",
+            "qubits": [
+              2,
+              3
+            ],
+            "param_idx": null
+          },
+          {
+            "name": "cnot",
+            "qubits": [
+              2,
+              3
+            ],
+            "param_idx": null
+          },
+          {
+            "name": "cnot",
+            "qubits": [
+              1,
+              0
+            ],
+            "param_idx": null
+          },
+          {
+            "name": "ry",
+            "qubits": [
+              0
+            ],
+            "param_idx": 8
+          },
+          {
+            "name": "ry",
+            "qubits": [
+              1
+            ],
+            "param_idx": 9
+          },
+          {
+            "name": "ry",
+            "qubits": [
+              2
+            ],
+            "param_idx": 10
+          },
+          {
+            "name": "ry",
+            "qubits": [
+              3
+            ],
+            "param_idx": 11
+          },
+          {
+            "name": "x",
+            "qubits": [
+              3
+            ],
+            "param_idx": null
+          },
+          {
+            "name": "rz",
+            "qubits": [
+              0
+            ],
+            "param_idx": 12
+          },
+          {
+            "name": "rz",
+            "qubits": [
+              1
+            ],
+            "param_idx": 13
+          },
+          {
+            "name": "rz",
+            "qubits": [
+              2
+            ],
+            "param_idx": 14
+          },
+          {
+            "name": "cnot",
+            "qubits": [
+              1,
+              2
+            ],
+            "param_idx": null
+          },
+          {
+            "name": "cnot",
+            "qubits": [
+              2,
+              3
+            ],
+            "param_idx": null
+          },
+          {
+            "name": "ry",
+            "qubits": [
+              0
+            ],
+            "param_idx": 15
+          },
+          {
+            "name": "ry",
+            "qubits": [
+              1
+            ],
+            "param_idx": 16
           }
         ]
       }
@@ -971,6 +1594,66 @@
       }
     },
     {
+      "family": "adaptive",
+      "num_qubits": 4,
+      "gate_count": 5,
+      "depth": 4,
+      "two_qubit_count": 3,
+      "num_params": 3,
+      "params": [
+        3.14161715731766,
+        -3.1608906864409176e-05,
+        0.0
+      ],
+      "verifier_score": 0.9999999999873792,
+      "objective": 0.5000000000063125,
+      "diversity": 0.7649999999999999,
+      "spec": {
+        "num_qubits": 4,
+        "num_params": 3,
+        "gates": [
+          {
+            "name": "rxx",
+            "qubits": [
+              1,
+              3
+            ],
+            "param_idx": 0
+          },
+          {
+            "name": "z",
+            "qubits": [
+              1
+            ],
+            "param_idx": null
+          },
+          {
+            "name": "s",
+            "qubits": [
+              2
+            ],
+            "param_idx": null
+          },
+          {
+            "name": "ryy",
+            "qubits": [
+              1,
+              3
+            ],
+            "param_idx": 1
+          },
+          {
+            "name": "rxx",
+            "qubits": [
+              2,
+              3
+            ],
+            "param_idx": 2
+          }
+        ]
+      }
+    },
+    {
       "family": "brickwall",
       "num_qubits": 4,
       "gate_count": 27,
@@ -978,33 +1661,33 @@
       "two_qubit_count": 3,
       "num_params": 24,
       "params": [
-        1.2142947323888857,
-        -0.1390877285181067,
-        0.40670968743590274,
-        -2.8354804037112045,
-        -3.11294093275818,
-        0.9844933358429176,
-        3.6821813178973084,
-        -0.0004078928077793465,
-        2.5010526566914297,
-        5.212894449141828,
-        3.2858157788126245,
-        1.4191926006446838,
-        -3.8887791868652952,
-        3.1438059360761907,
-        2.0259608829398936,
-        -1.2353917897838025,
-        -3.1711602118063245,
-        0.05101639407376486,
-        0.3028322957319569,
-        3.141797133300627,
-        -1.3161473218731374,
-        -2.5902955847329867,
-        3.1236007808229433,
-        -0.2046341932665722
+        0.815003771257111,
+        -1.0571769430534756,
+        3.7874089330723297,
+        1.2036903036029953,
+        4.641198757549034,
+        2.8954555415009517,
+        3.8976975560043545,
+        0.00013195992584467362,
+        -0.17589088069598283,
+        -2.1293566200958,
+        0.46465554723937175,
+        0.35825758344599945,
+        -0.6461551821363116,
+        5.240052264061239,
+        -3.816011000767888,
+        0.12270321155855324,
+        1.5343524903441583,
+        -2.4090442619142727,
+        -0.8121017080523533,
+        -3.1405342342317875,
+        -3.7744703353251547,
+        -3.039977472220061,
+        3.6618810893277685,
+        5.608706846375217
       ],
-      "verifier_score": 0.990436765653798,
-      "objective": 0.500007112438142,
+      "verifier_score": 0.9756445208286476,
+      "objective": 0.5000002193738997,
       "diversity": 0.38888888888888884,
       "spec": {
         "num_qubits": 4,
@@ -1213,33 +1896,33 @@
       "two_qubit_count": 8,
       "num_params": 24,
       "params": [
-        1.5707360417128382,
-        -0.8005088490227339,
-        -1.565649932857674,
-        3.786250320827147,
-        1.5717428029115998,
-        -2.4928509831721852,
-        4.708244127617416,
-        2.962897614820279,
-        -1.5652207073468516,
-        1.9401222501310094,
-        -2.529409868223821,
-        2.9311817832418994,
-        -0.5151584397890567,
-        1.582505185528158,
-        -2.6165166676059366,
-        2.4282756508302707,
-        -1.5799211180996746,
-        -0.9125491803123256,
-        -1.3397729716191542,
-        1.5755897933353855,
-        -1.806809498985237,
-        2.520617427030964,
-        1.5747932559956137,
-        -2.9533396218397714
+        -2.6773360930333356,
+        4.708457851207703,
+        -0.46370638306474304,
+        -3.856163622650178,
+        -1.5721412908073569,
+        0.7155109123056059,
+        3.080665449430877,
+        -1.5757724159090591,
+        3.198261594175208,
+        7.7804277950320655,
+        -4.690670673722536,
+        -3.215036393712237,
+        2.6069440609801346,
+        4.712969580718567,
+        0.2824238240807756,
+        0.48098545468684684,
+        1.5695089243060123,
+        -3.570151179426587,
+        1.0223635266294768,
+        0.022508272203170736,
+        0.598958345410017,
+        2.596445275654835,
+        3.121713029460248,
+        0.5958184246971124
       ],
-      "verifier_score": 0.9999061833846297,
-      "objective": 0.00011744568012306278,
+      "verifier_score": 0.9999827111048845,
+      "objective": 1.9810266020048317e-05,
       "diversity": 0.43541666666666656,
       "spec": {
         "num_qubits": 4,
@@ -1474,6 +2157,1914 @@
             "qubits": [
               3,
               1
+            ],
+            "param_idx": null
+          }
+        ]
+      }
+    },
+    {
+      "family": "adaptive",
+      "num_qubits": 4,
+      "gate_count": 9,
+      "depth": 6,
+      "two_qubit_count": 4,
+      "num_params": 4,
+      "params": [
+        3.140257263581217,
+        0.29999999999999993,
+        -0.0013213945761408772,
+        0.0
+      ],
+      "verifier_score": 0.9999999999510318,
+      "objective": 0.500000000024486,
+      "diversity": 0.55,
+      "spec": {
+        "num_qubits": 4,
+        "num_params": 4,
+        "gates": [
+          {
+            "name": "z",
+            "qubits": [
+              1
+            ],
+            "param_idx": null
+          },
+          {
+            "name": "s",
+            "qubits": [
+              2
+            ],
+            "param_idx": null
+          },
+          {
+            "name": "ryy",
+            "qubits": [
+              1,
+              3
+            ],
+            "param_idx": 0
+          },
+          {
+            "name": "sqrt_iswap",
+            "qubits": [
+              1,
+              3
+            ],
+            "param_idx": null
+          },
+          {
+            "name": "rzz",
+            "qubits": [
+              1,
+              3
+            ],
+            "param_idx": 1
+          },
+          {
+            "name": "z",
+            "qubits": [
+              1
+            ],
+            "param_idx": null
+          },
+          {
+            "name": "s",
+            "qubits": [
+              2
+            ],
+            "param_idx": null
+          },
+          {
+            "name": "ryy",
+            "qubits": [
+              1,
+              3
+            ],
+            "param_idx": 2
+          },
+          {
+            "name": "ry",
+            "qubits": [
+              2
+            ],
+            "param_idx": 3
+          }
+        ]
+      }
+    },
+    {
+      "family": "mutated",
+      "num_qubits": 4,
+      "gate_count": 48,
+      "depth": 22,
+      "two_qubit_count": 13,
+      "num_params": 27,
+      "params": [
+        0.9050085886461806,
+        -1.106650743094529,
+        1.1359240707598777,
+        2.0202102993361857,
+        0.22023921473543476,
+        -0.6757684172372409,
+        0.6206406936365856,
+        0.6699137700019516,
+        2.5464629867080295,
+        3.4240625925416097,
+        0.513075841478201,
+        1.610742346158693,
+        0.9179677906076927,
+        2.1586452101179194,
+        -1.9599479903337962,
+        -3.9771021836603393,
+        -0.43618297950698015,
+        0.08875178773460825,
+        -1.9516516524852432,
+        2.3294554921342185,
+        -0.1033566043419377,
+        5.743587026720378,
+        0.4004497975450112,
+        -0.1577532654390581,
+        0.9259866166889439,
+        -0.45694864714272954,
+        -1.486644209696926
+      ],
+      "verifier_score": 0.9949889983163629,
+      "objective": 0.005067701969566962,
+      "diversity": 0.48291666666666666,
+      "spec": {
+        "num_qubits": 4,
+        "num_params": 27,
+        "gates": [
+          {
+            "name": "h",
+            "qubits": [
+              0
+            ],
+            "param_idx": null
+          },
+          {
+            "name": "h",
+            "qubits": [
+              1
+            ],
+            "param_idx": null
+          },
+          {
+            "name": "h",
+            "qubits": [
+              2
+            ],
+            "param_idx": null
+          },
+          {
+            "name": "h",
+            "qubits": [
+              3
+            ],
+            "param_idx": null
+          },
+          {
+            "name": "rzz",
+            "qubits": [
+              1,
+              2
+            ],
+            "param_idx": 0
+          },
+          {
+            "name": "rzz",
+            "qubits": [
+              0,
+              1
+            ],
+            "param_idx": 0
+          },
+          {
+            "name": "rzz",
+            "qubits": [
+              2,
+              3
+            ],
+            "param_idx": 0
+          },
+          {
+            "name": "rzz",
+            "qubits": [
+              3,
+              0
+            ],
+            "param_idx": 0
+          },
+          {
+            "name": "rx",
+            "qubits": [
+              0
+            ],
+            "param_idx": 1
+          },
+          {
+            "name": "rx",
+            "qubits": [
+              1
+            ],
+            "param_idx": 1
+          },
+          {
+            "name": "rx",
+            "qubits": [
+              2
+            ],
+            "param_idx": 1
+          },
+          {
+            "name": "rx",
+            "qubits": [
+              3
+            ],
+            "param_idx": 1
+          },
+          {
+            "name": "rzz",
+            "qubits": [
+              0,
+              1
+            ],
+            "param_idx": 2
+          },
+          {
+            "name": "rzz",
+            "qubits": [
+              1,
+              2
+            ],
+            "param_idx": 2
+          },
+          {
+            "name": "rzz",
+            "qubits": [
+              2,
+              3
+            ],
+            "param_idx": 2
+          },
+          {
+            "name": "rzz",
+            "qubits": [
+              3,
+              0
+            ],
+            "param_idx": 2
+          },
+          {
+            "name": "rx",
+            "qubits": [
+              0
+            ],
+            "param_idx": 3
+          },
+          {
+            "name": "rz",
+            "qubits": [
+              1
+            ],
+            "param_idx": 3
+          },
+          {
+            "name": "rx",
+            "qubits": [
+              3
+            ],
+            "param_idx": 3
+          },
+          {
+            "name": "rx",
+            "qubits": [
+              2
+            ],
+            "param_idx": 3
+          },
+          {
+            "name": "rx",
+            "qubits": [
+              3
+            ],
+            "param_idx": 4
+          },
+          {
+            "name": "rzz",
+            "qubits": [
+              0,
+              1
+            ],
+            "param_idx": 5
+          },
+          {
+            "name": "rzz",
+            "qubits": [
+              1,
+              2
+            ],
+            "param_idx": 5
+          },
+          {
+            "name": "swap",
+            "qubits": [
+              2,
+              1
+            ],
+            "param_idx": null
+          },
+          {
+            "name": "rzz",
+            "qubits": [
+              2,
+              3
+            ],
+            "param_idx": 5
+          },
+          {
+            "name": "rz",
+            "qubits": [
+              0
+            ],
+            "param_idx": 6
+          },
+          {
+            "name": "rzz",
+            "qubits": [
+              2,
+              0
+            ],
+            "param_idx": 7
+          },
+          {
+            "name": "t",
+            "qubits": [
+              0
+            ],
+            "param_idx": null
+          },
+          {
+            "name": "ry",
+            "qubits": [
+              2
+            ],
+            "param_idx": 8
+          },
+          {
+            "name": "ry",
+            "qubits": [
+              3
+            ],
+            "param_idx": 9
+          },
+          {
+            "name": "rz",
+            "qubits": [
+              0
+            ],
+            "param_idx": 10
+          },
+          {
+            "name": "rz",
+            "qubits": [
+              1
+            ],
+            "param_idx": 11
+          },
+          {
+            "name": "rz",
+            "qubits": [
+              2
+            ],
+            "param_idx": 12
+          },
+          {
+            "name": "ry",
+            "qubits": [
+              0
+            ],
+            "param_idx": 13
+          },
+          {
+            "name": "ry",
+            "qubits": [
+              1
+            ],
+            "param_idx": 14
+          },
+          {
+            "name": "ry",
+            "qubits": [
+              2
+            ],
+            "param_idx": 15
+          },
+          {
+            "name": "ry",
+            "qubits": [
+              3
+            ],
+            "param_idx": 16
+          },
+          {
+            "name": "x",
+            "qubits": [
+              3
+            ],
+            "param_idx": null
+          },
+          {
+            "name": "rz",
+            "qubits": [
+              0
+            ],
+            "param_idx": 17
+          },
+          {
+            "name": "ry",
+            "qubits": [
+              0
+            ],
+            "param_idx": 18
+          },
+          {
+            "name": "rz",
+            "qubits": [
+              0
+            ],
+            "param_idx": 19
+          },
+          {
+            "name": "rz",
+            "qubits": [
+              1
+            ],
+            "param_idx": 20
+          },
+          {
+            "name": "ry",
+            "qubits": [
+              1
+            ],
+            "param_idx": 21
+          },
+          {
+            "name": "ry",
+            "qubits": [
+              2
+            ],
+            "param_idx": 22
+          },
+          {
+            "name": "ry",
+            "qubits": [
+              3
+            ],
+            "param_idx": 23
+          },
+          {
+            "name": "rz",
+            "qubits": [
+              0
+            ],
+            "param_idx": 24
+          },
+          {
+            "name": "ry",
+            "qubits": [
+              1
+            ],
+            "param_idx": 25
+          },
+          {
+            "name": "rz",
+            "qubits": [
+              2
+            ],
+            "param_idx": 26
+          }
+        ]
+      }
+    },
+    {
+      "family": "adaptive",
+      "num_qubits": 4,
+      "gate_count": 7,
+      "depth": 3,
+      "two_qubit_count": 3,
+      "num_params": 2,
+      "params": [
+        3.1415801442022233,
+        1.7630787711835896e-06
+      ],
+      "verifier_score": 0.9999999999601017,
+      "objective": 0.5000000000199513,
+      "diversity": 0.5277777777777778,
+      "spec": {
+        "num_qubits": 4,
+        "num_params": 2,
+        "gates": [
+          {
+            "name": "z",
+            "qubits": [
+              1
+            ],
+            "param_idx": null
+          },
+          {
+            "name": "s",
+            "qubits": [
+              2
+            ],
+            "param_idx": null
+          },
+          {
+            "name": "ryy",
+            "qubits": [
+              1,
+              3
+            ],
+            "param_idx": 0
+          },
+          {
+            "name": "swap",
+            "qubits": [
+              3,
+              1
+            ],
+            "param_idx": null
+          },
+          {
+            "name": "rxx",
+            "qubits": [
+              0,
+              2
+            ],
+            "param_idx": 1
+          },
+          {
+            "name": "s",
+            "qubits": [
+              2
+            ],
+            "param_idx": null
+          },
+          {
+            "name": "z",
+            "qubits": [
+              0
+            ],
+            "param_idx": null
+          }
+        ]
+      }
+    },
+    {
+      "family": "mutated",
+      "num_qubits": 4,
+      "gate_count": 28,
+      "depth": 13,
+      "two_qubit_count": 6,
+      "num_params": 22,
+      "params": [
+        -1.2313245938396593,
+        -1.4932962437109139e-05,
+        3.954935781508763,
+        2.200954432365606,
+        6.283202535609471,
+        3.4882255428981397,
+        3.011231382628781,
+        0.8008668943756189,
+        -2.82381868039452,
+        -1.5830914380154575,
+        0.8020438451441692,
+        -6.012680027602675,
+        6.283158542288141,
+        -1.4106100129464325,
+        0.7116411019451616,
+        0.6997217215802504,
+        -5.583337582826857,
+        -2.0713836054087045,
+        -5.479382818366707,
+        -3.345426396009736,
+        4.791545736944056,
+        4.567934398598283
+      ],
+      "verifier_score": 0.7408026877733203,
+      "objective": 0.5000000001894168,
+      "diversity": 0.3153846153846154,
+      "spec": {
+        "num_qubits": 4,
+        "num_params": 22,
+        "gates": [
+          {
+            "name": "rz",
+            "qubits": [
+              0
+            ],
+            "param_idx": 0
+          },
+          {
+            "name": "ry",
+            "qubits": [
+              0
+            ],
+            "param_idx": 1
+          },
+          {
+            "name": "rz",
+            "qubits": [
+              0
+            ],
+            "param_idx": 2
+          },
+          {
+            "name": "rz",
+            "qubits": [
+              1
+            ],
+            "param_idx": 3
+          },
+          {
+            "name": "ry",
+            "qubits": [
+              1
+            ],
+            "param_idx": 4
+          },
+          {
+            "name": "rz",
+            "qubits": [
+              1
+            ],
+            "param_idx": 5
+          },
+          {
+            "name": "cz",
+            "qubits": [
+              1,
+              3
+            ],
+            "param_idx": null
+          },
+          {
+            "name": "rz",
+            "qubits": [
+              2
+            ],
+            "param_idx": 6
+          },
+          {
+            "name": "rz",
+            "qubits": [
+              2
+            ],
+            "param_idx": 7
+          },
+          {
+            "name": "rz",
+            "qubits": [
+              3
+            ],
+            "param_idx": 8
+          },
+          {
+            "name": "ry",
+            "qubits": [
+              3
+            ],
+            "param_idx": 9
+          },
+          {
+            "name": "rz",
+            "qubits": [
+              3
+            ],
+            "param_idx": 10
+          },
+          {
+            "name": "cnot",
+            "qubits": [
+              0,
+              1
+            ],
+            "param_idx": null
+          },
+          {
+            "name": "cnot",
+            "qubits": [
+              2,
+              3
+            ],
+            "param_idx": null
+          },
+          {
+            "name": "rz",
+            "qubits": [
+              0
+            ],
+            "param_idx": 11
+          },
+          {
+            "name": "ry",
+            "qubits": [
+              0
+            ],
+            "param_idx": 12
+          },
+          {
+            "name": "rz",
+            "qubits": [
+              0
+            ],
+            "param_idx": 13
+          },
+          {
+            "name": "rz",
+            "qubits": [
+              1
+            ],
+            "param_idx": 14
+          },
+          {
+            "name": "rz",
+            "qubits": [
+              1
+            ],
+            "param_idx": 15
+          },
+          {
+            "name": "rz",
+            "qubits": [
+              1
+            ],
+            "param_idx": 16
+          },
+          {
+            "name": "rz",
+            "qubits": [
+              2
+            ],
+            "param_idx": 17
+          },
+          {
+            "name": "ry",
+            "qubits": [
+              2
+            ],
+            "param_idx": 18
+          },
+          {
+            "name": "ry",
+            "qubits": [
+              3
+            ],
+            "param_idx": 20
+          },
+          {
+            "name": "rz",
+            "qubits": [
+              2
+            ],
+            "param_idx": 19
+          },
+          {
+            "name": "rz",
+            "qubits": [
+              3
+            ],
+            "param_idx": 21
+          },
+          {
+            "name": "cnot",
+            "qubits": [
+              1,
+              2
+            ],
+            "param_idx": null
+          },
+          {
+            "name": "cnot",
+            "qubits": [
+              2,
+              0
+            ],
+            "param_idx": null
+          },
+          {
+            "name": "cnot",
+            "qubits": [
+              3,
+              1
+            ],
+            "param_idx": null
+          }
+        ]
+      }
+    },
+    {
+      "family": "adaptive",
+      "num_qubits": 4,
+      "gate_count": 5,
+      "depth": 2,
+      "two_qubit_count": 1,
+      "num_params": 2,
+      "params": [
+        3.1415784161637426,
+        0.0
+      ],
+      "verifier_score": 0.9999999999493239,
+      "objective": 0.5000000000253402,
+      "diversity": 0.7166666666666667,
+      "spec": {
+        "num_qubits": 4,
+        "num_params": 2,
+        "gates": [
+          {
+            "name": "ryy",
+            "qubits": [
+              0,
+              2
+            ],
+            "param_idx": 0
+          },
+          {
+            "name": "s",
+            "qubits": [
+              3
+            ],
+            "param_idx": null
+          },
+          {
+            "name": "rx",
+            "qubits": [
+              0
+            ],
+            "param_idx": 1
+          },
+          {
+            "name": "z",
+            "qubits": [
+              3
+            ],
+            "param_idx": null
+          },
+          {
+            "name": "t",
+            "qubits": [
+              2
+            ],
+            "param_idx": null
+          }
+        ]
+      }
+    },
+    {
+      "family": "mutated",
+      "num_qubits": 4,
+      "gate_count": 43,
+      "depth": 18,
+      "two_qubit_count": 7,
+      "num_params": 32,
+      "params": [
+        0.988114828764366,
+        -0.31294657131952885,
+        4.0875205087389,
+        2.032874823900735,
+        4.575205167076714,
+        2.8633303784967596,
+        4.546736570204747,
+        0.4831473526441148,
+        0.39160897639059483,
+        -1.8867971362458935,
+        1.51292620213025,
+        0.10615703683029244,
+        -0.8478152791957569,
+        5.622797929119559,
+        -3.4988494240681582,
+        0.30191094928239354,
+        1.5880067161586613,
+        -2.302181409658574,
+        -0.33796311456890743,
+        -2.000032015661805,
+        -3.7138757284888517,
+        -3.009253900543767,
+        4.551113094555905,
+        5.606567309177383,
+        0.014340295337871274,
+        0.662511320612854,
+        0.052118400842504936,
+        1.3444051957690883,
+        -4.8137280286381525,
+        -2.446327473706438,
+        -5.717517715371473,
+        4.549320171725116
+      ],
+      "verifier_score": 0.8110493720263249,
+      "objective": 0.500149677700779,
+      "diversity": 0.3578811369509044,
+      "spec": {
+        "num_qubits": 4,
+        "num_params": 32,
+        "gates": [
+          {
+            "name": "rz",
+            "qubits": [
+              0
+            ],
+            "param_idx": 0
+          },
+          {
+            "name": "rz",
+            "qubits": [
+              0
+            ],
+            "param_idx": 2
+          },
+          {
+            "name": "ry",
+            "qubits": [
+              1
+            ],
+            "param_idx": 1
+          },
+          {
+            "name": "rz",
+            "qubits": [
+              1
+            ],
+            "param_idx": 3
+          },
+          {
+            "name": "ry",
+            "qubits": [
+              1
+            ],
+            "param_idx": 4
+          },
+          {
+            "name": "rz",
+            "qubits": [
+              1
+            ],
+            "param_idx": 5
+          },
+          {
+            "name": "rz",
+            "qubits": [
+              2
+            ],
+            "param_idx": 6
+          },
+          {
+            "name": "ry",
+            "qubits": [
+              2
+            ],
+            "param_idx": 7
+          },
+          {
+            "name": "rz",
+            "qubits": [
+              2
+            ],
+            "param_idx": 8
+          },
+          {
+            "name": "rz",
+            "qubits": [
+              3
+            ],
+            "param_idx": 9
+          },
+          {
+            "name": "rz",
+            "qubits": [
+              3
+            ],
+            "param_idx": 11
+          },
+          {
+            "name": "ry",
+            "qubits": [
+              3
+            ],
+            "param_idx": 10
+          },
+          {
+            "name": "cnot",
+            "qubits": [
+              0,
+              1
+            ],
+            "param_idx": null
+          },
+          {
+            "name": "cnot",
+            "qubits": [
+              2,
+              3
+            ],
+            "param_idx": null
+          },
+          {
+            "name": "rz",
+            "qubits": [
+              0
+            ],
+            "param_idx": 12
+          },
+          {
+            "name": "ry",
+            "qubits": [
+              0
+            ],
+            "param_idx": 13
+          },
+          {
+            "name": "rz",
+            "qubits": [
+              0
+            ],
+            "param_idx": 14
+          },
+          {
+            "name": "ry",
+            "qubits": [
+              1
+            ],
+            "param_idx": 16
+          },
+          {
+            "name": "rz",
+            "qubits": [
+              1
+            ],
+            "param_idx": 15
+          },
+          {
+            "name": "rz",
+            "qubits": [
+              1
+            ],
+            "param_idx": 17
+          },
+          {
+            "name": "rz",
+            "qubits": [
+              2
+            ],
+            "param_idx": 18
+          },
+          {
+            "name": "ry",
+            "qubits": [
+              2
+            ],
+            "param_idx": 19
+          },
+          {
+            "name": "rz",
+            "qubits": [
+              2
+            ],
+            "param_idx": 20
+          },
+          {
+            "name": "cz",
+            "qubits": [
+              0,
+              2
+            ],
+            "param_idx": null
+          },
+          {
+            "name": "rz",
+            "qubits": [
+              3
+            ],
+            "param_idx": 21
+          },
+          {
+            "name": "ry",
+            "qubits": [
+              3
+            ],
+            "param_idx": 22
+          },
+          {
+            "name": "rz",
+            "qubits": [
+              3
+            ],
+            "param_idx": 23
+          },
+          {
+            "name": "cnot",
+            "qubits": [
+              1,
+              2
+            ],
+            "param_idx": null
+          },
+          {
+            "name": "s",
+            "qubits": [
+              3
+            ],
+            "param_idx": null
+          },
+          {
+            "name": "rx",
+            "qubits": [
+              0
+            ],
+            "param_idx": 24
+          },
+          {
+            "name": "h",
+            "qubits": [
+              2
+            ],
+            "param_idx": null
+          },
+          {
+            "name": "h",
+            "qubits": [
+              3
+            ],
+            "param_idx": null
+          },
+          {
+            "name": "rzz",
+            "qubits": [
+              1,
+              2
+            ],
+            "param_idx": 25
+          },
+          {
+            "name": "t",
+            "qubits": [
+              1
+            ],
+            "param_idx": null
+          },
+          {
+            "name": "z",
+            "qubits": [
+              1
+            ],
+            "param_idx": null
+          },
+          {
+            "name": "s",
+            "qubits": [
+              2
+            ],
+            "param_idx": null
+          },
+          {
+            "name": "ryy",
+            "qubits": [
+              1,
+              3
+            ],
+            "param_idx": 25
+          },
+          {
+            "name": "rxx",
+            "qubits": [
+              2,
+              3
+            ],
+            "param_idx": 26
+          },
+          {
+            "name": "rz",
+            "qubits": [
+              1
+            ],
+            "param_idx": 27
+          },
+          {
+            "name": "rz",
+            "qubits": [
+              1
+            ],
+            "param_idx": 28
+          },
+          {
+            "name": "rz",
+            "qubits": [
+              2
+            ],
+            "param_idx": 29
+          },
+          {
+            "name": "ry",
+            "qubits": [
+              2
+            ],
+            "param_idx": 30
+          },
+          {
+            "name": "ry",
+            "qubits": [
+              3
+            ],
+            "param_idx": 31
+          }
+        ]
+      }
+    },
+    {
+      "family": "adaptive",
+      "num_qubits": 4,
+      "gate_count": 7,
+      "depth": 3,
+      "two_qubit_count": 4,
+      "num_params": 3,
+      "params": [
+        3.1415952656367407,
+        9.13360209427171e-06,
+        0.5622335742552447
+      ],
+      "verifier_score": 0.9999999999774383,
+      "objective": 0.5000000000112826,
+      "diversity": 0.5,
+      "spec": {
+        "num_qubits": 4,
+        "num_params": 3,
+        "gates": [
+          {
+            "name": "x",
+            "qubits": [
+              0
+            ],
+            "param_idx": null
+          },
+          {
+            "name": "ry",
+            "qubits": [
+              2
+            ],
+            "param_idx": 0
+          },
+          {
+            "name": "ry",
+            "qubits": [
+              3
+            ],
+            "param_idx": 1
+          },
+          {
+            "name": "iswap",
+            "qubits": [
+              1,
+              3
+            ],
+            "param_idx": null
+          },
+          {
+            "name": "rzz",
+            "qubits": [
+              0,
+              2
+            ],
+            "param_idx": 2
+          },
+          {
+            "name": "swap",
+            "qubits": [
+              0,
+              2
+            ],
+            "param_idx": null
+          },
+          {
+            "name": "iswap",
+            "qubits": [
+              3,
+              1
+            ],
+            "param_idx": null
+          }
+        ]
+      }
+    },
+    {
+      "family": "mutated",
+      "num_qubits": 4,
+      "gate_count": 15,
+      "depth": 7,
+      "two_qubit_count": 3,
+      "num_params": 7,
+      "params": [
+        8.063702163752408,
+        3.1416104068199218,
+        4.922106725900139,
+        0.24302261843100803,
+        6.7908790740193214e-06,
+        4.951913859037383e-05,
+        2.8985449097727667
+      ],
+      "verifier_score": 0.999999999183979,
+      "objective": 0.5000000004080121,
+      "diversity": 0.6261904761904762,
+      "spec": {
+        "num_qubits": 4,
+        "num_params": 7,
+        "gates": [
+          {
+            "name": "ryy",
+            "qubits": [
+              0,
+              2
+            ],
+            "param_idx": 0
+          },
+          {
+            "name": "s",
+            "qubits": [
+              3
+            ],
+            "param_idx": null
+          },
+          {
+            "name": "rx",
+            "qubits": [
+              0
+            ],
+            "param_idx": 1
+          },
+          {
+            "name": "z",
+            "qubits": [
+              3
+            ],
+            "param_idx": null
+          },
+          {
+            "name": "ryy",
+            "qubits": [
+              0,
+              2
+            ],
+            "param_idx": 2
+          },
+          {
+            "name": "t",
+            "qubits": [
+              2
+            ],
+            "param_idx": null
+          },
+          {
+            "name": "s",
+            "qubits": [
+              1
+            ],
+            "param_idx": null
+          },
+          {
+            "name": "rx",
+            "qubits": [
+              0
+            ],
+            "param_idx": 3
+          },
+          {
+            "name": "cnot",
+            "qubits": [
+              1,
+              2
+            ],
+            "param_idx": null
+          },
+          {
+            "name": "ry",
+            "qubits": [
+              0
+            ],
+            "param_idx": 4
+          },
+          {
+            "name": "ry",
+            "qubits": [
+              1
+            ],
+            "param_idx": 5
+          },
+          {
+            "name": "s",
+            "qubits": [
+              3
+            ],
+            "param_idx": null
+          },
+          {
+            "name": "rx",
+            "qubits": [
+              0
+            ],
+            "param_idx": 6
+          },
+          {
+            "name": "z",
+            "qubits": [
+              0
+            ],
+            "param_idx": null
+          },
+          {
+            "name": "t",
+            "qubits": [
+              2
+            ],
+            "param_idx": null
+          }
+        ]
+      }
+    },
+    {
+      "family": "mutated",
+      "num_qubits": 4,
+      "gate_count": 29,
+      "depth": 13,
+      "two_qubit_count": 7,
+      "num_params": 19,
+      "params": [
+        6.283253598964133,
+        3.145627793636117,
+        -0.014676829841820596,
+        0.5168227494994947,
+        0.0007926562686672818,
+        3.1422958122978986,
+        0.2716300445199695,
+        0.004006512592827603,
+        5.7392590297284e-05,
+        -0.0051579120440373785,
+        -0.5849332183066372,
+        -1.5609038888371958,
+        0.0011295139820578287,
+        -0.007849253802434715,
+        -0.22751696786909972,
+        3.14022990460395,
+        3.140770462002379,
+        -0.011347509583281944,
+        0.047717030519494566
+      ],
+      "verifier_score": 0.9999494150421069,
+      "objective": 5.6434323421505894e-05,
+      "diversity": 0.3434350132625994,
+      "spec": {
+        "num_qubits": 4,
+        "num_params": 19,
+        "gates": [
+          {
+            "name": "rx",
+            "qubits": [
+              0
+            ],
+            "param_idx": 0
+          },
+          {
+            "name": "rx",
+            "qubits": [
+              1
+            ],
+            "param_idx": 1
+          },
+          {
+            "name": "rx",
+            "qubits": [
+              3
+            ],
+            "param_idx": 18
+          },
+          {
+            "name": "rx",
+            "qubits": [
+              3
+            ],
+            "param_idx": 3
+          },
+          {
+            "name": "rx",
+            "qubits": [
+              2
+            ],
+            "param_idx": 2
+          },
+          {
+            "name": "ry",
+            "qubits": [
+              0
+            ],
+            "param_idx": 4
+          },
+          {
+            "name": "ry",
+            "qubits": [
+              3
+            ],
+            "param_idx": 6
+          },
+          {
+            "name": "ry",
+            "qubits": [
+              1
+            ],
+            "param_idx": 5
+          },
+          {
+            "name": "cnot",
+            "qubits": [
+              0,
+              1
+            ],
+            "param_idx": null
+          },
+          {
+            "name": "cnot",
+            "qubits": [
+              1,
+              2
+            ],
+            "param_idx": null
+          },
+          {
+            "name": "cnot",
+            "qubits": [
+              2,
+              3
+            ],
+            "param_idx": null
+          },
+          {
+            "name": "rx",
+            "qubits": [
+              0
+            ],
+            "param_idx": 7
+          },
+          {
+            "name": "rx",
+            "qubits": [
+              1
+            ],
+            "param_idx": 8
+          },
+          {
+            "name": "rx",
+            "qubits": [
+              2
+            ],
+            "param_idx": 9
+          },
+          {
+            "name": "rx",
+            "qubits": [
+              3
+            ],
+            "param_idx": 10
+          },
+          {
+            "name": "sqrt_iswap",
+            "qubits": [
+              2,
+              0
+            ],
+            "param_idx": null
+          },
+          {
+            "name": "ry",
+            "qubits": [
+              0
+            ],
+            "param_idx": 11
+          },
+          {
+            "name": "ry",
+            "qubits": [
+              1
+            ],
+            "param_idx": 12
+          },
+          {
+            "name": "ry",
+            "qubits": [
+              2
+            ],
+            "param_idx": 13
+          },
+          {
+            "name": "ry",
+            "qubits": [
+              3
+            ],
+            "param_idx": 14
+          },
+          {
+            "name": "cnot",
+            "qubits": [
+              0,
+              1
+            ],
+            "param_idx": null
+          },
+          {
+            "name": "cnot",
+            "qubits": [
+              1,
+              2
+            ],
+            "param_idx": null
+          },
+          {
+            "name": "x",
+            "qubits": [
+              2
+            ],
+            "param_idx": null
+          },
+          {
+            "name": "cnot",
+            "qubits": [
+              2,
+              3
+            ],
+            "param_idx": null
+          },
+          {
+            "name": "rx",
+            "qubits": [
+              0
+            ],
+            "param_idx": 15
+          },
+          {
+            "name": "rx",
+            "qubits": [
+              1
+            ],
+            "param_idx": 15
+          },
+          {
+            "name": "x",
+            "qubits": [
+              0
+            ],
+            "param_idx": null
+          },
+          {
+            "name": "ry",
+            "qubits": [
+              2
+            ],
+            "param_idx": 16
+          },
+          {
+            "name": "ry",
+            "qubits": [
+              3
+            ],
+            "param_idx": 17
+          }
+        ]
+      }
+    },
+    {
+      "family": "adaptive",
+      "num_qubits": 4,
+      "gate_count": 7,
+      "depth": 6,
+      "two_qubit_count": 6,
+      "num_params": 2,
+      "params": [
+        3.141593397363143,
+        0.7294176988774315
+      ],
+      "verifier_score": 0.9999999999998617,
+      "objective": 0.500000000000071,
+      "diversity": 0.5333333333333333,
+      "spec": {
+        "num_qubits": 4,
+        "num_params": 2,
+        "gates": [
+          {
+            "name": "ryy",
+            "qubits": [
+              1,
+              3
+            ],
+            "param_idx": 0
+          },
+          {
+            "name": "sqrt_iswap",
+            "qubits": [
+              1,
+              3
+            ],
+            "param_idx": null
+          },
+          {
+            "name": "rzz",
+            "qubits": [
+              1,
+              3
+            ],
+            "param_idx": 1
+          },
+          {
+            "name": "z",
+            "qubits": [
+              2
+            ],
+            "param_idx": null
+          },
+          {
+            "name": "cz",
+            "qubits": [
+              3,
+              0
+            ],
+            "param_idx": null
+          },
+          {
+            "name": "cz",
+            "qubits": [
+              0,
+              1
+            ],
+            "param_idx": null
+          },
+          {
+            "name": "swap",
+            "qubits": [
+              3,
+              1
+            ],
+            "param_idx": null
+          }
+        ]
+      }
+    },
+    {
+      "family": "mutated",
+      "num_qubits": 4,
+      "gate_count": 18,
+      "depth": 10,
+      "two_qubit_count": 7,
+      "num_params": 6,
+      "params": [
+        6.283180850704647,
+        2.956913506818929e-05,
+        0.9513109265276676,
+        6.914859863041056e-05,
+        3.141523271959115,
+        2.685091763770264e-05
+      ],
+      "verifier_score": 0.9999999984007992,
+      "objective": 0.5000000007996036,
+      "diversity": 0.5895833333333333,
+      "spec": {
+        "num_qubits": 4,
+        "num_params": 6,
+        "gates": [
+          {
+            "name": "x",
+            "qubits": [
+              0
+            ],
+            "param_idx": null
+          },
+          {
+            "name": "ry",
+            "qubits": [
+              2
+            ],
+            "param_idx": 0
+          },
+          {
+            "name": "rx",
+            "qubits": [
+              3
+            ],
+            "param_idx": 1
+          },
+          {
+            "name": "iswap",
+            "qubits": [
+              1,
+              0
+            ],
+            "param_idx": null
+          },
+          {
+            "name": "swap",
+            "qubits": [
+              0,
+              2
+            ],
+            "param_idx": null
+          },
+          {
+            "name": "cnot",
+            "qubits": [
+              0,
+              1
+            ],
+            "param_idx": null
+          },
+          {
+            "name": "rzz",
+            "qubits": [
+              0,
+              2
+            ],
+            "param_idx": 2
+          },
+          {
+            "name": "iswap",
+            "qubits": [
+              3,
+              1
+            ],
+            "param_idx": null
+          },
+          {
+            "name": "y",
+            "qubits": [
+              0
+            ],
+            "param_idx": null
+          },
+          {
+            "name": "rx",
+            "qubits": [
+              0
+            ],
+            "param_idx": 3
+          },
+          {
+            "name": "rx",
+            "qubits": [
+              1
+            ],
+            "param_idx": 3
+          },
+          {
+            "name": "rx",
+            "qubits": [
+              2
+            ],
+            "param_idx": 3
+          },
+          {
+            "name": "rx",
+            "qubits": [
+              0
+            ],
+            "param_idx": 4
+          },
+          {
+            "name": "rx",
+            "qubits": [
+              1
+            ],
+            "param_idx": 4
+          },
+          {
+            "name": "swap",
+            "qubits": [
+              3,
+              1
+            ],
+            "param_idx": null
+          },
+          {
+            "name": "rxx",
+            "qubits": [
+              0,
+              2
+            ],
+            "param_idx": 5
+          },
+          {
+            "name": "s",
+            "qubits": [
+              2
+            ],
+            "param_idx": null
+          },
+          {
+            "name": "z",
+            "qubits": [
+              0
             ],
             "param_idx": null
           }

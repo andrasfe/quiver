@@ -1,21 +1,21 @@
 """Generate a portable diverse-circuit set for hardware experimentation.
 
-Runs Quiver on the canonical 4-qubit square-graph MaxCut problem and
-saves the resulting registry to results/ibm_ready_circuits.json. The
-saved JSON contains every circuit's spec, optimised parameters, and
-metadata — enough for a downstream consumer (e.g. a Jupyter notebook
-submitting to IBM Quantum) to convert each one to a Qiskit circuit
-and run it on real hardware.
+Runs Quiver's full diverse-generation pipeline on the canonical 4-qubit
+square-graph MaxCut problem and saves the resulting registry to
+results/ibm_ready_circuits.json.
 
-We pick the 4-qubit square MaxCut because:
-  • 4 qubits fits any near-term IBM device with room to spare
-  • the optimal cut (alternating bitstrings 0101 / 1010) is well-known
-  • multiple ansatz families converge to it, so we get genuine
-    structural diversity in the saved set
+Pipeline features enabled:
+  • canonical ansatz templates (HE / QAOA / LinEnt / BrickWall / SE)
+  • mutation rounds with microstructure library (genetic recombination
+    across previously-verified circuits)
+  • adaptive (ADAPT-style) gate-by-gate growth with anti-template reward
+    pushing structures away from canonical shapes
+  • compactness preference in the registry (similar candidates that are
+    smaller / shallower replace their incumbents)
 
-The generated circuits use only gates Qiskit supports natively (or
-that we wrap as a unitary box), so the notebook can submit them
-without extra translation work.
+The result is many more circuits than the canonical-template-only run
+produces — and crucially, structurally varied at much smaller depths
+(useful for noisy hardware where every CNOT is expensive).
 """
 
 from __future__ import annotations
@@ -38,9 +38,11 @@ from quiver.ansatz import (
     StronglyEntangling,
 )
 from quiver.config import (
+    AdaptiveConfig,
     BudgetConfig,
     DiversityConfig,
     ExplorationConfig,
+    MutationConfig,
     OptimizerConfig,
 )
 
@@ -101,15 +103,40 @@ def build_library() -> list:
     ]
 
 
-def main() -> None:
+def main(num_solutions: int = 24, time_budget_s: int = 300) -> None:
     target = cycle_alt_target()
     config = QuiverConfig(
         exploration=ExplorationConfig(
-            num_solutions=8, time_budget_seconds=120, seed=42,
+            num_solutions=num_solutions,
+            time_budget_seconds=time_budget_s,
+            seed=42,
         ),
         optimizer=OptimizerConfig(basin_hops=10, max_iter=200, step_size=1.2),
-        diversity=DiversityConfig(threshold=0.15),
+        diversity=DiversityConfig(
+            threshold=0.12,           # slightly looser to admit more variants
+            prefer_compact=True,       # replace similar entries with smaller ones
+        ),
         budget=BudgetConfig(max_gates=120, max_depth=40),
+        mutation=MutationConfig(
+            enabled=True, frequency=2,
+            chain_min=4, chain_max=12,
+            use_microstructures=True, weld_weight=2.0,
+        ),
+        adaptive=AdaptiveConfig(
+            enabled=True, frequency=4,
+            max_gates=40,
+            candidates_per_step=14,
+            inner_max_iter=30,
+            plateau_patience=4,
+            epsilon_random=0.25,
+            target_loss=0.05,
+            microstructures_enabled=True,
+            microstructures_per_solution=4,
+            microstructure_min_length=2,
+            microstructure_max_length=5,
+            fragment_candidate_fraction=0.4,
+            anti_template_weight=0.3,
+        ),
     )
 
     quiver = Quiver(target=target, verifier=verifier, config=config)
