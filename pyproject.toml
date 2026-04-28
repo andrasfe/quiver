@@ -5,9 +5,9 @@ build-backend = "setuptools.build_meta"
 [project]
 # The PyPI distribution name. Different from the import name `quiver`
 # because the bare `quiver` namespace is already taken on PyPI.
-# Install with:  pip install quiver-quantum
+# Install with:  pip install quiver-circuits
 # Import with:   import quiver
-name = "quiver-quantum"
+name = "quiver-circuits"
 version = "0.1.0"
 description = "Quantum circuit exploration framework that finds multiple structurally diverse solutions to problems with known target outcomes."
 readme = "README.md"

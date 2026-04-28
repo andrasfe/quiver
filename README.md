@@ -179,17 +179,17 @@ simulation.
 
 ## Installation
 
-From PyPI (the package is named `quiver-quantum` because the bare
+From PyPI (the package is named `quiver-circuits` because the bare
 `quiver` namespace is taken; `import quiver` still works):
 
 ```bash
-pip install quiver-quantum                # core (numpy + scipy)
-pip install quiver-quantum[pennylane]     # + PennyLane backend
-pip install quiver-quantum[qiskit]        # + Qiskit backend
-pip install quiver-quantum[ibm]           # + qiskit-ibm-runtime + qiskit-aer
-pip install quiver-quantum[dwave]         # + dimod / dwave-system
-pip install quiver-quantum[all]           # everything
-pip install quiver-quantum[test]          # pytest tooling
+pip install quiver-circuits                # core (numpy + scipy)
+pip install quiver-circuits[pennylane]     # + PennyLane backend
+pip install quiver-circuits[qiskit]        # + Qiskit backend
+pip install quiver-circuits[ibm]           # + qiskit-ibm-runtime + qiskit-aer
+pip install quiver-circuits[dwave]         # + dimod / dwave-system
+pip install quiver-circuits[all]           # everything
+pip install quiver-circuits[test]          # pytest tooling
 ```
 
 For development against this repo:

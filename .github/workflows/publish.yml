@@ -69,7 +69,7 @@ jobs:
       (github.event_name == 'workflow_dispatch' && github.event.inputs.target == 'pypi')
     environment:
       name: pypi
-      url: https://pypi.org/project/quiver-quantum/
+      url: https://pypi.org/project/quiver-circuits/
     permissions:
       id-token: write   # required for trusted publishing
     steps:
@@ -89,7 +89,7 @@ jobs:
     if: github.event_name == 'workflow_dispatch' && github.event.inputs.target == 'testpypi'
     environment:
       name: testpypi
-      url: https://test.pypi.org/project/quiver-quantum/
+      url: https://test.pypi.org/project/quiver-circuits/
     permissions:
       id-token: write
     steps:
