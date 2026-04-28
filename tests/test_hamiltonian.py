@@ -1,6 +1,6 @@
 import numpy as np
 
-from quiver.hamiltonian import (
+from quivercirc.hamiltonian import (
     expectation,
     ground_state_energy,
     heisenberg,

@@ -27,8 +27,8 @@ from typing import Callable
 
 import numpy as np
 
-from quiver import Quiver, QuiverConfig
-from quiver.ansatz import (
+from quivercirc import Quiver, QuiverConfig
+from quivercirc.ansatz import (
     AllToAll,
     BrickWall,
     HardwareEfficient,
@@ -36,7 +36,7 @@ from quiver.ansatz import (
     QAOAInspired,
     StronglyEntangling,
 )
-from quiver.config import (
+from quivercirc.config import (
     BudgetConfig,
     DiversityConfig,
     ExplorationConfig,

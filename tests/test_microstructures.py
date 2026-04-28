@@ -1,8 +1,8 @@
 import numpy as np
 
-from quiver.ansatz import HardwareEfficient
-from quiver.circuit import CircuitSpec, GateSpec
-from quiver.microstructures import MicrostructureLibrary, weld
+from quivercirc.ansatz import HardwareEfficient
+from quivercirc.circuit import CircuitSpec, GateSpec
+from quivercirc.microstructures import MicrostructureLibrary, weld
 
 
 def test_add_solution_extracts_fragments():

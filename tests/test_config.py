@@ -1,6 +1,6 @@
 from pathlib import Path
 
-from quiver.config import load_config
+from quivercirc.config import load_config
 
 
 def test_load_example_config(tmp_path: Path):

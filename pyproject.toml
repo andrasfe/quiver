@@ -3,12 +3,11 @@ requires = ["setuptools>=68", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-# The PyPI distribution name. Different from the import name `quiver`
-# because the bare `quiver` namespace is already taken on PyPI.
+# PyPI distribution name and import name now match.
 # Install with:  pip install quivercirc
-# Import with:   import quiver
+# Import with:   import quivercirc
 name = "quivercirc"
-version = "0.1.0"
+version = "0.1.1"
 description = "Quantum circuit exploration framework that finds multiple structurally diverse solutions to problems with known target outcomes."
 readme = "README.md"
 requires-python = ">=3.10"
@@ -65,7 +64,7 @@ Issues = "https://github.com/andrasfe/quiver/issues"
 
 [tool.setuptools.packages.find]
 where = ["."]
-include = ["quiver*"]
+include = ["quivercirc*"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

@@ -24,7 +24,7 @@ from dataclasses import dataclass, field
 
 import numpy as np
 
-from quiver.circuit import CircuitSpec, GateSpec
+from quivercirc.circuit import CircuitSpec, GateSpec
 
 
 @dataclass

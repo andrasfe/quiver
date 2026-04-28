@@ -7,7 +7,7 @@ from typing import Protocol, runtime_checkable
 
 import numpy as np
 
-from quiver.circuit import CircuitSpec
+from quivercirc.circuit import CircuitSpec
 
 
 @runtime_checkable

@@ -35,16 +35,16 @@ from pathlib import Path
 
 import numpy as np
 
-from quiver import Quiver, QuiverConfig
-from quiver.ansatz import (
+from quivercirc import Quiver, QuiverConfig
+from quivercirc.ansatz import (
     BrickWall,
     HardwareEfficient,
     LinearEntangler,
     QAOAInspired,
     StronglyEntangling,
 )
-from quiver.backends import NumpyBackend
-from quiver.config import (
+from quivercirc.backends import NumpyBackend
+from quivercirc.config import (
     AdaptiveConfig,
     BudgetConfig,
     DiversityConfig,
@@ -52,9 +52,9 @@ from quiver.config import (
     MutationConfig,
     OptimizerConfig,
 )
-from quiver.diversity import structural_similarity
-from quiver.hamiltonian import heisenberg, tfim, vqe_setup
-from quiver.microstructures import MicrostructureLibrary
+from quivercirc.diversity import structural_similarity
+from quivercirc.hamiltonian import heisenberg, tfim, vqe_setup
+from quivercirc.microstructures import MicrostructureLibrary
 
 
 RESULTS = Path(__file__).resolve().parent.parent / "results"

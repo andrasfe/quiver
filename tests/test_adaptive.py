@@ -1,9 +1,9 @@
 import numpy as np
 
-from quiver.adaptive import AdaptiveGrowth, _candidate_pool
-from quiver.backends import NumpyBackend
-from quiver.circuit import CircuitSpec
-from quiver.verification import fidelity_objective
+from quivercirc.adaptive import AdaptiveGrowth, _candidate_pool
+from quivercirc.backends import NumpyBackend
+from quivercirc.circuit import CircuitSpec
+from quivercirc.verification import fidelity_objective
 
 
 def test_candidate_pool_covers_full_gate_set():

@@ -1,7 +1,7 @@
 import numpy as np
 
-from quiver.ansatz import HardwareEfficient, QAOAInspired
-from quiver.mutation import (
+from quivercirc.ansatz import HardwareEfficient, QAOAInspired
+from quivercirc.mutation import (
     Mutator,
     mutate_delete,
     mutate_insert,
@@ -106,7 +106,7 @@ def test_chain_output_remains_valid_specification():
 
 
 def test_mutator_with_library_can_weld_fragments():
-    from quiver.microstructures import MicrostructureLibrary
+    from quivercirc.microstructures import MicrostructureLibrary
     spec, _ = _spec_from_he()
     params = np.linspace(0.1, 0.9, spec.num_params)
     lib = MicrostructureLibrary(fragments_per_solution=4, min_length=3, max_length=4)

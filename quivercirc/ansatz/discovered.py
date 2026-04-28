@@ -19,8 +19,8 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
-from quiver.circuit import CircuitSpec, GateSpec
-from quiver.distillation import CanonicalForm, DistilledPattern
+from quivercirc.circuit import CircuitSpec, GateSpec
+from quivercirc.distillation import CanonicalForm, DistilledPattern
 
 
 @dataclass

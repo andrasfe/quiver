@@ -9,7 +9,7 @@ from __future__ import annotations
 
 from typing import Protocol, runtime_checkable
 
-from quiver.circuit import CircuitSpec
+from quivercirc.circuit import CircuitSpec
 
 
 @runtime_checkable

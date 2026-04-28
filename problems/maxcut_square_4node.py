@@ -36,10 +36,10 @@ from pathlib import Path
 
 import numpy as np
 
-from quiver import Quiver, QuiverConfig
-from quiver.ansatz import HardwareEfficient, LinearEntangler, QAOAInspired
-from quiver.backends import NumpyBackend
-from quiver.config import (
+from quivercirc import Quiver, QuiverConfig
+from quivercirc.ansatz import HardwareEfficient, LinearEntangler, QAOAInspired
+from quivercirc.backends import NumpyBackend
+from quivercirc.config import (
     BudgetConfig,
     DiversityConfig,
     ExplorationConfig,

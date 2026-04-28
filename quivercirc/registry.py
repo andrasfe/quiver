@@ -7,8 +7,8 @@ from typing import Iterator
 
 import numpy as np
 
-from quiver.circuit import CircuitSpec
-from quiver.diversity import DiversityWeights, diversity_score, structural_similarity
+from quivercirc.circuit import CircuitSpec
+from quivercirc.diversity import DiversityWeights, diversity_score, structural_similarity
 
 
 @dataclass

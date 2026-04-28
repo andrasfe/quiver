@@ -19,7 +19,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
-from quiver.circuit import CircuitSpec, GateSpec
+from quivercirc.circuit import CircuitSpec, GateSpec
 
 
 @dataclass

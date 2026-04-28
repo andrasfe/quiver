@@ -21,9 +21,9 @@ from pathlib import Path
 
 import numpy as np
 
-from quiver import Quiver, QuiverConfig
-from quiver.ansatz import HardwareEfficient, LinearEntangler, QAOAInspired
-from quiver.config import (
+from quivercirc import Quiver, QuiverConfig
+from quivercirc.ansatz import HardwareEfficient, LinearEntangler, QAOAInspired
+from quivercirc.config import (
     AdaptiveConfig,
     BudgetConfig,
     DiversityConfig,
@@ -31,7 +31,7 @@ from quiver.config import (
     MutationConfig,
     OptimizerConfig,
 )
-from quiver.diversity import structural_similarity
+from quivercirc.diversity import structural_similarity
 
 
 N = 4

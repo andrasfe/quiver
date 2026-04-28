@@ -1,5 +1,5 @@
-from quiver.ansatz import HardwareEfficient, LinearEntangler, QAOAInspired
-from quiver.diversity import diversity_score, structural_similarity
+from quivercirc.ansatz import HardwareEfficient, LinearEntangler, QAOAInspired
+from quivercirc.diversity import diversity_score, structural_similarity
 
 
 def test_identical_specs_have_similarity_one():

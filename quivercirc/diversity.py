@@ -25,7 +25,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Iterable
 
-from quiver.circuit import CircuitSpec
+from quivercirc.circuit import CircuitSpec
 
 
 @dataclass(frozen=True)

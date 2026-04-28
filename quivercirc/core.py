@@ -9,18 +9,18 @@ from typing import Callable, Iterable
 
 import numpy as np
 
-from quiver.adaptive import AdaptiveGrowth
-from quiver.ansatz.base import Ansatz
-from quiver.backends.base import Backend
-from quiver.backends.numpy_backend import NumpyBackend
-from quiver.circuit import CircuitSpec
-from quiver.config import QuiverConfig
-from quiver.diversity import DiversityWeights
-from quiver.microstructures import MicrostructureLibrary
-from quiver.mutation import Mutator
-from quiver.optimizer import optimize
-from quiver.registry import RegistryEntry, SolutionRegistry
-from quiver.verification import Verifier, fidelity_objective, fidelity_verifier
+from quivercirc.adaptive import AdaptiveGrowth
+from quivercirc.ansatz.base import Ansatz
+from quivercirc.backends.base import Backend
+from quivercirc.backends.numpy_backend import NumpyBackend
+from quivercirc.circuit import CircuitSpec
+from quivercirc.config import QuiverConfig
+from quivercirc.diversity import DiversityWeights
+from quivercirc.microstructures import MicrostructureLibrary
+from quivercirc.mutation import Mutator
+from quivercirc.optimizer import optimize
+from quivercirc.registry import RegistryEntry, SolutionRegistry
+from quivercirc.verification import Verifier, fidelity_objective, fidelity_verifier
 
 
 Objective = Callable[[np.ndarray], float]

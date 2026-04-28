@@ -4,10 +4,10 @@ from pathlib import Path
 import numpy as np
 import pytest
 
-from quiver.ansatz import HardwareEfficient, QAOAInspired
-from quiver.circuit import CircuitSpec, GateSpec
-from quiver.core import Solution
-from quiver.persistence import (
+from quivercirc.ansatz import HardwareEfficient, QAOAInspired
+from quivercirc.circuit import CircuitSpec, GateSpec
+from quivercirc.core import Solution
+from quivercirc.persistence import (
     load_circuit,
     load_registry,
     save_circuit,

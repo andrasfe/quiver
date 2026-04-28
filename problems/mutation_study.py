@@ -24,8 +24,8 @@ from pathlib import Path
 
 import numpy as np
 
-from quiver import Quiver, QuiverConfig
-from quiver.ansatz import (
+from quivercirc import Quiver, QuiverConfig
+from quivercirc.ansatz import (
     AllToAll,
     BrickWall,
     HardwareEfficient,
@@ -33,14 +33,14 @@ from quiver.ansatz import (
     QAOAInspired,
     StronglyEntangling,
 )
-from quiver.config import (
+from quivercirc.config import (
     BudgetConfig,
     DiversityConfig,
     ExplorationConfig,
     MutationConfig,
     OptimizerConfig,
 )
-from quiver.diversity import structural_similarity
+from quivercirc.diversity import structural_similarity
 
 
 N = 8                          # 8 qubits keeps each run fast on numpy backend

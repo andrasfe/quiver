@@ -16,7 +16,7 @@ from typing import Callable
 import numpy as np
 from scipy.optimize import minimize
 
-from quiver.config import OptimizerConfig
+from quivercirc.config import OptimizerConfig
 
 
 @dataclass

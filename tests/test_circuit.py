@@ -1,6 +1,6 @@
 import pytest
 
-from quiver.circuit import CircuitSpec, GateSpec
+from quivercirc.circuit import CircuitSpec, GateSpec
 
 
 def test_depth_packs_parallel_single_qubit_gates():

@@ -1,7 +1,7 @@
 import numpy as np
 
-from quiver.ansatz import HardwareEfficient, QAOAInspired
-from quiver.registry import SolutionRegistry
+from quivercirc.ansatz import HardwareEfficient, QAOAInspired
+from quivercirc.registry import SolutionRegistry
 
 
 def test_first_entry_is_always_accepted():

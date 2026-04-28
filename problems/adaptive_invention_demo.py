@@ -21,15 +21,15 @@ from pathlib import Path
 
 import numpy as np
 
-from quiver.adaptive import AdaptiveGrowth
-from quiver.ansatz import (
+from quivercirc.adaptive import AdaptiveGrowth
+from quivercirc.ansatz import (
     HardwareEfficient,
     LinearEntangler,
     QAOAInspired,
 )
-from quiver.backends import NumpyBackend
-from quiver.diversity import structural_similarity
-from quiver.verification import fidelity_objective
+from quivercirc.backends import NumpyBackend
+from quivercirc.diversity import structural_similarity
+from quivercirc.verification import fidelity_objective
 
 
 def ghz_target(n: int) -> np.ndarray:
@@ -152,7 +152,7 @@ def run_adaptive(target: np.ndarray, label: str, seeds: list[int]) -> dict:
 
 
 def _spec_from_signature(sig, num_qubits):
-    from quiver.circuit import CircuitSpec, GateSpec
+    from quivercirc.circuit import CircuitSpec, GateSpec
     spec = CircuitSpec(num_qubits=num_qubits)
     max_p = -1
     for s in sig:

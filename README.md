@@ -184,8 +184,7 @@ simulation.
 
 ## Installation
 
-From PyPI (the package is named `quivercirc` because the bare
-`quiver` namespace is taken; `import quiver` still works):
+From PyPI:
 
 ```bash
 pip install quivercirc                # core (numpy + scipy)

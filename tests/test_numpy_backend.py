@@ -1,9 +1,9 @@
 import numpy as np
 import pytest
 
-from quiver.ansatz import HardwareEfficient
-from quiver.backends import NumpyBackend
-from quiver.circuit import CircuitSpec, GateSpec
+from quivercirc.ansatz import HardwareEfficient
+from quivercirc.backends import NumpyBackend
+from quivercirc.circuit import CircuitSpec, GateSpec
 
 
 def test_hadamard_creates_uniform_superposition():

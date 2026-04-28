@@ -6,6 +6,16 @@ adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [0.1.1] — 2026-04-28
+
+### Changed
+
+- **Renamed import name from `quiver` to `quivercirc`** so the
+  distribution name and import name match. After upgrading, change
+  `from quiver import X` to `from quivercirc import X` in your code.
+  The 0.1.0 release is the only version where `pip install quivercirc`
+  exposed the legacy `import quiver` name.
+
 ## [0.1.0] — 2026-04-28
 
 Initial public release.

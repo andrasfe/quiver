@@ -1,9 +1,9 @@
 import numpy as np
 
-from quiver.ansatz.discovered import DiscoveredAnsatz
-from quiver.circuit import GateSpec
-from quiver.distillation import canonicalize, distill_library, fragment_from_canonical
-from quiver.microstructures import Fragment, MicrostructureLibrary
+from quivercirc.ansatz.discovered import DiscoveredAnsatz
+from quivercirc.circuit import GateSpec
+from quivercirc.distillation import canonicalize, distill_library, fragment_from_canonical
+from quivercirc.microstructures import Fragment, MicrostructureLibrary
 
 
 def _frag_at(qubits_list, name="ry", parametric=True):

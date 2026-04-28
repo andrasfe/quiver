@@ -35,8 +35,8 @@ from typing import Iterable
 
 import numpy as np
 
-from quiver.circuit import CircuitSpec, GateSpec
-from quiver.core import Solution
+from quivercirc.circuit import CircuitSpec, GateSpec
+from quivercirc.core import Solution
 
 
 # ---------- core (de)serialisation --------------------------------------

@@ -25,12 +25,12 @@ from pathlib import Path
 
 import numpy as np
 
-from quiver import (
+from quivercirc import (
     Quiver,
     QuiverConfig,
     save_registry,
 )
-from quiver.ansatz import (
+from quivercirc.ansatz import (
     AllToAll,
     BrickWall,
     HardwareEfficient,
@@ -38,7 +38,7 @@ from quiver.ansatz import (
     QAOAInspired,
     StronglyEntangling,
 )
-from quiver.config import (
+from quivercirc.config import (
     AdaptiveConfig,
     BudgetConfig,
     DiversityConfig,

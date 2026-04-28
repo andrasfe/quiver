@@ -15,7 +15,7 @@ from dataclasses import dataclass
 
 import numpy as np
 
-from quiver.circuit import CircuitSpec, GateSpec
+from quivercirc.circuit import CircuitSpec, GateSpec
 
 
 _SQRT2 = 1.0 / np.sqrt(2.0)

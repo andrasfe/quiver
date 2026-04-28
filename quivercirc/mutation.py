@@ -27,8 +27,8 @@ from typing import Callable
 
 import numpy as np
 
-from quiver.circuit import CircuitSpec, GateSpec
-from quiver.microstructures import MicrostructureLibrary, weld
+from quivercirc.circuit import CircuitSpec, GateSpec
+from quivercirc.microstructures import MicrostructureLibrary, weld
 
 
 PARAM_1Q = ("rx", "ry", "rz")

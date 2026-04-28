@@ -24,8 +24,8 @@ from __future__ import annotations
 from collections import Counter, defaultdict
 from dataclasses import dataclass
 
-from quiver.circuit import GateSpec
-from quiver.microstructures import Fragment, MicrostructureLibrary
+from quivercirc.circuit import GateSpec
+from quivercirc.microstructures import Fragment, MicrostructureLibrary
 
 
 CanonicalForm = tuple[tuple[str, tuple[int, ...], bool], ...]

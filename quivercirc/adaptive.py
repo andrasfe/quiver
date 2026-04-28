@@ -33,9 +33,9 @@ from typing import Callable
 import numpy as np
 from scipy.optimize import minimize
 
-from quiver.circuit import CircuitSpec, GateSpec
-from quiver.diversity import structural_similarity
-from quiver.microstructures import MicrostructureLibrary, weld
+from quivercirc.circuit import CircuitSpec, GateSpec
+from quivercirc.diversity import structural_similarity
+from quivercirc.microstructures import MicrostructureLibrary, weld
 
 
 _PARAM_1Q = ("rx", "ry", "rz")

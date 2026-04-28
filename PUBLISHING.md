@@ -1,14 +1,13 @@
 # Publishing `quivercirc` to PyPI
 
-The package is configured for PyPI under the distribution name
-**`quivercirc`** (the bare `quiver` name is taken). Users install
-with:
+The package is published as **`quivercirc`** on PyPI. Distribution
+name and import name match. Users install with:
 
 ```bash
 pip install quivercirc
 ```
 
-and then `import quiver` works as normal.
+and then `import quivercirc` works as normal.
 
 ## Prerequisites
 
@@ -111,6 +110,5 @@ pip install quivercirc[test]       # pytest tooling for development
   unique. If `quivercirc` is also taken, pick another (e.g.
   `quiver-search`, `quiver-explorer`, `pyquiver`) and update `name` in
   `pyproject.toml`.
-- **Import name vs distribution name** — `pip install quivercirc`
-  but `import quiver`. The two are deliberately decoupled in
-  `pyproject.toml`.
+- **Import name and distribution name match** — `pip install quivercirc`
+  installs the `quivercirc` import package; no name aliasing.

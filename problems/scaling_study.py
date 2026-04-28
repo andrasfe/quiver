@@ -31,9 +31,9 @@ from typing import Callable
 
 import numpy as np
 
-from quiver import Quiver, QuiverConfig
-from quiver.ansatz import HardwareEfficient, LinearEntangler, QAOAInspired
-from quiver.config import (
+from quivercirc import Quiver, QuiverConfig
+from quivercirc.ansatz import HardwareEfficient, LinearEntangler, QAOAInspired
+from quivercirc.config import (
     BudgetConfig,
     DiversityConfig,
     ExplorationConfig,

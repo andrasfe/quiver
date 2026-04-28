@@ -1,12 +1,12 @@
 """Quiver: structurally diverse quantum circuit exploration."""
 
-from quiver.adaptive import AdaptiveGrowth
-from quiver.circuit import CircuitSpec, GateSpec
-from quiver.config import AdaptiveConfig, MutationConfig, QuiverConfig, load_config
-from quiver.core import Quiver, Solution
-from quiver.diversity import diversity_score, structural_similarity
-from quiver.mutation import Mutator
-from quiver.persistence import (
+from quivercirc.adaptive import AdaptiveGrowth
+from quivercirc.circuit import CircuitSpec, GateSpec
+from quivercirc.config import AdaptiveConfig, MutationConfig, QuiverConfig, load_config
+from quivercirc.core import Quiver, Solution
+from quivercirc.diversity import diversity_score, structural_similarity
+from quivercirc.mutation import Mutator
+from quivercirc.persistence import (
     LoadedSolution,
     load_circuit,
     load_registry,
@@ -15,9 +15,9 @@ from quiver.persistence import (
     spec_from_dict,
     spec_to_dict,
 )
-from quiver.registry import SolutionRegistry
+from quivercirc.registry import SolutionRegistry
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 
 __all__ = [
     "Quiver",

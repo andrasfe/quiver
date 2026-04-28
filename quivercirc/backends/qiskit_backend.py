@@ -12,7 +12,7 @@ from dataclasses import dataclass
 
 import numpy as np
 
-from quiver.circuit import CircuitSpec
+from quivercirc.circuit import CircuitSpec
 
 
 def to_qiskit_circuit(spec: CircuitSpec, params: np.ndarray):
@@ -71,7 +71,7 @@ def to_qiskit_circuit(spec: CircuitSpec, params: np.ndarray):
         elif n == "ryy":
             qc.ryy(theta, qs[0], qs[1])
         elif n in ("iswap", "sqrt_iswap"):
-            from quiver.backends.numpy_backend import _iswap, _sqrt_iswap
+            from quivercirc.backends.numpy_backend import _iswap, _sqrt_iswap
             from qiskit.quantum_info import Operator
             mat = _iswap() if n == "iswap" else _sqrt_iswap()
             qc.unitary(Operator(mat), qs, label=n)

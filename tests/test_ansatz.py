@@ -1,4 +1,4 @@
-from quiver.ansatz import (
+from quivercirc.ansatz import (
     AllToAll,
     BrickWall,
     HardwareEfficient,
