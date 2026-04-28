@@ -48,12 +48,8 @@ htmlcov/
 # Local-only design notes (kept off origin)
 idea.md
 
-# Hardware-experimentation notebooks — local only.
-# The persistence module + generator script ARE pushed; the notebook that
-# loads them and submits to IBM hardware is not (it carries API tokens
-# and run-specific results we don't want public).
-notebooks/
+# Hardware-experimentation notebooks: tracked in git but encrypted at
+# rest via git-crypt (see .gitattributes). On github.com these files
+# appear as binary blobs; locally they decrypt automatically once the
+# repo is unlocked with the saved key.
 .ipynb_checkpoints/
-
-# Hardware run results (per-experiment, may include device names etc.)
-results/ibm_run_*.json

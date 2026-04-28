@@ -1,0 +1,9 @@
+# git-crypt: anything under notebooks/ is encrypted at rest in this
+# public repo. Only checkouts with `git-crypt unlock <key-file>` can
+# read these files; on github.com they appear as binary blobs.
+notebooks/** filter=git-crypt diff=git-crypt
+
+# Also encrypt any per-run hardware results (these were previously
+# gitignored, but git-crypt lets us version them privately too if we
+# want — comment out if you'd rather keep them gitignored only).
+results/ibm_run_*.json filter=git-crypt diff=git-crypt
