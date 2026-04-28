@@ -179,17 +179,17 @@ simulation.
 
 ## Installation
 
-From PyPI (the package is named `quiver-circuits` because the bare
+From PyPI (the package is named `quivercirc` because the bare
 `quiver` namespace is taken; `import quiver` still works):
 
 ```bash
-pip install quiver-circuits                # core (numpy + scipy)
-pip install quiver-circuits[pennylane]     # + PennyLane backend
-pip install quiver-circuits[qiskit]        # + Qiskit backend
-pip install quiver-circuits[ibm]           # + qiskit-ibm-runtime + qiskit-aer
-pip install quiver-circuits[dwave]         # + dimod / dwave-system
-pip install quiver-circuits[all]           # everything
-pip install quiver-circuits[test]          # pytest tooling
+pip install quivercirc                # core (numpy + scipy)
+pip install quivercirc[pennylane]     # + PennyLane backend
+pip install quivercirc[qiskit]        # + Qiskit backend
+pip install quivercirc[ibm]           # + qiskit-ibm-runtime + qiskit-aer
+pip install quivercirc[dwave]         # + dimod / dwave-system
+pip install quivercirc[all]           # everything
+pip install quivercirc[test]          # pytest tooling
 ```
 
 For development against this repo:

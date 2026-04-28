@@ -1,11 +1,11 @@
-# Publishing `quiver-circuits` to PyPI
+# Publishing `quivercirc` to PyPI
 
 The package is configured for PyPI under the distribution name
-**`quiver-circuits`** (the bare `quiver` name is taken). Users install
+**`quivercirc`** (the bare `quiver` name is taken). Users install
 with:
 
 ```bash
-pip install quiver-circuits
+pip install quivercirc
 ```
 
 and then `import quiver` works as normal.
@@ -44,7 +44,7 @@ twine upload --repository testpypi dist/*
 # Install from TestPyPI to confirm
 pip install --index-url https://test.pypi.org/simple/ \
             --extra-index-url https://pypi.org/simple/ \
-            quiver-circuits
+            quivercirc
 ```
 
 The `--extra-index-url` is needed because TestPyPI doesn't mirror the
@@ -63,7 +63,7 @@ twine upload dist/*
 ```
 
 After upload, the package appears at
-https://pypi.org/project/quiver-circuits/ within a minute or two.
+https://pypi.org/project/quivercirc/ within a minute or two.
 
 ## Versioning
 
@@ -96,11 +96,11 @@ The `[project.optional-dependencies]` block defines named installable
 extras:
 
 ```bash
-pip install quiver-circuits[ibm]        # qiskit + qiskit-ibm-runtime + qiskit-aer
-pip install quiver-circuits[pennylane]  # PennyLane backend
-pip install quiver-circuits[dwave]      # D-Wave penalty exploration
-pip install quiver-circuits[all]        # everything above
-pip install quiver-circuits[test]       # pytest tooling for development
+pip install quivercirc[ibm]        # qiskit + qiskit-ibm-runtime + qiskit-aer
+pip install quivercirc[pennylane]  # PennyLane backend
+pip install quivercirc[dwave]      # D-Wave penalty exploration
+pip install quivercirc[all]        # everything above
+pip install quivercirc[test]       # pytest tooling for development
 ```
 
 ## Trouble-shooting
@@ -108,9 +108,9 @@ pip install quiver-circuits[test]       # pytest tooling for development
 - **"File already exists"** — bump the version number; PyPI doesn't
   allow re-uploading the same version.
 - **"Invalid distribution name"** — the package name on PyPI must be
-  unique. If `quiver-circuits` is also taken, pick another (e.g.
+  unique. If `quivercirc` is also taken, pick another (e.g.
   `quiver-search`, `quiver-explorer`, `pyquiver`) and update `name` in
   `pyproject.toml`.
-- **Import name vs distribution name** — `pip install quiver-circuits`
+- **Import name vs distribution name** — `pip install quivercirc`
   but `import quiver`. The two are deliberately decoupled in
   `pyproject.toml`.
