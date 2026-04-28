@@ -44,3 +44,6 @@ htmlcov/
 
 # Beads (local workflow state)
 .beads/
+
+# Local-only design notes (kept off origin)
+idea.md
