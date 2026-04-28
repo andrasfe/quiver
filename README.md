@@ -1,5 +1,10 @@
 # Quiver
 
+[![PyPI version](https://img.shields.io/pypi/v/quivercirc.svg)](https://pypi.org/project/quivercirc/)
+[![Python versions](https://img.shields.io/pypi/pyversions/quivercirc.svg)](https://pypi.org/project/quivercirc/)
+[![CI](https://github.com/andrasfe/quiver/actions/workflows/ci.yml/badge.svg)](https://github.com/andrasfe/quiver/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
 > Quantum circuit exploration framework that finds **multiple structurally diverse**
 > solutions to problems where the target outcome is known in advance.
 
