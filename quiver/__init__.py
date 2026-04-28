@@ -6,6 +6,15 @@ from quiver.config import AdaptiveConfig, MutationConfig, QuiverConfig, load_con
 from quiver.core import Quiver, Solution
 from quiver.diversity import diversity_score, structural_similarity
 from quiver.mutation import Mutator
+from quiver.persistence import (
+    LoadedSolution,
+    load_circuit,
+    load_registry,
+    save_circuit,
+    save_registry,
+    spec_from_dict,
+    spec_to_dict,
+)
 from quiver.registry import SolutionRegistry
 
 __version__ = "0.1.0"
@@ -24,4 +33,12 @@ __all__ = [
     "load_config",
     "diversity_score",
     "structural_similarity",
+    # persistence
+    "LoadedSolution",
+    "save_registry",
+    "load_registry",
+    "save_circuit",
+    "load_circuit",
+    "spec_to_dict",
+    "spec_from_dict",
 ]
