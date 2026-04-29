@@ -16,8 +16,13 @@ from quivercirc.persistence import (
     spec_to_dict,
 )
 from quivercirc.registry import SolutionRegistry
+from quivercirc.subspace import (
+    AdaptiveKResult,
+    select_k_adaptive,
+    subspace_diagonalize,
+)
 
-__version__ = "0.1.1"
+__version__ = "0.1.2"
 
 __all__ = [
     "Quiver",
@@ -41,4 +46,8 @@ __all__ = [
     "load_circuit",
     "spec_to_dict",
     "spec_from_dict",
+    # subspace expansion / adaptive K
+    "subspace_diagonalize",
+    "select_k_adaptive",
+    "AdaptiveKResult",
 ]
