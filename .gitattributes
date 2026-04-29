@@ -13,3 +13,14 @@ notebooks/README.md !filter !diff
 # gitignored, but git-crypt lets us version them privately too if we
 # want — comment out if you'd rather keep them gitignored only).
 results/ibm_run_*.json filter=git-crypt diff=git-crypt
+
+# Working drafts of the DS-VQE paper. Encrypted so the manuscript stays
+# private until publication, but version-controlled and accessible to
+# anyone with the symmetric key.
+paper/*.tex filter=git-crypt diff=git-crypt
+paper/*.md filter=git-crypt diff=git-crypt
+paper/*.bib filter=git-crypt diff=git-crypt
+paper/*.pdf filter=git-crypt diff=git-crypt
+# The README inside paper/ stays in the clear so the folder is
+# explorable on github.com.
+paper/README.md !filter !diff
