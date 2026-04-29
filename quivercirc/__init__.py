@@ -21,8 +21,9 @@ from quivercirc.subspace import (
     select_k_adaptive,
     subspace_diagonalize,
 )
+from quivercirc.topology import Topology
 
-__version__ = "0.1.2"
+__version__ = "0.1.3"
 
 __all__ = [
     "Quiver",
@@ -50,4 +51,6 @@ __all__ = [
     "subspace_diagonalize",
     "select_k_adaptive",
     "AdaptiveKResult",
+    # hardware topology
+    "Topology",
 ]

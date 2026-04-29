@@ -36,6 +36,7 @@ from scipy.optimize import minimize
 from quivercirc.circuit import CircuitSpec, GateSpec
 from quivercirc.diversity import structural_similarity
 from quivercirc.microstructures import MicrostructureLibrary, weld
+from quivercirc.topology import Topology
 
 
 _PARAM_1Q = ("rx", "ry", "rz")
@@ -48,17 +49,26 @@ def _is_parametric(name: str) -> bool:
     return name in _PARAM_1Q or name in _PARAM_2Q
 
 
-def _candidate_pool(num_qubits: int) -> list[tuple[str, tuple[int, ...]]]:
+def _candidate_pool(
+    num_qubits: int, topology: Topology | None = None
+) -> list[tuple[str, tuple[int, ...]]]:
     pool: list[tuple[str, tuple[int, ...]]] = []
     for q in range(num_qubits):
         for name in _PARAM_1Q + _FIXED_1Q:
             pool.append((name, (q,)))
-    for i in range(num_qubits):
-        for j in range(num_qubits):
-            if i == j:
-                continue
-            for name in _PARAM_2Q + _FIXED_2Q:
-                pool.append((name, (i, j)))
+    if topology is None:
+        pairs = [(i, j) for i in range(num_qubits)
+                 for j in range(num_qubits) if i != j]
+    else:
+        # both directions allowed — the optimizer benefits from CNOT
+        # control/target asymmetry, but only on edges hardware supports.
+        pairs = []
+        for (a, b) in topology.edge_list():
+            pairs.append((a, b))
+            pairs.append((b, a))
+    for (i, j) in pairs:
+        for name in _PARAM_2Q + _FIXED_2Q:
+            pool.append((name, (i, j)))
     return pool
 
 
@@ -131,6 +141,10 @@ class AdaptiveGrowth:
     # gates are dictated by problem structure.
     coupled_pairs: frozenset[tuple[int, int]] = frozenset()
     coupling_bonus: float = 0.0
+    # Hardware coupling map: when set, the candidate gate pool only
+    # contains 2-qubit gates on edges of this topology, so grown
+    # circuits transpile to native depth without SWAPs.
+    topology: Topology | None = None
 
     def grow(
         self,
@@ -146,7 +160,7 @@ class AdaptiveGrowth:
         except Exception:
             best_loss = 1.0
 
-        pool = _candidate_pool(self.num_qubits)
+        pool = _candidate_pool(self.num_qubits, self.topology)
         plateau = 0
 
         while spec.gate_count < self.max_gates and plateau < self.plateau_patience:
