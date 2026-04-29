@@ -54,4 +54,4 @@ jobs:
         run: |
           python -m venv /tmp/venv
           /tmp/venv/bin/pip install dist/*.whl
-          /tmp/venv/bin/python -c "import quiver; print('quiver', quiver.__version__, 'imported OK')"
+          /tmp/venv/bin/python -c "import quivercirc; print('quivercirc', quivercirc.__version__, 'imported OK')"
