@@ -1,7 +1,13 @@
-# git-crypt: anything under notebooks/ is encrypted at rest in this
-# public repo. Only checkouts with `git-crypt unlock <key-file>` can
-# read these files; on github.com they appear as binary blobs.
-notebooks/** filter=git-crypt diff=git-crypt
+# git-crypt: encrypt the actual notebook files. Only checkouts with
+# `git-crypt unlock <key-file>` can read them; on github.com they
+# appear as binary blobs (the "Invalid Notebook" error in the UI is
+# the encryption working).
+notebooks/*.ipynb filter=git-crypt diff=git-crypt
+
+# Plain-text README inside notebooks/ stays in the clear so the
+# folder shows a useful explanation on github.com instead of just
+# error pages.
+notebooks/README.md !filter !diff
 
 # Also encrypt any per-run hardware results (these were previously
 # gitignored, but git-crypt lets us version them privately too if we
