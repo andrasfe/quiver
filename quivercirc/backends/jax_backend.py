@@ -37,9 +37,14 @@ import jax.numpy as jnp
 from quivercirc.circuit import CircuitSpec, GateSpec
 
 
-# default to single-precision complex; override by setting
-# `JAX_BACKEND_DTYPE = "complex128"` before constructing the backend.
-_DTYPE = jnp.complex64
+# enable double precision globally — float32 is too imprecise for
+# accumulated inner products over 2^n amplitudes at n>=15 (one
+# observed failure mode: classical |<psi_i|psi_j>|^2 rounds to zero
+# at n=20 in complex64, which collapses the subspace eigenvalue
+# problem to "pick the best diagonal"). The 2x slowdown over float32
+# is still ~1500x faster than numpy parameter-shift gradient at n=20.
+jax.config.update("jax_enable_x64", True)
+_DTYPE = jnp.complex128
 
 
 # ---------- gate primitives (JAX) ------------------------------------------
@@ -282,7 +287,7 @@ class JaxBackend:
 
     def statevector(self, spec: CircuitSpec, params) -> np.ndarray:
         fn = self._get_fn(spec)
-        psi = fn(jnp.asarray(params, dtype=jnp.float32))
+        psi = fn(jnp.asarray(params, dtype=jnp.float64))
         return np.asarray(psi).astype(np.complex128)
 
     # --- helpers tailored for VQE training (autodiff over <psi|H|psi>) --
@@ -315,7 +320,7 @@ class JaxBackend:
         loss_and_grad = jax.jit(jax.value_and_grad(loss))
 
         def closure(params_np):
-            params_j = jnp.asarray(params_np, dtype=jnp.float32)
+            params_j = jnp.asarray(params_np, dtype=jnp.float64)
             val, grad = loss_and_grad(params_j)
             return float(val), np.asarray(grad).astype(np.float64)
 
