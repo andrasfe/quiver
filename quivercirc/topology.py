@@ -37,10 +37,17 @@ class Topology:
     """A coupling-map graph on `num_qubits` logical qubits.
 
     Edges are an undirected, canonicalized set of (i, j) pairs with i<j.
+
+    `physical_layout`, when set, records the physical-qubit assignment
+    for each logical qubit (logical index ``i`` lives on physical qubit
+    ``physical_layout[i]``). Constructed by :meth:`from_backend`; pass
+    to ``qiskit.transpile(..., initial_layout=topo.physical_layout)`` to
+    pin the embedding instead of letting the transpiler choose.
     """
 
     num_qubits: int
     edges: frozenset[tuple[int, int]]
+    physical_layout: tuple[int, ...] | None = None
 
     @classmethod
     def line(cls, n: int) -> "Topology":
@@ -95,6 +102,98 @@ class Topology:
             tails[(nxt - 4) % len(tails)] = nxt
             nxt += 1
         return cls.from_edges(n, edges)
+
+    @classmethod
+    def from_backend(
+        cls, backend, n: int, layout: str = "path", start_qubit: int | None = None,
+    ) -> "Topology":
+        """Pull the device coupling map and extract a connected n-qubit
+        subgraph; return a Topology with edges relabeled 0..n-1 and a
+        physical_layout recording the chosen physical qubits.
+
+        Parameters
+        ----------
+        backend : a qiskit backend with a ``coupling_map`` attribute (or
+            something that quacks like one). Both ``CouplingMap`` and a
+            list-of-pairs are accepted.
+        n : number of logical qubits to embed.
+        layout : ``"path"`` greedy-walks a length-n path (preferring
+            low-degree neighbours so we don't waste degree-3 hubs);
+            ``"compact"`` BFS-expands from ``start_qubit`` until n
+            qubits are collected.
+        start_qubit : starting physical qubit index. Defaults to the
+            lowest-index qubit in the coupling graph.
+        """
+        try:
+            edge_iter = backend.coupling_map.get_edges()
+        except AttributeError:
+            edge_iter = list(backend.coupling_map)
+
+        adj: dict[int, set[int]] = {}
+        for (a, b) in edge_iter:
+            adj.setdefault(a, set()).add(b)
+            adj.setdefault(b, set()).add(a)
+        if not adj:
+            raise ValueError("backend has empty coupling map")
+
+        if start_qubit is None:
+            start_qubit = min(adj.keys())
+
+        if layout == "path":
+            physical = [start_qubit]
+            visited = {start_qubit}
+            while len(physical) < n:
+                cands = sorted(adj[physical[-1]] - visited,
+                               key=lambda q: (len(adj[q]), q))
+                if not cands:
+                    break
+                physical.append(cands[0])
+                visited.add(cands[0])
+            if len(physical) < n:
+                # retry from each high-degree-2 starting qubit
+                for s in sorted(adj.keys(),
+                                key=lambda q: (len(adj[q]), q)):
+                    physical, visited = [s], {s}
+                    while len(physical) < n:
+                        cands = sorted(adj[physical[-1]] - visited,
+                                       key=lambda q: (len(adj[q]), q))
+                        if not cands:
+                            break
+                        physical.append(cands[0])
+                        visited.add(cands[0])
+                    if len(physical) == n:
+                        break
+            if len(physical) < n:
+                raise ValueError(f"could not extract length-{n} path "
+                                 f"from coupling map")
+        elif layout == "compact":
+            physical = [start_qubit]
+            frontier = list(adj[start_qubit])
+            seen = {start_qubit}
+            while len(physical) < n and frontier:
+                q = frontier.pop(0)
+                if q in seen:
+                    continue
+                seen.add(q)
+                physical.append(q)
+                for nb in sorted(adj[q]):
+                    if nb not in seen and nb not in frontier:
+                        frontier.append(nb)
+            if len(physical) < n:
+                raise ValueError(f"could not collect {n} qubits via BFS")
+        else:
+            raise ValueError(f"unknown layout '{layout}'")
+
+        phys_to_logical = {p: i for i, p in enumerate(physical)}
+        edges = set()
+        for (a, b) in edge_iter:
+            if a in phys_to_logical and b in phys_to_logical:
+                edges.add(_canon(phys_to_logical[a], phys_to_logical[b]))
+        return cls(
+            num_qubits=n,
+            edges=frozenset(edges),
+            physical_layout=tuple(physical),
+        )
 
     def has_edge(self, i: int, j: int) -> bool:
         return _canon(i, j) in self.edges

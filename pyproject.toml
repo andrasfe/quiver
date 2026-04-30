@@ -7,7 +7,7 @@ build-backend = "setuptools.build_meta"
 # Install with:  pip install quivercirc
 # Import with:   import quivercirc
 name = "quivercirc"
-version = "0.1.3"
+version = "0.1.4"
 description = "Quantum circuit exploration framework that finds multiple structurally diverse solutions to problems with known target outcomes."
 readme = "README.md"
 requires-python = ">=3.10"
