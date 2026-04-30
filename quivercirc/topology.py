@@ -140,30 +140,41 @@ class Topology:
             start_qubit = min(adj.keys())
 
         if layout == "path":
-            physical = [start_qubit]
-            visited = {start_qubit}
-            while len(physical) < n:
-                cands = sorted(adj[physical[-1]] - visited,
-                               key=lambda q: (len(adj[q]), q))
-                if not cands:
-                    break
-                physical.append(cands[0])
-                visited.add(cands[0])
-            if len(physical) < n:
-                # retry from each high-degree-2 starting qubit
+            # DFS with backtracking — guaranteed to find a length-n
+            # path if one exists. Greedy "prefer low-degree" without
+            # backtracking can dead-end on heavy-hex side branches.
+            def find_path(start):
+                path = [start]
+                visited = {start}
+
+                def dfs():
+                    if len(path) == n:
+                        return True
+                    # Prefer low-degree neighbours (don't burn hubs early)
+                    cands = sorted(adj[path[-1]] - visited,
+                                   key=lambda q: (len(adj[q]), q))
+                    for nb in cands:
+                        path.append(nb)
+                        visited.add(nb)
+                        if dfs():
+                            return True
+                        path.pop()
+                        visited.discard(nb)
+                    return False
+
+                return path if dfs() else None
+
+            physical = find_path(start_qubit)
+            if physical is None:
+                # try every other starting qubit, low-degree first
                 for s in sorted(adj.keys(),
                                 key=lambda q: (len(adj[q]), q)):
-                    physical, visited = [s], {s}
-                    while len(physical) < n:
-                        cands = sorted(adj[physical[-1]] - visited,
-                                       key=lambda q: (len(adj[q]), q))
-                        if not cands:
-                            break
-                        physical.append(cands[0])
-                        visited.add(cands[0])
-                    if len(physical) == n:
+                    if s == start_qubit:
+                        continue
+                    physical = find_path(s)
+                    if physical is not None:
                         break
-            if len(physical) < n:
+            if physical is None:
                 raise ValueError(f"could not extract length-{n} path "
                                  f"from coupling map")
         elif layout == "compact":
