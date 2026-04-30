@@ -3,7 +3,14 @@
 from quivercirc.backends.base import Backend
 from quivercirc.backends.numpy_backend import NumpyBackend
 
-__all__ = ["Backend", "NumpyBackend"]
+
+def jax_backend(*args, **kwargs):
+    from quivercirc.backends.jax_backend import JaxBackend
+
+    return JaxBackend(*args, **kwargs)
+
+
+__all__ = ["Backend", "NumpyBackend", "jax_backend"]
 
 
 def pennylane_backend(*args, **kwargs):
