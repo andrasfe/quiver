@@ -326,5 +326,30 @@ class JaxBackend:
 
         return closure
 
+    def make_fidelity_loss_and_grad(
+        self, spec: CircuitSpec, target: np.ndarray,
+    ) -> Callable:
+        """Return a JIT'd `(params) -> (loss, grad)` for the *infidelity*
+        ``loss(theta) = 1 - |<target | U(theta) |0>|^2``. Used by the
+        warmstart phase of coordinated training: minimising this drives
+        the trained state toward the reference ``target`` state.
+        """
+        fn = self._get_fn(spec)
+        target_j = jnp.asarray(target, dtype=_DTYPE)
+
+        def loss(p):
+            psi = fn(p)
+            ovl = jnp.vdot(target_j, psi)
+            return 1.0 - jnp.real(ovl * jnp.conj(ovl))
+
+        loss_and_grad = jax.jit(jax.value_and_grad(loss))
+
+        def closure(params_np):
+            params_j = jnp.asarray(params_np, dtype=jnp.float64)
+            val, grad = loss_and_grad(params_j)
+            return float(val), np.asarray(grad).astype(np.float64)
+
+        return closure
+
 
 __all__ = ["JaxBackend"]
