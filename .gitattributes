@@ -1,22 +1,3 @@
-# git-crypt: encrypt the actual notebook files. Only checkouts with
-# `git-crypt unlock <key-file>` can read them; on github.com they
-# appear as binary blobs (the "Invalid Notebook" error in the UI is
-# the encryption working).
-notebooks/*.ipynb filter=git-crypt diff=git-crypt
-
-# Plain-text README inside notebooks/ stays in the clear so the
-# folder shows a useful explanation on github.com instead of just
-# error pages.
-notebooks/README.md !filter !diff
-
-# Also encrypt any per-run hardware results (these were previously
-# gitignored, but git-crypt lets us version them privately too if we
-# want — comment out if you'd rather keep them gitignored only).
-results/ibm_run_*.json filter=git-crypt diff=git-crypt
-
-# Working drafts + supporting scripts under paper/. Encrypted so the
-# manuscript stays private until publication, but version-controlled
-# and accessible to anyone with the symmetric key. README is in the
-# clear so the folder is explorable on github.com.
-paper/** filter=git-crypt diff=git-crypt
-paper/README.md !filter !diff
+# All paper sources, results, and notebooks are now public. The
+# previous git-crypt encryption was retired with the final
+# (closing) revision of the manuscript. No active filters.
